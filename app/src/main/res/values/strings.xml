@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Vue2.0</string>
+    <string name="send_feedback">Send Now</string>
+    <string name="google_button_text">Personalize using Google+</string>
+    <string name="fb_button_text">Personalize using Facebook</string>
+    <string name="title_activity_google_play_services">GooglePlayServicesActivity</string>
+
+    <!--sample text that will be replace once the server is ready in UI-->
+    <string name="sample_Dress_for_pool_party">Dress for pool party</string>
+    <string name="sample_Marry_Long_bottom">Marry Long bottom</string>
+    <string name="sample_Trending_in_San_Fransisco">Trending in San Fransisco.</string>
+    <string name="sample_starts_in_two_days">starts in 2 days...</string>
+    <string name="sample_rate_now">Please rate now!</string>
+    <string name="sample_corol_white">Corol White</string>
+    <string name="sample_price">$42</string>
+
+    <string name="personalize_your_shopping_experience">Personalize your shopping experience</string>
+
+    <string name="find_at">Find At</string>
+    <string name="suggested_by">Suggested by</string>
+    <string name="facebook_id">270148406527212</string>
+
+    <string name="trending">Trending</string>
+    <string name="trending_aisles_tag">aisle/trending</string>
+    <string name="dataentry_edit_permission">Do you want to change the existing data?</string>
+    <string name="dataentry_mandtory_field_mesg">Please enter Lookingfor.</string>
+    <string name="dataentry_mandtory_field_add_aisleimage_mesg">Please Add Aisle Image.</string>
+    <string name="limit_tag">limit</string>
+    <string name="offset_tag">offset</string>
+    <string name="discard_othersource_image_mesg">Would you like to discard the other application image?</string>
+    <string name="middle_earth">Visiting Middle Earth</string>
+    <string name="profile_owner">Profile Owner</string>
+    <string name="uploading_mesg">Uploading...</string>
+    <string name="aisle_owner_profile_desc">Profile of the aisle owner</string>
+    <string name="progress_message">Signing in to Google&#8230;</string>
+    <string name="app_installation_mesg">Enable Share via</string>
+    <string name="no_thanks_click_alert_mesg">To be friendly, please provide initials</string>
+    <string name="plus_example_deep_link_id">/+/mobile/android/</string>
+    <string name="plus_example_deep_link_url">        https://developers.google.com/+/mobile/android/</string>
+    <string name="googleplus_button_text">Sign In with Google</string>
+    <string name="instagram_button_text">Sign In with Instagram</string>
+    <string name="facebook_button_text">Sign In with Facebook</string>
+    <string name="cancel_button_text">No Thanks</string>
+    <string name="share_via_mesg">SHARE VIA</string>
+    <string name="com_facebook_dialogloginactivity_ok_button">OK</string>
+    <string name="com_facebook_loginview_log_out_button">Log Out</string>
+    <string name="com_facebook_loginview_log_in_button">Log In</string>
+    <string name="com_facebook_loginview_logged_in_as">Logged in as: %1$s</string>
+    <string name="com_facebook_loginview_logged_in_using_facebook">Logged in using Facebook</string>
+    <string name="com_facebook_loginview_log_out_action">Log Out</string>
+    <string name="com_facebook_loginview_cancel_action">Cancel</string>
+    <string name="com_facebook_logo_content_description">Facebook Logo</string>
+    <string name="com_facebook_usersettingsfragment_log_in_button">Log In&#8230;</string>
+    <string name="com_facebook_usersettingsfragment_logged_in">Logged In</string>
+    <string name="com_facebook_usersettingsfragment_not_logged_in">Not Logged In</string>
+    <string name="com_facebook_placepicker_subtitle_format">%1$s • %2$,d were here</string>
+    <string name="com_facebook_placepicker_subtitle_catetory_only_format">%1$s</string>
+    <string name="com_facebook_placepicker_subtitle_were_here_only_format">%1$,d were here</string>
+    <string name="com_facebook_picker_done_button_text">Done</string>
+    <string name="com_facebook_choose_friends">Choose Friends</string>
+    <string name="com_facebook_nearby">Nearby</string>
+    <string name="yes_mesg">Yes</string>
+    <string name="fb_no_friends">There are no friends to show.</string>
+    <string name="no_mesg">No</string>
+    <string name="com_facebook_loading">Loading...</string>
+    <string name="com_facebook_internet_permission_error_title">AndroidManifest Error</string>
+    <string name="com_facebook_internet_permission_error_message">WebView login requires INTERNET permission</string>
+    <string name="com_facebook_requesterror_web_login">Please log in via https://www.facebook.com or https://m.facebook.com to re-enable the app to connect with Facebook.</string>
+    <string name="com_facebook_requesterror_relogin">The app is not connected with Facebook, please log in and reconnect this app.</string>
+    <string name="com_facebook_requesterror_password_changed">Your password on Facebook has changed, please reconnect the app with Facebook.</string>
+    <string name="com_facebook_requesterror_reconnect">An error occurred when connecting with Facebook, please reconnect the app with Facebook.</string>
+    <string name="com_facebook_requesterror_permissions">An app connection with Facebook failed due to insufficient permissions, please grant the app permissions to perform the operation.
+    </string>
+    <string name="no_network">No network, check network settings</string>
+    <string name="alert_Dialog_Network">No Network Connection: Check Network Settings</string>
+</resources>

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="objectify-4.0rc1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/libs/objectify-4.0rc1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
