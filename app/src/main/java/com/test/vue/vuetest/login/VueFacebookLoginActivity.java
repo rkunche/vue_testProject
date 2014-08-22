@@ -121,6 +121,7 @@ class Callback implements  OnResult{
             }
         } else {
             Toast.makeText(VueFacebookLoginActivity.this,"User Logged in with Facebook",Toast.LENGTH_SHORT).show();
+            finish();
         }
     }
 }

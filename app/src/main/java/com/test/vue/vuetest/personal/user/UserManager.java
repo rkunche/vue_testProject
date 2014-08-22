@@ -108,7 +108,7 @@ public class UserManager {
     public void getUserWithFacebookId(String fbId,OnResult callback) {
         UserHelper helper = new UserHelper();
         helper.requestType =  UserCreateAndUpdateTask.GET_USER_WITH_FACEBOOK_ID;
-        helper.callback = new ResultCallBack();
+        helper.callback =callback;
         helper.id = fbId;
         callUserTask(helper);;
     }
