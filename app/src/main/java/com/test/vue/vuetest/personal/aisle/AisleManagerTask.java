@@ -94,9 +94,9 @@ public class AisleManagerTask extends AsyncTask<Void,Void,ArrayList<ClientAisle>
         if(clientAisles != null) {
             //TODO: save the new aisle/s.
             Log.i(TAG,TAG+" "+clientAisles.get(0).getOwnerUserId());
-            aisleHelper.callback.onResultComplete(true);
+            aisleHelper.callback.onResultComplete(true,clientAisles);
         } else {
-            aisleHelper.callback.onResultComplete(false);
+            aisleHelper.callback.onResultComplete(false,clientAisles);
             Log.i(TAG,TAG+" NULL" );
         }
     }

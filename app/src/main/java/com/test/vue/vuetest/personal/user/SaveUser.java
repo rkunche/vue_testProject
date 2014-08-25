@@ -10,9 +10,6 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-/**
- * Created by advisors on 1/8/14.
- */
 public class SaveUser {
     private static final String sUserFileName ="VueUser.ser";
     public static void saveUserToFile(ClientUser user){
@@ -34,7 +31,7 @@ public class SaveUser {
             is.close();
             return vueUser;
         }catch (Exception e){
-            e.printStackTrace();;
+            e.printStackTrace();
         }
         return  null;
     }

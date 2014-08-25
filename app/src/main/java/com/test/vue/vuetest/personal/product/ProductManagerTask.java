@@ -1,55 +1,94 @@
 package com.test.vue.vuetest.personal.product;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.test.vue.vuetest.domain.client.ClientProduct;
+import com.test.vue.vuetest.domain.client.ClientProductImage;
+import com.test.vue.vuetest.domain.client.ClientProductProvider;
 import com.test.vue.vuetest.personal.GenericNetWorker;
-import com.test.vue.vuetest.utils.UrlConstants;
+import com.test.vue.vuetest.personal.product.productApi.ProductApiConnector;
+import com.test.vue.vuetest.personal.product.productApi.ProductApiInterface;
 
-import junit.framework.Assert;
-
-
-public class ProductManagerTask extends AsyncTask<Void,Void,ClientProduct> {
+/**
+ * Generic Async task for all product types(product,image,providers,comment,ratings.
+ */
+public class ProductManagerTask extends AsyncTask<Void,Void,Object> {
     private static final String TAG = "productMangerTask";
     public static final int CREATE_PRODUCT = 0;
     public static final int UPDATE_PRODUCT = 1;
     public static final int GET_PRODUCT = 2;
     public static final int DELETE_PRODUCT = 3;
-
-
-    GenericNetWorker<ClientProduct> clientProductHelper;
-    ProductHelper productHelper;
+    private ProductHelper productHelper;
+    private ProductApiInterface api;
    public  ProductManagerTask(ProductHelper productHelper){
-
        this.productHelper = productHelper;
-       clientProductHelper = new GenericNetWorker<ClientProduct>(ClientProduct.class);
+       api = ProductApiConnector.getUrlInterface(productHelper.type);
     }
     @Override
-    protected ClientProduct doInBackground(Void... voids) {
+    protected Object doInBackground(Void... voids) {
         try{
             String url;
             switch (productHelper.requestType) {
 
                 case CREATE_PRODUCT:
-                    url = UrlConstants.CREATE_PRODUCT_RESTURL;
-                    Assert.assertNotNull(productHelper.clientProduct);
-                    productHelper.clientProduct =  clientProductHelper.createObject(productHelper.clientProduct,url);
-                    return  productHelper.clientProduct;
+                      url =    api.createUrl();
+                    if(productHelper.type.equals(ClientProduct.class)) {
+                        GenericNetWorker<ClientProduct> clientProductHelper = new GenericNetWorker<ClientProduct>(ClientProduct.class);
+                         ClientProduct clientProduct = (ClientProduct) productHelper.object;
+                        productHelper.object = clientProductHelper.createObject(clientProduct, url);
+                    } else if(productHelper.type.equals(ClientProductImage.class)){
+                        GenericNetWorker<ClientProductImage> clientProductHelper = new GenericNetWorker<ClientProductImage>(ClientProductImage.class);
+                        ClientProductImage clientProductImage = (ClientProductImage) productHelper.object;
+                        productHelper.object = clientProductHelper.createObject(clientProductImage, url);
+                    } else if(productHelper.type.equals(ClientProductProvider.class)){
+                        GenericNetWorker<ClientProductProvider> clientProductHelper = new GenericNetWorker<ClientProductProvider>(ClientProductProvider.class);
+                        ClientProductProvider clientProductProvider = (ClientProductProvider) productHelper.object;
+                        productHelper.object = clientProductHelper.createObject(clientProductProvider, url);
+                    }
+                    return   productHelper.object;
 
-                case UPDATE_PRODUCT: break;
-
+                case UPDATE_PRODUCT:
+                    url =    api.updateUrl();
+                    if(productHelper.type.equals(ClientProduct.class)) {
+                        GenericNetWorker<ClientProduct> clientProductHelper = new GenericNetWorker<ClientProduct>(ClientProduct.class);
+                        ClientProduct clientProduct = (ClientProduct) productHelper.object;
+                        productHelper.object = clientProductHelper.updateObject(clientProduct, clientProduct.getId(), url);
+                    } else if(productHelper.type.equals(ClientProductImage.class)){
+                        GenericNetWorker<ClientProductImage> clientProductHelper = new GenericNetWorker<ClientProductImage>(ClientProductImage.class);
+                        ClientProductImage clientProductImage = (ClientProductImage) productHelper.object;
+                        productHelper.object = clientProductHelper.updateObject(clientProductImage, clientProductImage.getId(), url);
+                    } else if(productHelper.type.equals(ClientProductProvider.class)){
+                        GenericNetWorker<ClientProductProvider> clientProductHelper = new GenericNetWorker<ClientProductProvider>(ClientProductProvider.class);
+                        ClientProductProvider clientProductProvider = (ClientProductProvider) productHelper.object;
+                        productHelper.object = clientProductHelper.updateObject(clientProductProvider, clientProductProvider.getId(), url);
+                    }
+                    return   productHelper.object;
                 case GET_PRODUCT:
 
-                    url = UrlConstants.GET_PRODUCT_RESTURL;
-                    Assert.assertNotNull(productHelper.clientProduct.getId());
-                    productHelper.clientProduct =  clientProductHelper.getObject(url,productHelper.clientProduct.getId());
-                    break;
-
+                    url =    api.getUrl();
+                    if(productHelper.type.equals(ClientProduct.class)) {
+                        GenericNetWorker<ClientProduct> clientProductHelper = new GenericNetWorker<ClientProduct>(ClientProduct.class);
+                        productHelper.object = clientProductHelper.getObject(url, productHelper.id);
+                    } else if(productHelper.type.equals(ClientProductImage.class)){
+                        GenericNetWorker<ClientProductImage> clientProductHelper = new GenericNetWorker<ClientProductImage>(ClientProductImage.class);
+                        productHelper.object = clientProductHelper.getObject(url, productHelper.id);
+                    } else if(productHelper.type.equals(ClientProductProvider.class)){
+                        GenericNetWorker<ClientProductProvider> clientProductHelper = new GenericNetWorker<ClientProductProvider>(ClientProductProvider.class);
+                        productHelper.object = clientProductHelper.getObject(url, productHelper.id);
+                    }
+              return productHelper.object;
                 case DELETE_PRODUCT:
-                    url = UrlConstants.DELETE_PRODUCT_RESTURL;
-                    Assert.assertNotNull(productHelper.clientProduct.getId());
-                   clientProductHelper.deleteObject(productHelper.clientProduct.getId(),url);
+                     url = api.deleteUrl();
+                    if(productHelper.type.equals(ClientProduct.class)) {
+                        GenericNetWorker<ClientProduct> clientProductHelper = new GenericNetWorker<ClientProduct>(ClientProduct.class);
+                        clientProductHelper.deleteObject(productHelper.id,url);
+                    } else if(productHelper.type.equals(ClientProductImage.class)){
+                        GenericNetWorker<ClientProductImage> clientProductHelper = new GenericNetWorker<ClientProductImage>(ClientProductImage.class);
+                        clientProductHelper.deleteObject(productHelper.id,url);
+                    } else if(productHelper.type.equals(ClientProductProvider.class)){
+                        GenericNetWorker<ClientProductProvider> clientProductHelper = new GenericNetWorker<ClientProductProvider>(ClientProductProvider.class);
+                        clientProductHelper.deleteObject(productHelper.id,url);
+                    }
                     break;
             }
 
@@ -60,12 +99,15 @@ public class ProductManagerTask extends AsyncTask<Void,Void,ClientProduct> {
     }
 
     @Override
-    protected void onPostExecute(ClientProduct clientProduct) {
+    protected void onPostExecute(Object clientProduct) {
         super.onPostExecute(clientProduct);
         if(clientProduct != null){
-            Log.i(TAG,TAG+" "+clientProduct.getDescription());
+            if( productHelper.callback != null)
+            productHelper.callback.onResultComplete(true,clientProduct);
         } else {
-            Log.i(TAG,TAG+" Product null ");
+            if( productHelper.callback != null)
+            productHelper.callback.onResultComplete(false,null);
         }
     }
+
 }

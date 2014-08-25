@@ -24,7 +24,7 @@ public class GenericNetWorker<T> {
         this.type = type;
     }
 
-   public T createObject(T object, String urlString)   {
+   public T createObject(  T object, String urlString)   {
        printLog("createObject entered");
        T resultObject = null;
        HttpURLConnection urlConnection = null;
@@ -49,7 +49,7 @@ public class GenericNetWorker<T> {
           printout.close();
           int statusCode = urlConnection.getResponseCode();
           if (statusCode != HttpURLConnection.HTTP_OK) {
-              printLog(""+statusCode);
+              printLog(" Failed Response Code "+statusCode);
           } else {
               InputStream in =
                       new BufferedInputStream(urlConnection.getInputStream());
@@ -58,6 +58,7 @@ public class GenericNetWorker<T> {
               if (responseMessage.length() > 0) {
                   try {
                       resultObject = (new ObjectMapper()).readValue(responseMessage, type);
+
                   } catch (Exception e) {
                       e.printStackTrace();
                   }
@@ -93,7 +94,7 @@ public class GenericNetWorker<T> {
             int statusCode = urlConnection.getResponseCode();
             if (statusCode != HttpURLConnection.HTTP_OK) {
                 // throw some exception
-                printLog(""+statusCode);
+                printLog(" Failed Response Code "+statusCode);
             } else {
                 InputStream in =
                         new BufferedInputStream(urlConnection.getInputStream());
@@ -151,7 +152,7 @@ public class GenericNetWorker<T> {
            int statusCode = urlConnection.getResponseCode();
            if (statusCode != HttpURLConnection.HTTP_OK) {
                // throw some exception
-               printLog(""+statusCode);
+               printLog(" Failed Response Code "+statusCode);
            } else {
                InputStream in =
                        new BufferedInputStream(urlConnection.getInputStream());

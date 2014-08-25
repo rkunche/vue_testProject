@@ -37,11 +37,14 @@ public class VueFacebookLoginActivity extends Activity{
         // start Facebook Login
         ClientUser clientUser =  SaveUser.getUserFromFile();
          if(clientUser == null){
+             //case 1 no user exists in device.
              loginFb = true;
          } else if(clientUser != null && clientUser.getFacebookId() == UserBase.DEFAULT_FACEBOOK_ID){
+             //case 2 no user exists in device but not logged with facebook.
              updateUserWithFbId = true;
              loginFb = true;
          } else {
+             //case 2   user exists in device and he already logged in with facebookId.
              loginFb = false;
          }
         if(loginFb){
@@ -84,6 +87,7 @@ public class VueFacebookLoginActivity extends Activity{
                                 //check whether  user already existed in server with the same FB id.
                                     UserManager userManager = new UserManager();
                                     userManager.getUserWithFacebookId(fbId,new Callback());
+                                Log.i(TAG,TAG+" fbId: "+fbId);
                             }
                         }
                     }).executeAsync();
@@ -99,9 +103,9 @@ public class VueFacebookLoginActivity extends Activity{
 
 class Callback implements  OnResult{
     @Override
-    public void onResultComplete(boolean status) {
+    public void onResultComplete(boolean status,Object object) {
         if(!status){
-
+            //case 1 server has no user with this face book id.
             if(!updateUserWithFbId) {
                 //no user existed , create new client with fb id.
                 Assert.assertNotNull(fbClientUser);
@@ -120,6 +124,7 @@ class Callback implements  OnResult{
                 logMessage = "updateFbUser";
             }
         } else {
+            // case 2 this user has registered in server already with same fb Id.
             Toast.makeText(VueFacebookLoginActivity.this,"User Logged in with Facebook",Toast.LENGTH_SHORT).show();
             finish();
         }
@@ -127,7 +132,7 @@ class Callback implements  OnResult{
 }
 class UpdateCallBack implements  OnResult {
     @Override
-    public void onResultComplete(boolean status) {
+    public void onResultComplete(boolean status,Object object) {
         if(status){
             printLog(logMessage +"Success");
             //user updated Successfully

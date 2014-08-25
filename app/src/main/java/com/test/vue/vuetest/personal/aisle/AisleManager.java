@@ -9,14 +9,17 @@ import com.test.vue.vuetest.personal.user.SaveUser;
 public class AisleManager {
     private String mLogMessage;
     private String TAG = "AisleManager";
+    AisleHelper aisleHelper;
+     AisleManager(){
+         aisleHelper = new AisleHelper();
+         aisleHelper.callback = new ResultCallBack();
+     }
     /**
      *
      */
     public void createAisle(ClientAisle clientAisle){
         mLogMessage = "createAisle";
-        AisleHelper aisleHelper = new AisleHelper();
         aisleHelper.requestType = AisleManagerTask.CREATE_AISLE;
-        aisleHelper.callback = new ResultCallBack();
         aisleHelper.clientAisle = clientAisle;
         callAisleTask(aisleHelper);
     }
@@ -25,11 +28,9 @@ public class AisleManager {
      *
      *
      */
-    public void retrieveAisleByUser(){
+    public void retrieveAisleByUser(Long id){
         mLogMessage = "retrieveAisle";
-        AisleHelper aisleHelper = new AisleHelper();
         aisleHelper.requestType = AisleManagerTask.GET_AISLES_BY_USER;
-        aisleHelper.callback = new ResultCallBack();
         callAisleTask(aisleHelper);
 
     }
@@ -39,9 +40,7 @@ public class AisleManager {
      */
     public void updateAisle(ClientAisle updateAisle){
         mLogMessage = "updateAisle";
-        AisleHelper aisleHelper = new AisleHelper();
         aisleHelper.requestType = AisleManagerTask.UPDATE_AISLE;
-        aisleHelper.callback = new ResultCallBack();
         aisleHelper.clientAisle = updateAisle;
         callAisleTask(aisleHelper);
     }
@@ -51,15 +50,13 @@ public class AisleManager {
      */
     public void deleteAisle(Long aisleId){
         mLogMessage = "deleteAisle";
-        AisleHelper aisleHelper = new AisleHelper();
         aisleHelper.requestType = AisleManagerTask.DELETE_AISLE;
-        aisleHelper.callback = new ResultCallBack();
         aisleHelper.aisleId = aisleId;
         callAisleTask(aisleHelper);
     }
 
     /**
-     *
+     * test code to be deleted.
      */
     private ClientAisle getSampleAisle(){
       long userId = SaveUser.getUserFromFile().getId();
@@ -68,7 +65,7 @@ public class AisleManager {
         clientAisle.setLookingFor("marriage suit");
         clientAisle.setCategory("Party");
         clientAisle.setName("raju's party suit aisle");
-        clientAisle.setOwnerUserId(userId);
+        clientAisle.setOwnerUserId(6419807607980032L);
         clientAisle.setDescription("Creating a test aisle for unit test");
         return clientAisle;
     }

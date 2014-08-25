@@ -1,24 +1,17 @@
 package com.test.vue.vuetest.personal.user;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.test.vue.vuetest.domain.client.ClientUser;
 import com.test.vue.vuetest.personal.GenericNetWorker;
-import com.test.vue.vuetest.personal.OnResult;
-import com.test.vue.vuetest.services.networking.CreateUserRequest;
 import com.test.vue.vuetest.utils.UrlConstants;
 
 import junit.framework.Assert;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import java.io.File;
@@ -136,16 +129,13 @@ public class UserCreateAndUpdateTask extends AsyncTask<Void, Void, ClientUser> {
     @Override
     protected void onPostExecute(ClientUser clientUser) {
         //TODO: Volley request needs to be changed.
-       // CreateUserRequest createUserRequest = new CreateUserRequest(clientUser,userUrl);
-        //clientUser.setJoinTime(12343434344444L);
-       //  createUserRequest.creteNewUser();
         boolean retrievedClient = false;
         if(clientUser != null) {
             SaveUser.saveUserToFile(clientUser);
             retrievedClient = true;
         }
         if(helper.callback != null) {
-            helper.callback.onResultComplete(retrievedClient);
+            helper.callback.onResultComplete(retrievedClient,clientUser);
         }
 
 

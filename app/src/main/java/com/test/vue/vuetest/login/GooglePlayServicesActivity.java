@@ -197,9 +197,6 @@ public class GooglePlayServicesActivity extends Activity implements
             String personGooglePlusProfile = currentPerson.getUrl();
             String profileUrl = currentPerson.getImage().getUrl();
             Log.i(TAG, "GoogleApiClient connected");
-            Log.i(TAG, "GoogleApiClient connected");
-            Log.i(TAG, "GoogleApiClient connected");
-
             //refer com.google.android.gms.plus.model.people.Person object for more info.
         }
     }

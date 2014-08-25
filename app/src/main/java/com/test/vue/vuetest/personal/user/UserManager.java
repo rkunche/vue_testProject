@@ -3,30 +3,23 @@ package com.test.vue.vuetest.personal.user;
 import android.content.Context;
 import android.util.Log;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.test.vue.vuetest.domain.client.ClientProduct;
 import com.test.vue.vuetest.domain.client.ClientUser;
-import com.test.vue.vuetest.personal.GenericJson;
 import com.test.vue.vuetest.personal.OnResult;
 import com.test.vue.vuetest.utils.FileCache;
-import com.test.vue.vuetest.utils.UrlConstants;
-import com.test.vue.vuetest.utils.VueConstants;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 
 import java.io.File;
-import java.net.URL;
 
 public class UserManager {
     public static String userImageUrl = "https://lh5.googleusercontent.com/-u5KwAmhVoUI/AAAAAAAAAAI/AAAAAAAAADg/5zfJJy26SNE/photo.jpg?sz=50";
     private String logMessage;
     private String TAG = "UserManager";
+    UserHelper helper;
 
     //public static String userImageUrl = "https://graph.facebook.com/477936655643127/picture?type=large";
-
+     public UserManager(){
+         UserHelper helper = new UserHelper();
+         helper.callback = new ResultCallBack();
+     }
     /**
      *create new user with user entered values.
      */
@@ -52,10 +45,7 @@ public class UserManager {
         //get the file name and path.
         FileCache fileCache = new FileCache(context);
         File file = fileCache.getFile(UserManager.userImageUrl);
-
-        UserHelper helper = new UserHelper();
         helper.requestType =  UserCreateAndUpdateTask.UPDATING_USER_WITH_IMAGE_URL;
-        helper.callback = new ResultCallBack();
         helper.clientUser = clientUser;
         helper.file = file;
         callUserTask(helper);
@@ -66,9 +56,8 @@ public class UserManager {
      */
     public void createNewClientUserWithFacebookId(ClientUser createdUser,OnResult callback) {
         logMessage = "createNewClientUserWithFacebookId";
-        UserHelper helper = new UserHelper();
         helper.requestType = UserCreateAndUpdateTask.CREATE_USER_WITH_FACEBOOK_ID;
-        helper.callback = new ResultCallBack();
+        helper.callback = callback;
         helper.clientUser = createdUser;
         callUserTask(helper);
     }
@@ -78,7 +67,6 @@ public class UserManager {
      */
     public void updateClientUserWithFacebookId(ClientUser updateUserWithFacebookId,OnResult callback) {
         logMessage = "updateClientUserWithFacebookId";
-        UserHelper helper = new UserHelper();
         helper.requestType = UserCreateAndUpdateTask.UPDATE_USER_WITH_FACEBOOK_ID;
         helper.callback = callback;
         helper.clientUser = updateUserWithFacebookId;
@@ -94,10 +82,8 @@ public class UserManager {
         //get the existing Client
         ClientUser clientUser = SaveUser.getUserFromFile();
         //set the facebook ID to the existing client.
-        UserHelper helper = new UserHelper();
-          helper.requestType =  UserCreateAndUpdateTask.UPDATE_GOOGLE_PLUS_USER_WITH_FACEBOOK_ID;
-          helper.callback = new ResultCallBack();
-          helper.clientUser = clientUser;
+        helper.requestType =  UserCreateAndUpdateTask.UPDATE_GOOGLE_PLUS_USER_WITH_FACEBOOK_ID;
+        helper.clientUser = clientUser;
         clientUser.setFacebookId(facebookId);
         callUserTask(helper);
     }
@@ -106,7 +92,6 @@ public class UserManager {
      * retrieves created user from server with facebook ID.
      */
     public void getUserWithFacebookId(String fbId,OnResult callback) {
-        UserHelper helper = new UserHelper();
         helper.requestType =  UserCreateAndUpdateTask.GET_USER_WITH_FACEBOOK_ID;
         helper.callback =callback;
         helper.id = fbId;
@@ -120,23 +105,18 @@ public class UserManager {
         logMessage = "createAnonymousUser";
         UserHelper helper = new UserHelper();
         helper.requestType =  UserCreateAndUpdateTask.CREATE_ANONYMOUS_USER;
-        helper.callback = new ResultCallBack();
         helper.clientUser = createUser();
         callUserTask(helper);
     }
 
     public void getCreatedUser() {
-        UserHelper helper = new UserHelper();
         helper.requestType = UserCreateAndUpdateTask.GET_USER_WITH_ID;
-        helper.callback = new ResultCallBack();
         callUserTask(helper);
     }
     public void deleteUser(){
         //send user to be deleted.
         logMessage = "deleteUser";
-        UserHelper helper = new UserHelper();
         helper.requestType =  UserCreateAndUpdateTask.DELETE_USER_WITH_ID;
-        helper.callback = new ResultCallBack();
         callUserTask(helper);
 
     }
@@ -156,8 +136,9 @@ public class UserManager {
     }
   private class  ResultCallBack implements OnResult {
       @Override
-      public void onResultComplete(boolean status) {
+      public void onResultComplete(boolean status,Object object) {
           if(status) {
+              ClientUser clientUser = (ClientUser) object;
               Log.i(TAG, TAG + " " + logMessage+" Success");
           } else {
               Log.i(TAG, TAG + " " + logMessage+" Failed");

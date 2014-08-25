@@ -56,6 +56,8 @@ public class UrlConstants {
             SERVER_PREFIX + "api/aislebookmarkcreate";
     public static final String CREATE_WEBSIGNUPUSER_RESTURL =
             SERVER_PREFIX + "api/websignupusersave";
+    public static final String CREATE_PRODUCTPROVIDER_RESTURL =
+            SERVER_PREFIX+"api/productprovider";
 
     /**
      * (R)ead routine URL's
@@ -117,6 +119,8 @@ public class UrlConstants {
     public static final String UPDATE_PRODUCTTAG_RESTURL =
             SERVER_PREFIX + "api/producttag";
 
+
+
     /**
      * (D)elete routine URL's
      */
@@ -139,6 +143,7 @@ public class UrlConstants {
     public static final String DELETE_PRODUCTTAG_RESTURL =
             SERVER_PREFIX + "api/producttag";
 
+
     /**
      * Search URL's
      */
@@ -154,5 +159,7 @@ public class UrlConstants {
      */
     public static final String IMAGE_UPLOAD_RESTURL =
             SERVER_PREFIX + "upload";
+ ;
+
 }
 

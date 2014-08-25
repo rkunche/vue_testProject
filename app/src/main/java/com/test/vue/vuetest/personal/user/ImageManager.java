@@ -23,7 +23,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class ImageManager {
-
+    String TAG = "ImageManager";
     /**
      * download the image and save it in the sd card
      */
@@ -68,10 +68,10 @@ public class ImageManager {
         if (response.getEntity() != null &&
                 response.getStatusLine().getStatusCode() == 200) {
             String responseMessage = EntityUtils.toString(response.getEntity());
-            Log.i("facebook","facebook: user creation task image upload successfully: ");
+            Log.i(TAG,TAG+" user creation task image upload successfully: ");
             return responseMessage;
         } else {
-            Log.i("facebook","facebook: user creation task image upload failed: ");
+            Log.i(TAG, TAG +" user creation task image upload failed: ");
             return null;
         }
     }

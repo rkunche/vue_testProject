@@ -16,7 +16,9 @@ import com.test.vue.vuetest.R;
 import com.test.vue.vuetest.domain.client.ClientUser;
 import com.test.vue.vuetest.login.VueFacebookLoginActivity;
 import com.test.vue.vuetest.personal.aisle.AisleManager;
+import com.test.vue.vuetest.personal.product.ImageManager;
 import com.test.vue.vuetest.personal.product.ProductManager;
+import com.test.vue.vuetest.personal.product.ProviderManager;
 import com.test.vue.vuetest.personal.user.UserManager;
 import com.test.vue.vuetest.utils.Utils;
 import com.test.vue.vuetest.utils.VueConstants;
@@ -104,22 +106,6 @@ public class CardFragment extends Fragment {
             }
         });
         return view;
-    }
-
-    public ClientUser createUser() {
-        String firstName =
-                "Raju";
-        String lastName =
-                "Kunche";
-        String deviceId = VueConstants.deviceId;
-        ClientUser newUser = new ClientUser();
-     /*   newUser.setFacebookShortTermAcessToken("CAACEdEose0cBAKoh8ENuOZClgLZCsHg9X8lgpePpVikEoBCOsCrcE0cDyA6cQAWzFZBUMYCQiRlSYhzQ9fDZC9bfRm9SfljwSgiAqcMaXMi8v2sb68dryfZC7hkL2yC3NWqG5cXyywe11Bq3RNpzQmJ3YRTDXGaB8N9wBaq1zCA8Jp2bhIDzjrA3nZATyEwoHwm9BzDPRRLVExV4o0PZB2cy9ZA8uWCa9TYZD");
-        newUser.setFacebookId("FACEBOOK_ID_" + System.currentTimeMillis());
-        newUser.setGooglePlusId("GOOGLEPLUS_ID_" + System.currentTimeMillis());
-        newUser.setFirstName(firstName);
-        newUser.setLastName(lastName);
-        newUser.setDeviceId(deviceId);*/
-        return newUser;
     }
 
 }

@@ -14,11 +14,11 @@ public class ClientProduct extends ProductBase {
     List<ClientProductTag> tags;
     List<ClientProductComment> comments;
     List<ClientProductRating> ratings;
-    
+
     /** Read-only provenance fields */
     Long orignalCreatorId;
     Long orignalProductId;
-    
+
     /**
      * Ignore serialization of this field
      * @return
@@ -82,7 +82,7 @@ public class ClientProduct extends ProductBase {
      * @return
      */
     @JsonIgnore
-    public List<ClientProductTag> getTags() {
+    public List<ClientProductTag> getProductTags() {
         return this.tags;
     }
 
@@ -91,7 +91,7 @@ public class ClientProduct extends ProductBase {
      * @return
      */
     @JsonProperty
-    public void setTags(List<ClientProductTag> tags) {
+    public void setProductTags(List<ClientProductTag> tags) {
         this.tags = tags;
     }
 
@@ -100,7 +100,7 @@ public class ClientProduct extends ProductBase {
      * @return
      */
     @JsonIgnore
-    public List<ClientProductImage> getImages() {
+    public List<ClientProductImage> getProductImages() {
         return images;
     }
 
@@ -109,7 +109,7 @@ public class ClientProduct extends ProductBase {
      * @return
      */
     @JsonProperty
-    public void setImages(List<ClientProductImage> images) {
+    public void setProductImages(List<ClientProductImage> images) {
         this.images = images;
     }
 
