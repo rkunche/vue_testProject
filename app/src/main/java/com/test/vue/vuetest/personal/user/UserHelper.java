@@ -11,4 +11,5 @@ public class UserHelper {
     public int requestType;
     public String id;
     public OnResult callback;
+
 }

@@ -24,6 +24,7 @@ public class ResponseHandler extends  Handler{
             case PRODUCT_REQUEST:
                 Log.i("TAG",TAG+" "+msg.obj);
                 break;
+
         }
     }
     protected void logMessage(String message){

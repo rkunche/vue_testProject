@@ -22,5 +22,6 @@ public class ProductProviderApi implements ProductApiInterface {
     @Override
     public String deleteUrl() {
         return null;
+
     }
 }

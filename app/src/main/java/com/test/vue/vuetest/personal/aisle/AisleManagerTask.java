@@ -97,7 +97,6 @@ public class AisleManagerTask extends AsyncTask<Void,Void,ArrayList<ClientAisle>
             aisleHelper.callback.onResultComplete(true,clientAisles);
         } else {
             aisleHelper.callback.onResultComplete(false,clientAisles);
-            Log.i(TAG,TAG+" NULL" );
         }
     }
 

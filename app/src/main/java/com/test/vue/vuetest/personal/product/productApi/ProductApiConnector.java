@@ -19,6 +19,7 @@ public class ProductApiConnector {
        }else if(type.equals(ClientProductRating.class)){
            return  new ProductRatingApi();
        }
+
        return null;
    }
 }

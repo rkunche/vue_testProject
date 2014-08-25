@@ -6,4 +6,5 @@ public interface ProductApiInterface {
     public String createUrl();
     public String updateUrl();
     public String deleteUrl();
+
 }

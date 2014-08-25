@@ -21,5 +21,6 @@ public class ProductImageApi implements ProductApiInterface {
     @Override
     public String deleteUrl() {
         return UrlConstants.DELETE_PRODUCTIMAGE_RESTURL;
+
     }
 }

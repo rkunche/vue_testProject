@@ -90,6 +90,7 @@ public class ProductManagerTask extends AsyncTask<Void,Void,Object> {
                         clientProductHelper.deleteObject(productHelper.id,url);
                     }
                     break;
+
             }
 
         } catch(Exception e){

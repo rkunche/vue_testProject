@@ -93,6 +93,7 @@ public class GenericJson<T> extends ResponseHandler{
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     /**

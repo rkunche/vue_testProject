@@ -22,5 +22,6 @@ public class ProductRatingApi implements ProductApiInterface {
     @Override
     public String deleteUrl() {
         return UrlConstants.DELETE_PRODUCTRATING_RESTURL;
+
     }
 }

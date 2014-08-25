@@ -47,6 +47,7 @@ public class ImageManager {
                 Log.i(TAG, TAG + " " + logMessage + " Success");
             } else {
                 Log.i(TAG, TAG + " " + logMessage+" Failed");
+
             }
         }
     }
