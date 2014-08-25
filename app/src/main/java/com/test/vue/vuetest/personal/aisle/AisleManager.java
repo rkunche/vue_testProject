@@ -79,8 +79,9 @@ public class AisleManager {
     }
     private class  ResultCallBack implements OnResult {
         @Override
-        public void onResultComplete(boolean status) {
+        public void onResultComplete(boolean status,Object object) {
             if(status) {
+                ClientAisle clientAisle = (ClientAisle) object;
                 Log.i(TAG, TAG + " " + mLogMessage + " Success");
             } else {
                 Log.i(TAG, TAG + " " + mLogMessage+" Failed");
