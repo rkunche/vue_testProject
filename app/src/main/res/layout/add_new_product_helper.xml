@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/light_blue"
+    android:orientation="vertical">
+<TextView
+    android:layout_width="wrap_content"
+    android:singleLine="true"
+    android:textColor="@color/white"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="16dp"
+    android:text="Congratulation!"
+    android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:singleLine="true"
+        android:layout_marginTop="12dp"
+        android:textColor="@color/black"
+        android:layout_gravity="center_horizontal"
+        android:text="Show off your new look!"
+        android:layout_height="wrap_content" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_marginTop="12dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:layout_height="38dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Add a new look photo!"
+        android:background="@drawable/round_corner_product"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:singleLine="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:textColor="@color/black"
+        android:layout_gravity="center_horizontal"
+        android:text="May be later"
+        android:layout_height="wrap_content" />
+</LinearLayout>
