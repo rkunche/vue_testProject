@@ -43,7 +43,7 @@
             android:layout_width="@dimen/vue_icon_dimensions"
             android:layout_height="@dimen/vue_icon_dimensions"
             android:layout_centerInParent="true"
-            android:src="@drawable/shopping_cart" />
+            android:src="@drawable/ic_action_comments_gray" />
     </RelativeLayout>
 
 </RelativeLayout>

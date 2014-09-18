@@ -8,10 +8,14 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
+import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.test.vue.vuetest.AnchoredContext;
+import com.test.vue.vuetest.domain.client.ClientAisle;
 import com.test.vue.vuetest.presenters.DataContainer;
 import com.test.vue.vuetest.utils.Logger;
 
@@ -22,7 +26,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
+import java.util.ArrayList;
+import java.util.List;
 
 //android and java imports
 
@@ -32,7 +41,7 @@ public class VueContentModelImpl implements VueContentModel {
     private static final int INITIALIZE = 0;
     private static final int REDUCE_PRIORITY = 1;
     private static final int RESUME_PRIORITY = 2;
-    private static final int AISLE_DATA_GET = 3;
+    public static final int AISLE_DATA_GET = 3;
     public static final int AISLE_DATA_NOTIFY = 4;
 
     private static VueContentModelImpl sVueContentModelImpl;
@@ -97,7 +106,11 @@ public class VueContentModelImpl implements VueContentModel {
     }
 
     public static void sendMessage(Message msg) {
-        sContentModelHandler.sendMessage(msg);
+        if(sContentModelHandler == null){
+            getContentModel();
+        } else {
+            sContentModelHandler.sendMessage(msg);
+        }
     }
 
     public static VueContentModel getContentModel() {
@@ -202,13 +215,25 @@ public class VueContentModelImpl implements VueContentModel {
                         " current offset = " + String.valueOf(mOffset));
             }
         }
-
-        for (int i = 0; i < jsonArray.length(); i++) {
+        Log.i("item","item "+jsonArray.toString());
+       // for (int i = 0; i < jsonArray.length(); i++) {
             try {
-                JSONObject aisleItem = jsonArray.getJSONObject(i);
-                aisleItem.optInt("random");
-            } catch(JSONException ex) {
+                Log.i("item","item ");
 
+             ArrayList<ClientAisle> aisles = (new ObjectMapper()).readValue(jsonArray.toString(),new TypeReference<List<ClientAisle>>(){});
+                Log.i("item","item aisle id: "+aisles.size());
+
+            }catch (MalformedURLException e) {
+                // handle invalid URL
+                e.printStackTrace();
+            } catch (SocketTimeoutException e) {
+                // handle timeout
+                e.printStackTrace();
+            } catch (IOException e) {
+                // handle I/0
+                e.printStackTrace();
+            } catch (Exception e){
+                e.printStackTrace();
             }
 
             /*AisleContext aisleContext = parseAisleData(ailseItem);
@@ -246,7 +271,7 @@ public class VueContentModelImpl implements VueContentModel {
                 // TODO: UNCOMMENT THIS CODE WHEN NO IMAGE AISLE FEATURE
                 // ENABLED.
             }*/
-        }
+      //  }
     }
 
     public void parseAisleData(JSONObject jsonObject) {
@@ -340,7 +365,7 @@ public class VueContentModelImpl implements VueContentModel {
                                 core.notifyMoreAislesLoaded((JSONArray)msg.obj, msg.arg1, msg.arg2);
 
                                 //based on some conditions we can go get more aisles. For now, just keep getting more
-                                sendMessage(Message.obtain(sContentModelHandler, AISLE_DATA_GET));
+                              //  sendMessage(Message.obtain(sContentModelHandler, AISLE_DATA_GET));
                                 break;
 
                             case AISLE_DATA_GET:

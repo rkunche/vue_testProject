@@ -16,7 +16,7 @@ public class ProductProviderApi implements ProductApiInterface {
 
     @Override
     public String updateUrl() {
-        return null;
+        return UrlConstants.UPDATE_PRODUCTPROVIDER_RESTURL;
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.test.vue.vuetest.services.networking;
 //Vue imports
 
 import android.os.Message;
+import android.util.Log;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -32,6 +33,8 @@ public class GetAislesResponse implements Response.Listener<JSONArray>,
     public void onErrorResponse(VolleyError volleyError) {
         volleyError.getMessage();
         //To change body of implemented methods use File | Settings | File Templates.
+        Log.i("error","error ");
+        volleyError.printStackTrace();
     }
 
     @Override

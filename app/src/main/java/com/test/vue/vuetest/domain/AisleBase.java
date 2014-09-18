@@ -1,5 +1,6 @@
 package com.test.vue.vuetest.domain;
 
+import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 
 import lombok.EqualsAndHashCode;
@@ -11,12 +12,41 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AisleBase {
 
+
+    /** Primary key */
+    @Getter @Setter @Id
+    Long id;
+    /** Parent information */
+    @Index @Getter @Setter Long ownerUserId;
+    /** Aisle fields */
+    @Getter @Setter @Index String category;
+
+    public AisleStateEnum getCurrentAisleState() {
+        return currentAisleState;
+    }
+
+    public void setCurrentAisleState(AisleStateEnum currentAisleState) {
+        this.currentAisleState = currentAisleState;
+    }
+
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getOwnerUserId() {
+        return ownerUserId;
     }
 
     public void setOwnerUserId(Long ownerUserId) {
@@ -63,51 +93,19 @@ public class AisleBase {
         this.bookmarkCount = bookmarkCount;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /** Primary key */
-    @Getter
-    @Setter
-    Long id;
-
-    public Long getOwnerUserId() {
-        return ownerUserId;
-    }
-
-    /** Parent information */
-    @Getter
-    @Setter
-    Long ownerUserId;
-
-    /** Aisle fields */
-    @Getter
-    @Setter
-    @Index
-    String category;
-    @Getter
-    @Setter
-    @Index
-    String lookingFor;
-    @Getter
-    @Setter
-    @Index
-    String name;
-    @Getter
-    @Setter
-    @Index
-    String occassion;
-    @Getter
-    @Setter
-    @Index
-    int bookmarkCount;
-    @Getter
-    @Setter
-    @Index
-    String description;
+    @Getter @Setter @Index String lookingFor;
+    @Getter @Setter @Index String name;
+    @Getter @Setter @Index String occassion;
+    @Getter @Setter @Index int bookmarkCount;
+    @Getter @Setter @Index String description;
+    public enum AisleStateEnum {
+        CRAWLED,
+        CURATED,
+        CURATED_AND_VERIFIED,
+        NEEDS_RECURATION,
+        ARCHIVED,
+        USER_CREATED,
+        CLONED,
+        DELETED}
+    @Index @Getter @Setter AisleStateEnum currentAisleState;
 }

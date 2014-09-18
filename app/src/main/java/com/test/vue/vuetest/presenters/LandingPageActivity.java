@@ -9,6 +9,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.telephony.TelephonyManager;
@@ -17,6 +18,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.test.vue.vuetest.R;
+import com.test.vue.vuetest.models.VueContentModelImpl;
 import com.test.vue.vuetest.services.logging.Logger;
 import com.test.vue.vuetest.services.sidekick.PersistentWatcher;
 import com.test.vue.vuetest.utils.VueConstants;
@@ -40,7 +42,10 @@ public class LandingPageActivity extends FragmentActivity {
         super.onCreate(icicle);
         Logger.console("onCreate of LandingPage invoked", "VueDebug");
         setContentView(R.layout.landing_page);
-
+        VueContentModelImpl.getContentModel();
+        Message message = new Message();
+        message.what = VueContentModelImpl.AISLE_DATA_GET;
+        VueContentModelImpl.sendMessage(message);
         boolean isAvailable = arePlayServicesAccessible();
         Intent watcherServiceIntent = new Intent(this, PersistentWatcher.class);
         watcherServiceIntent.putExtra(PersistentWatcher.REASON, PersistentWatcher.START_SIDEKICK);

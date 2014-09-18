@@ -81,18 +81,5 @@ public class ProductManager {
         product.setTitle("Test product");
         return product;
     }
-    /**
-     * test code.
-     */
-    private ClientProduct updateClientProductObject(){
-        ClientProduct product = new ClientProduct();
-        product.setId(5423325266313216L);
-        product.setOwnerProductListId(null);
-        product.setOrignalCreatorId(null);
-        product.setDescription("Dummy description");
-        product.setOwnerAisleId(Long.valueOf("4887425285357568"));
-        product.setCurrentProductState(ProductBase.ProductStateEnum.USER_CREATED);
-        product.setTitle("Test product");
-        return product;
-    }
+
 }

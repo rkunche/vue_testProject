@@ -20,10 +20,14 @@ public class ProviderManager {
         logMessage = "createProductProvider";
         productHelper.requestType = ProductManagerTask.CREATE_PRODUCT;
         productHelper.object = productProvider;
+
         callProductTask(productHelper);
     }
     public void updateProductProvider(ClientProductProvider productProvider){
         logMessage = "updateProductProvider";
+        productHelper.requestType = ProductManagerTask.UPDATE_PRODUCT;
+        productHelper.object = productProvider;
+        callProductTask(productHelper);
     }
     public void getProductProvider(Long id){
         logMessage = "getProductProvider";

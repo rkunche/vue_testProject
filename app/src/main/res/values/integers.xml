@@ -6,4 +6,10 @@
     <integer name="image_card_bottom_layout_height">48</integer>
     <integer name="product_card_info_text_shadow">10</integer>
 
+    <integer name="small_text_size">18</integer>
+    <integer name="medium_text_size">20</integer>
+    <integer name="large_text_size">22</integer>
+    <integer name="friend_text_size">14</integer>
+
+
 </resources>

@@ -17,7 +17,7 @@ public class UserManager {
 
     //public static String userImageUrl = "https://graph.facebook.com/477936655643127/picture?type=large";
      public UserManager(){
-         UserHelper helper = new UserHelper();
+         helper = new UserHelper();
          helper.callback = new ResultCallBack();
      }
     /**

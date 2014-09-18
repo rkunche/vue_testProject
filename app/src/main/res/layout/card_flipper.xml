@@ -1,7 +1,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_marginTop="@dimen/margin_8dp"
     android:layout_height="wrap_content">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:id="@+id/aisle_card"
+    android:layout_marginLeft="-8dp"
+    android:layout_marginRight="-8dp"
+    android:background="@drawable/big_card"
+    android:layout_height="match_parent">
     <include
         android:id="@+id/card_top_id"
         layout="@layout/card_top" />
@@ -16,6 +23,7 @@
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:focusable="true">
 
             <include layout="@layout/pager_card_one" />
@@ -49,26 +57,39 @@
                 android:layout_height="@dimen/vue_icon_dimensions" />
         </RelativeLayout>
     </RelativeLayout>
-
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/product_card_bottom_text_height"
+    android:layout_marginTop="@dimen/product_card_bottom_text_top_margin"
+    android:layout_centerHorizontal="true"
+    android:layout_below="@+id/pager_layout_id">
     <TextView
         android:id="@+id/bottom_view_id"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/product_card_bottom_text_height"
-        android:layout_below="@+id/pager_layout_id"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/product_card_bottom_text_top_margin"
         android:gravity="center_vertical"
+        android:textColor="@color/start_in_two_days"
         android:text="@string/sample_starts_in_two_days" />
-
     <TextView
         android:id="@+id/bottom_view_id_rate_now"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/product_card_bottom_text_height"
-        android:layout_below="@+id/pager_layout_id"
-        android:layout_marginTop="@dimen/product_card_bottom_text_top_margin"
         android:layout_toRightOf="@+id/bottom_view_id"
         android:gravity="center_vertical"
+        android:layout_marginLeft="4dp"
         android:text="@string/sample_rate_now"
-        android:textColor="@android:color/holo_orange_light" />
+        android:textColor="#141313" />
+</RelativeLayout>
+</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/special_card"
+        android:visibility="gone"
+        android:layout_marginLeft="-6dp"
+        android:layout_marginRight="-6dp"
+        android:background="@drawable/big_card"
+        android:layout_height="240dp">
 
+        </RelativeLayout>
 </RelativeLayout><!--each icon size is 32 dp and its touch area is 42 dp.-->

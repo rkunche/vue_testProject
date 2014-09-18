@@ -1,5 +1,6 @@
 package com.test.vue.vuetest.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.googlecode.objectify.annotation.Index;
 
 import java.util.List;
@@ -80,6 +81,7 @@ public class ProductBase {
     Long ownerAisleId;
     @Getter
     @Setter
+    @JsonIgnore
     Long ownerProductListId;
 
     public Long getCreatorId() {
@@ -103,14 +105,18 @@ public class ProductBase {
     @Setter
     @Index
     String description;
-    
+
     public enum ProductStateEnum {
+        CRAWLED,
+        CURATED,
+        CURATED_AND_VERIFIED,
+        NEEDS_RECURATION,
+        ARCHIVED,
         USER_CREATED,
         CLONED,
-        CURATED}
-    @Getter
-    @Setter
-    ProductStateEnum currentProductState;
+        DELETED}
+    @Index @Getter @Setter ProductStateEnum currentProductState;
+
 
     @Getter
     @Setter
