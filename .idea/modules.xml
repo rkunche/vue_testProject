@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/VueTest.iml" filepath="$PROJECT_DIR$/VueTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sep18Vue.iml" filepath="$PROJECT_DIR$/sep18Vue.iml" />
     </modules>
   </component>
 </project>

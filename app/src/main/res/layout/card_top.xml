@@ -1,11 +1,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/product_card_top_layout_height"
+    android:layout_marginBottom="@dimen/margin_2dp"
     android:layout_marginLeft="@dimen/activity_horizontal_margin"
     android:layout_marginRight="@dimen/activity_horizontal_margin">
 
     <com.test.vue.vuetest.uihelper.CircularImageView
-        android:id="@+id/aisle_card_user_id"
+        android:id="@+id/aisle_card_user_pic_id"
         android:layout_width="@dimen/product_card_top_layout_profile_pic_dimensions"
         android:layout_height="@dimen/product_card_top_layout_profile_pic_dimensions"
         android:layout_alignParentLeft="true"
@@ -18,18 +19,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginRight="@dimen/vue_icon_touch_area_dimensions"
-        android:layout_toRightOf="@+id/aisle_card_user_id"
+        android:layout_toRightOf="@+id/aisle_card_user_pic_id"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/card_user_heading_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_4dp"
+            android:layout_marginLeft="@dimen/margin_2dp"
             android:layout_weight="2"
             android:ellipsize="end"
             android:gravity="bottom"
             android:maxLines="1"
+            android:fontFamily="sans-serif"
             android:textSize="18dp"
             android:textColor="@color/aisle_title_color"
             android:text="@string/sample_Dress_for_pool_party" />
@@ -38,11 +40,13 @@
             android:id="@+id/aisle_card_user_name_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_4dp"
+            android:layout_marginLeft="@dimen/margin_2dp"
             android:layout_weight="2"
             android:ellipsize="end"
             android:gravity="top"
+            android:fontFamily="sans-serif"
             android:maxLines="1"
+            android:layout_marginTop="2dp"
             android:textSize="16dp"
             android:textColor="@color/aisle_owner_name"
             android:text="@string/sample_Mary_Long_bottom" />

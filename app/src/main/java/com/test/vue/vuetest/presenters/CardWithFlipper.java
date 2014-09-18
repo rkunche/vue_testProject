@@ -38,7 +38,7 @@ public class CardWithFlipper extends DataAdapter{
 
     View birthDaySpecial;
     WeakHashMap<String, View> weekSpecialCards;
-
+    Bitmap suggesterIcon;
 
     CardWithFlipper(Context context) {
         super(context);
@@ -54,7 +54,7 @@ public class CardWithFlipper extends DataAdapter{
         View friendsList = creator.createFriendsListCard();
         WeakReference<View> friendsListRef = new WeakReference<View>(friendsList);
         weekSpecialCards.put(FRIENDS_CARD, friendsList);
-
+          suggesterIcon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.vuetest);
     }
 
     @Override
@@ -89,8 +89,8 @@ public class CardWithFlipper extends DataAdapter{
                     Utils.getCurrentCardHeight(mTempHeight, mContext)
                             + Utils.getPixel(mContext, mPagerCardBottomMargin)
             );
+        params.setMargins(Utils.getPixel(mContext,16),0,Utils.getPixel(mContext,16),0);
 
-            Bitmap suggesterIcon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.vuetest);
             viewHolder.productSuggesterPic.setImageBitmap(suggesterIcon);
             viewHolder.aisleContentBrowser.setLayoutParams(params);
             viewHolder.productImage.setImageResource(R.drawable.image);

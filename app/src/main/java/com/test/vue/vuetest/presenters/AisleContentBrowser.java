@@ -62,7 +62,7 @@ public class AisleContentBrowser extends ViewFlipper {
             }
         });
         mTapTimeout = ViewConfiguration.getTapTimeout();
-        this.setBackgroundColor(Color.WHITE);
+        this.setBackgroundColor(Color.TRANSPARENT);
         mDetector = new GestureDetector(AisleContentBrowser.this.getContext(),
                 new mListener());
     }

@@ -215,7 +215,7 @@ public class VueContentModelImpl implements VueContentModel {
                         " current offset = " + String.valueOf(mOffset));
             }
         }
-        Log.i("item","item "+jsonArray.toString());
+/*        Log.i("item","item "+jsonArray.toString());
        // for (int i = 0; i < jsonArray.length(); i++) {
             try {
                 Log.i("item","item ");
@@ -234,7 +234,7 @@ public class VueContentModelImpl implements VueContentModel {
                 e.printStackTrace();
             } catch (Exception e){
                 e.printStackTrace();
-            }
+            }*/
 
             /*AisleContext aisleContext = parseAisleData(ailseItem);
             ArrayList<AisleImageDetails> aisleImageDetailsList = new ArrayList<AisleImageDetails>();
