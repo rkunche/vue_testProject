@@ -20,6 +20,9 @@ public class CardViewHolder {
     RelativeLayout specialCard;
     RelativeLayout aisleSettings;
 
+    TextView aisleCardUserNameId;
+    TextView cardUserHeadingId;
+
 
 
 

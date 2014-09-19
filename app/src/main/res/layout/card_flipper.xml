@@ -59,14 +59,13 @@
     </RelativeLayout>
 <RelativeLayout
     android:layout_width="wrap_content"
-    android:layout_height="@dimen/product_card_bottom_text_height"
-    android:layout_marginTop="@dimen/product_card_bottom_text_top_margin"
+    android:layout_height="42dp"
     android:layout_centerHorizontal="true"
     android:layout_below="@+id/pager_layout_id">
     <TextView
         android:id="@+id/bottom_view_id"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/product_card_bottom_text_height"
+        android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:gravity="center_vertical"
         android:textColor="@color/start_in_two_days"
@@ -74,7 +73,7 @@
     <TextView
         android:id="@+id/bottom_view_id_rate_now"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/product_card_bottom_text_height"
+        android:layout_height="match_parent"
         android:layout_toRightOf="@+id/bottom_view_id"
         android:gravity="center_vertical"
         android:layout_marginLeft="4dp"

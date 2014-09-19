@@ -15,6 +15,7 @@ import com.android.volley.toolbox.Volley;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.test.vue.vuetest.AnchoredContext;
+import com.test.vue.vuetest.domain.AisleBase;
 import com.test.vue.vuetest.domain.client.ClientAisle;
 import com.test.vue.vuetest.presenters.DataContainer;
 import com.test.vue.vuetest.utils.Logger;
@@ -106,7 +107,7 @@ public class VueContentModelImpl implements VueContentModel {
     }
 
     public static void sendMessage(Message msg) {
-        if(sContentModelHandler == null){
+        if (sContentModelHandler == null) {
             getContentModel();
         } else {
             sContentModelHandler.sendMessage(msg);
@@ -128,13 +129,16 @@ public class VueContentModelImpl implements VueContentModel {
     @Override
     public void getCardsMetaData(int offset, int limit) {
     }
+
     //set listener to notify the cards adapter when data is available
-    public void setDataRegisterListener(DataContainer dataContainerListener){
+    public void setDataRegisterListener(DataContainer dataContainerListener) {
         mDataContainerListener = dataContainerListener;
     }
-    public DataContainer getDataRegisterListener(){
+
+    public DataContainer getDataRegisterListener() {
         return mDataContainerListener;
     }
+
     @Override
     public void onPause() {
         //deinitContinuousFetcher
@@ -147,12 +151,12 @@ public class VueContentModelImpl implements VueContentModel {
         SharedPreferences contentModelPrefs =
                 AnchoredContext.getInstance().getApplicationContext().getSharedPreferences(CONTENT_MODEL_STATE_PREFS, 0);
 
-        boolean newInstall = contentModelPrefs.getBoolean("newInstall",true);
-        boolean updatedInstall = contentModelPrefs.getBoolean("updatedInstall",false);
-        mFetcherOffset = contentModelPrefs.getInt("lastFetchedItemIndex",0);
+        boolean newInstall = contentModelPrefs.getBoolean("newInstall", true);
+        boolean updatedInstall = contentModelPrefs.getBoolean("updatedInstall", false);
+        mFetcherOffset = contentModelPrefs.getInt("lastFetchedItemIndex", 0);
 
         mTimeWhenGetAislesWasStarted = System.currentTimeMillis();
-        if(newInstall) {
+        if (newInstall) {
             //Lets make sure we don't have bugs here
             Assert.assertFalse("Status indicates this is a new install but somehow " +
                     "updatedInstall is set to true as well!", updatedInstall == true);
@@ -164,7 +168,7 @@ public class VueContentModelImpl implements VueContentModel {
             mStoredContent.getReadableDatabase();
 
             initializeContinuousFetcher();
-        } else if(updatedInstall) {
+        } else if (updatedInstall) {
 
         } else {
             mStoredContent = new PersistentDatabase(AnchoredContext.getInstance().getApplicationContext());
@@ -186,55 +190,67 @@ public class VueContentModelImpl implements VueContentModel {
     private void notifyMoreAislesLoaded(JSONArray jsonArray, int offset, int limit) {
         //ArrayList<AisleWindowContent> aisleWindowContentList = new ArrayList<AisleWindowContent>();
         mOffset = offset + limit;
-        if(mOffset >= 1000) {
-            if(mTimeTakenToFetch1000Aisles == -1) {
+        if (mOffset >= 1000) {
+            if (mTimeTakenToFetch1000Aisles == -1) {
                 mTimeTakenToFetch1000Aisles = System.currentTimeMillis();
                 Logger.analytics("AisleMetaDataLoadPerformance", "Time taken to fetch the first " +
                         "1000 aisles = " + String.valueOf(mTimeTakenToFetch1000Aisles - mTimeWhenGetAislesWasStarted) +
                         " current offset = " + String.valueOf(mOffset));
             }
-        } else if(mOffset >= 500) {
-            if(mTimeTakenToFetch500Aisles == -1) {
+        } else if (mOffset >= 500) {
+            if (mTimeTakenToFetch500Aisles == -1) {
                 mTimeTakenToFetch500Aisles = System.currentTimeMillis();
-                Logger.analytics("AisleMetaDataLoadPerformance","Time taken to fetch the first " +
+                Logger.analytics("AisleMetaDataLoadPerformance", "Time taken to fetch the first " +
                         "500 aisles = " + String.valueOf(mTimeTakenToFetch500Aisles - mTimeWhenGetAislesWasStarted) +
                         " current offset = " + String.valueOf(mOffset));
             }
-        } else if(mOffset >= 100) {
-            if(mTimeTakenToFetch100Aisles == -1) {
+        } else if (mOffset >= 100) {
+            if (mTimeTakenToFetch100Aisles == -1) {
                 mTimeTakenToFetch100Aisles = System.currentTimeMillis();
-                Logger.analytics("AisleMetaDataLoadPerformance","Time taken to fetch the first " +
+                Logger.analytics("AisleMetaDataLoadPerformance", "Time taken to fetch the first " +
                         "100 aisles = " + String.valueOf(mTimeTakenToFetch100Aisles - mTimeWhenGetAislesWasStarted) +
                         " current offset = " + String.valueOf(mOffset));
             }
-        } else if(mOffset >= 10) {
-            if(mTimeTakenToFetch10Aisles == -1) {
+        } else if (mOffset >= 10) {
+            if (mTimeTakenToFetch10Aisles == -1) {
                 mTimeTakenToFetch10Aisles = System.currentTimeMillis();
-                Logger.analytics("AisleMetaDataLoadPerformance","Time taken to fetch the first " +
+                Logger.analytics("AisleMetaDataLoadPerformance", "Time taken to fetch the first " +
                         "10 aisles = " + String.valueOf(mTimeTakenToFetch10Aisles - mTimeWhenGetAislesWasStarted) +
                         " current offset = " + String.valueOf(mOffset));
             }
         }
-        Log.i("item","item "+jsonArray.toString());
-       // for (int i = 0; i < jsonArray.length(); i++) {
-            try {
-                Log.i("item","item ");
+        Log.i("item", "item " + jsonArray.length());
+        // for (int i = 0; i < jsonArray.length(); i++) {
+        try {
+            Log.i("item", "item ");
 
-             ArrayList<ClientAisle> aisles = (new ObjectMapper()).readValue(jsonArray.toString(),new TypeReference<List<ClientAisle>>(){});
-                Log.i("item","item aisle id: "+aisles.size());
-
-            }catch (MalformedURLException e) {
-                // handle invalid URL
-                e.printStackTrace();
-            } catch (SocketTimeoutException e) {
-                // handle timeout
-                e.printStackTrace();
-            } catch (IOException e) {
-                // handle I/0
-                e.printStackTrace();
-            } catch (Exception e){
-                e.printStackTrace();
+            ArrayList<ClientAisle> aisles = (new ObjectMapper()).readValue(jsonArray.toString(), new TypeReference<List<ClientAisle>>() {
+            });
+            WeakReference<ArrayList<ClientAisle>> weakReferenceClientAisleList = new WeakReference<ArrayList<ClientAisle>>(aisles);
+            ArrayList<ClientAisle> CuratedAisles = new ArrayList<ClientAisle>();
+            Log.i("item", "item aisle id: " + aisles.size());
+            for (int i = 0; i < aisles.size(); i++) {
+                if (aisles.get(i).getProductList() != null && aisles.get(i).getCurrentAisleState() != ClientAisle.AisleStateEnum.DELETED /*&& (aisles.get(i).getProductList() != null && aisles.get(i).getProductList().get(0).getProductImages() != null)*/) {
+                   if(aisles.get(i).getProductList().size() != 0 && aisles.get(i).getProductList().get(0).getProductImages().size() != 0)
+                    CuratedAisles.add(aisles.get(i));
+                }
             }
+            aisles.clear();
+            aisles = null;
+            mDataContainerListener.addMoreData(CuratedAisles);
+
+        } catch (MalformedURLException e) {
+            // handle invalid URL
+            e.printStackTrace();
+        } catch (SocketTimeoutException e) {
+            // handle timeout
+            e.printStackTrace();
+        } catch (IOException e) {
+            // handle I/0
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
             /*AisleContext aisleContext = parseAisleData(ailseItem);
             ArrayList<AisleImageDetails> aisleImageDetailsList = new ArrayList<AisleImageDetails>();
@@ -271,7 +287,7 @@ public class VueContentModelImpl implements VueContentModel {
                 // TODO: UNCOMMENT THIS CODE WHEN NO IMAGE AISLE FEATURE
                 // ENABLED.
             }*/
-      //  }
+        //  }
     }
 
     public void parseAisleData(JSONObject jsonObject) {
@@ -340,6 +356,7 @@ public class VueContentModelImpl implements VueContentModel {
             synchronized (VueContentModelImpl.class) {
                 sContentModelHandler = new Handler() {
                     private VueContentModelImpl core;
+
                     @Override
                     public void handleMessage(Message msg) {
                         switch (msg.what) {
@@ -362,16 +379,16 @@ public class VueContentModelImpl implements VueContentModel {
 
                             case AISLE_DATA_NOTIFY:
                                 //more aisle data has become available
-                                core.notifyMoreAislesLoaded((JSONArray)msg.obj, msg.arg1, msg.arg2);
+                                core.notifyMoreAislesLoaded((JSONArray) msg.obj, msg.arg1, msg.arg2);
 
                                 //based on some conditions we can go get more aisles. For now, just keep getting more
-                              //  sendMessage(Message.obtain(sContentModelHandler, AISLE_DATA_GET));
+                                //  sendMessage(Message.obtain(sContentModelHandler, AISLE_DATA_GET));
                                 break;
 
                             case AISLE_DATA_GET:
                                 fetcher = new WeakReference<NetworkContentAccessor>(NetworkContentAccessor.getInstance());
                                 if (null != fetcher.get()) {
-                                    fetcher.get().getAislesInRange(core.mOffset,core.mLimit);
+                                    fetcher.get().getAislesInRange(core.mOffset, core.mLimit);
                                 }
                                 break;
                         }

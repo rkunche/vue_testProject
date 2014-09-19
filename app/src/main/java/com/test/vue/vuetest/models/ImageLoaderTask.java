@@ -3,15 +3,17 @@ package com.test.vue.vuetest.models;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.ImageView;
 
+import com.facebook.android.Util;
 import com.test.vue.vuetest.presenters.ProductCustomImageVeiw;
+import com.test.vue.vuetest.utils.BitmapLoaderUtils;
+import com.test.vue.vuetest.utils.Utils;
 
 import java.lang.ref.WeakReference;
 
-/**
- * Created by advisors on 17/9/14.
- */
+
 public class ImageLoaderTask extends AsyncTask<Void, Void, Bitmap> {
     private final WeakReference<ImageView> imageViewReference;
     public String url;
@@ -28,7 +30,10 @@ public class ImageLoaderTask extends AsyncTask<Void, Void, Bitmap> {
 
     @Override
     protected Bitmap doInBackground(Void... voids) {
-        return null;
+        Log.i("BitmapLoading", "BitmapLoading... doInBackground");
+       Bitmap bitmap = BitmapLoaderUtils.getInstance().getBitmap(url,true, Utils.sCardWidth, Utils.sCardHeight,"Trending");
+
+        return bitmap;
     }
 
     @Override

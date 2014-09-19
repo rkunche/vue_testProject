@@ -45,7 +45,7 @@ public class AisleContentAdapter implements IAisleContentAdapter {
     public boolean setAisleContent(AisleContentBrowser contentBrowser,
                                    int currentIndex, int wantedIndex, boolean shiftPivot,
                                    int imagesCount) {
-        return true;
+        return false;
     }
 
     public void loadImage(ImageView imageView, String imgUrl,

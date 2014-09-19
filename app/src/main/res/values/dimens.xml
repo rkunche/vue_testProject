@@ -5,7 +5,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="feedback_text_size">18dp</dimen>
     <dimen name="feedback_edit_lay_height">100dp</dimen>
-    <dimen name="product_card_top_layout_profile_pic_dimensions">72dp</dimen>
+    <dimen name="product_card_top_layout_profile_pic_dimensions">58dp</dimen>
 
     <dimen name="vue_icon_dimensions">32dp</dimen>
     <dimen name="vue_icon_touch_area_dimensions">42dp</dimen>

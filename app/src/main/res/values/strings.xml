@@ -7,11 +7,11 @@
     <string name="fb_button_text">Personalize using Facebook</string>
     <string name="title_activity_google_play_services">GooglePlayServicesActivity</string>
 
-    <!-- sample text that will be replace once the server is ready in UI -->
-    <string name="sample_Dress_for_pool_party">Dress for pool party</string>
+    <!--sample text that will be replace once the server is ready in UI-->
+    <string name="sample_Dress_for_pool_party">Dress for Pool Party</string>
     <string name="sample_Mary_Long_bottom">Mary Long bottom</string>
     <string name="sample_Trending_in_San_Fransisco">Trending in San Fransisco.</string>
-    <string name="sample_starts_in_two_days">starts in 2 days...Please  </string>
+    <string name="sample_starts_in_two_days">Starts in 2 days...Please  </string>
     <string name="sample_rate_now">  Rate Now!</string>
     <string name="sample_corol_white">Alex Chung</string>
     <string name="sample_price">$42</string>

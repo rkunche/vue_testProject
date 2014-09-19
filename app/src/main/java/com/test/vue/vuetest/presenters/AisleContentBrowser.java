@@ -3,15 +3,20 @@ package com.test.vue.vuetest.presenters;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.test.vue.vuetest.R;
+import com.test.vue.vuetest.domain.client.ClientAisle;
+
+import java.lang.ref.WeakReference;
 
 
 public class AisleContentBrowser extends ViewFlipper {
@@ -41,6 +46,8 @@ public class AisleContentBrowser extends ViewFlipper {
     public boolean isLeft;
     public boolean isRight;
     private GestureDetector mDetector;
+    ClientAisle clientAisle;
+    WeakReference<ClientAisle> clientAisleWeakReference;
     
     public AisleContentBrowser(Context context) {
         super(context);
@@ -48,7 +55,13 @@ public class AisleContentBrowser extends ViewFlipper {
        // mAisleUniqueId = AisleWindowContent.EMPTY_AISLE_CONTENT_ID;
         mScrollIndex = 0;
     }
-    
+    public void setClientAisle(ClientAisle clientAisle){
+        this.clientAisle = clientAisle;
+         clientAisleWeakReference = new WeakReference<ClientAisle>(this.clientAisle);
+    }
+    public ClientAisle getClientAisle(){
+        return  clientAisle;
+    }
     public AisleContentBrowser(Context context, AttributeSet attribs) {
         super(context, attribs);
        // mAisleUniqueId = AisleWindowContent.EMPTY_AISLE_CONTENT_ID;
@@ -62,7 +75,7 @@ public class AisleContentBrowser extends ViewFlipper {
             }
         });
         mTapTimeout = ViewConfiguration.getTapTimeout();
-        this.setBackgroundColor(Color.WHITE);
+        this.setBackgroundColor(Color.TRANSPARENT);
         mDetector = new GestureDetector(AisleContentBrowser.this.getContext(),
                 new mListener());
     }
@@ -143,15 +156,16 @@ public class AisleContentBrowser extends ViewFlipper {
                             .indexOfChild(aisleContentBrowser.getCurrentView());
                     nextView = (View) aisleContentBrowser
                             .getChildAt(currentIndex + 1);
-                    
+
                     mLoadImage = false;
                     if (/* null != mSpecialNeedsAdapter && */null == nextView
                             || getImageListCount() == 1) {
                         mLoadImage = true;
-                       
+
                         if (!mSpecialNeedsAdapter.setAisleContent(
                                 AisleContentBrowser.this, currentIndex,
                                 currentIndex + 1, true, getImageListCount())) {
+
                             mAnimationInProgress = true;
                             Animation cantWrapRight = AnimationUtils
                                     .loadAnimation(mContext,
@@ -185,7 +199,7 @@ public class AisleContentBrowser extends ViewFlipper {
                             return super.onTouchEvent(event);
                         }
                     }
-                    
+
                     Animation currentGoLeft = AnimationUtils.loadAnimation(
                             mContext,  R.anim.right_out);
                     final Animation nextFadeIn = AnimationUtils.loadAnimation(
@@ -209,7 +223,7 @@ public class AisleContentBrowser extends ViewFlipper {
                                 }
                             });
                     
-                    aisleContentBrowser.setDisplayedChild(currentIndex + 1);
+                   aisleContentBrowser.setDisplayedChild(currentIndex + 1);
                     // aisleContentBrowser.invalidate();
                     return super.onTouchEvent(event);
                 }
@@ -230,7 +244,6 @@ public class AisleContentBrowser extends ViewFlipper {
                         if (!mSpecialNeedsAdapter.setAisleContent(
                                 AisleContentBrowser.this, currentIndex,
                                 currentIndex - 1, true, getImageListCount())) {
-                            
                             Animation cantWrapLeft = AnimationUtils
                                     .loadAnimation(mContext,
                                             R.anim.cant_wrap_left);

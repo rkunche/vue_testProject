@@ -1,5 +1,9 @@
 package com.test.vue.vuetest.presenters;
 
+import com.test.vue.vuetest.domain.client.ClientAisle;
+
+import java.util.ArrayList;
+
 /**
  *
  *
@@ -8,7 +12,7 @@ package com.test.vue.vuetest.presenters;
 public interface DataContainer {
     public void notifyAdapters();
 
-    //public void addMoreData(ArrayList<AisleWindowContent> aisleList);
+    public void addMoreData(ArrayList<ClientAisle> aisleList);
 
     public void clearAllData();
 }

@@ -3,7 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/vue_testProject.iml" filepath="$PROJECT_DIR$/vue_testProject.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/sep18Vue.iml" filepath="$PROJECT_DIR$/sep18Vue.iml" />
+>>>>>>> 5a2a7915df1ccd8e9d1bde943f378f70129805b4
     </modules>
   </component>
 </project>

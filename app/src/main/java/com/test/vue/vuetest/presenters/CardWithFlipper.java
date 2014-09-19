@@ -1,26 +1,22 @@
 package com.test.vue.vuetest.presenters;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
+import com.test.vue.vuetest.AnchoredContext;
 import com.test.vue.vuetest.R;
+import com.test.vue.vuetest.domain.client.ClientAisle;
 import com.test.vue.vuetest.models.ImageLoaderTask;
-import com.test.vue.vuetest.personal.product.ImageManager;
+import com.test.vue.vuetest.utils.BitmapLruCache;
 import com.test.vue.vuetest.utils.Utils;
 
 import java.lang.ref.WeakReference;
@@ -31,18 +27,20 @@ public class CardWithFlipper extends DataAdapter{
     private Context mContext;
     private LayoutInflater mInflater;
     private int mPagerCardBottomMargin = /*22 +*/ 48;
-    private int mTempHeight = 1000;
+    private int mCardHeight = 1000;
     SpecialCardCreator creator;
     private static final String BIRTH_DAY_CARD = "birth_day_card";
     private static final String FRIENDS_CARD = "friends_card";
 
     View birthDaySpecial;
     WeakHashMap<String, View> weekSpecialCards;
-
+    Bitmap suggesterIcon;
+    BitmapLruCache bitmapLruCache;
 
     CardWithFlipper(Context context) {
         super(context);
         mContext = context;
+        mCardHeight = Utils.getMaxCardHeight(context);
         weekSpecialCards = new WeakHashMap<String, View>();
         mInflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -54,6 +52,7 @@ public class CardWithFlipper extends DataAdapter{
         View friendsList = creator.createFriendsListCard();
         WeakReference<View> friendsListRef = new WeakReference<View>(friendsList);
         weekSpecialCards.put(FRIENDS_CARD, friendsList);
+          suggesterIcon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.vuetest);
 
     }
 
@@ -75,6 +74,14 @@ public class CardWithFlipper extends DataAdapter{
             viewHolder.productCreateAisle = (RelativeLayout) convertView.findViewById(R.id.card_create_aisle_id);
             viewHolder.productMenuId = (ImageView) convertView.findViewById(R.id.product_menu_id);
             viewHolder.aisleSettings = (RelativeLayout) convertView.findViewById(R.id.aisle_card_user_window_id);
+            viewHolder.aisleCardUserNameId = (TextView) convertView.findViewById(R.id.aisle_card_user_name_id);
+            viewHolder.cardUserHeadingId = (TextView) convertView.findViewById(R.id.card_user_heading_id);
+
+            // set the params based on the best image height in the aisle.
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                    android.widget.RelativeLayout.LayoutParams.MATCH_PARENT,mCardHeight);
+            params.setMargins(Utils.getPixel(mContext,16),0,Utils.getPixel(mContext,16),0);
+            viewHolder.aisleContentBrowser.setLayoutParams(params);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (CardViewHolder) convertView.getTag();
@@ -83,19 +90,18 @@ public class CardWithFlipper extends DataAdapter{
         if (position % 2 == 0) {
             viewHolder.aisleCard.setVisibility(View.VISIBLE);
             viewHolder.specialCard.setVisibility(View.GONE);
-            // set the params based on the best image height in the aisle.
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                    android.widget.RelativeLayout.LayoutParams.MATCH_PARENT,
-                    Utils.getCurrentCardHeight(mTempHeight, mContext)
-                            + Utils.getPixel(mContext, mPagerCardBottomMargin)
-            );
 
-            Bitmap suggesterIcon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.vuetest);
+
             viewHolder.productSuggesterPic.setImageBitmap(suggesterIcon);
-            viewHolder.aisleContentBrowser.setLayoutParams(params);
-            viewHolder.productImage.setImageResource(R.drawable.common_signin_btn_text_focus_dark);
-            String url = null;
-          //loadBitMap(viewHolder.productImage,windowList.get(position).imageList.get(0).getExternalURL());
+
+
+
+        viewHolder.aisleCardUserNameId.setText(windowList.get(position).getName());
+        viewHolder.cardUserHeadingId.setText(windowList.get(position).getLookingFor());
+
+
+          loadBitMap(viewHolder.productImage, windowList.get(position).getProductList().get(0).getProductImages().get(0).getExternalURL(),viewHolder.aisleContentBrowser, windowList.get(position));
+
 
             viewHolder.commentsShowId.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -138,10 +144,20 @@ public class CardWithFlipper extends DataAdapter{
 
         return convertView;
     }
-  private void loadBitMap(ImageView imageView,String url){
-      if(ImageLoaderTask.cancelPotentialWork(url,imageView)){
-       ImageLoaderTask imageLoaderTask = new ImageLoaderTask(imageView, url);
-          ((ProductCustomImageVeiw)  imageView).setWorkerTaskObject(imageLoaderTask);
+  private void loadBitMap(ImageView imageView,String url,AisleContentBrowser browser,ClientAisle aisleWindow) {
+
+      browser.setImageListCount(1);
+      bitmapLruCache = BitmapLruCache.getInstance(AnchoredContext
+              .getInstance());
+
+      Bitmap bitmap = bitmapLruCache.getBitmap(url);
+      if (bitmap != null) {
+          imageView.setImageBitmap(bitmap);
+      } else if (ImageLoaderTask.cancelPotentialWork(url, imageView)) {
+          Log.i("BitmapLoading", "BitmapLoading... 2");
+          imageView.setImageBitmap(null);
+          ImageLoaderTask imageLoaderTask = new ImageLoaderTask(imageView, url);
+          ((ProductCustomImageVeiw) imageView).setWorkerTaskObject(imageLoaderTask);
           imageLoaderTask.execute();
       }
   }
