@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -70,12 +71,13 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
     }
 
     private void setActionBar() {
-        getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         LayoutInflater mInflater = LayoutInflater.from(this);
 
-        View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
-        trending_list = (TextView) mCustomView.findViewById(R.id.my_feed_text_id);
+       // View mCustomView = mInflater.inflate(R.layout.custom_actionbar,null);
+        actionBar.setCustomView(R.layout.custom_actionbar);
+        trending_list = (TextView) actionBar.getCustomView().findViewById(R.id.my_feed_text_id);
         trending_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +91,7 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
 
             }
         });
-        getActionBar().setCustomView(mCustomView);
+
 
     }
 
