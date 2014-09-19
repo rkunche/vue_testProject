@@ -1,6 +1,8 @@
 package com.test.vue.vuetest.presenters;
 
 
+import android.content.Context;
+
 public interface IAisleContentAdapter {
     public void setContentSource(String uniqueAisleId);
 
@@ -12,7 +14,7 @@ public interface IAisleContentAdapter {
 
     public boolean setAisleContent(AisleContentBrowser contentBrowser,
                                    int currentIndex, int wantedIndex, boolean shiftPivot,
-                                   int imagesCount);
+                                   int imagesCount,Context context);
 
     public String getAisleId();
 

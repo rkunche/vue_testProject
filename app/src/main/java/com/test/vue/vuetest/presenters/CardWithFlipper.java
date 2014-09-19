@@ -143,14 +143,29 @@ public class CardWithFlipper extends DataAdapter{
         return convertView;
     }
   private void loadBitMap(ImageView imageView,String url,AisleContentBrowser browser,ClientAisle aisleWindow) {
-
-      browser.setImageListCount(1);
+      Log.i("browsercall","browsercall same call 1 "+browser.getAisleUniqueId()+" aisleId: "+aisleWindow.getId().toString());
+        if(browser.getAisleUniqueId().equals(aisleWindow.getId().toString())){
+            Log.i("browsercall","browsercall same call returns");
+            return;
+        }
+      browser.setAisleUniqueId(aisleWindow.getId().toString());
+      browser.setClientAisle(aisleWindow);
+      //TODO: CLEAR ALL THE CONTENT FROM THE BROWSER.
       bitmapLruCache = BitmapLruCache.getInstance(AnchoredContext
               .getInstance());
+     if( browser.getChildCount() > 1){
+         for(int i=1;i<browser.getChildCount();i++){
+             View removedView =  browser. getChildAt(i);
+             ((ImageView) removedView.findViewById(R.id.product_image)).setImageBitmap(null);
+               browser.removeViewAt(i);
+             ProductAdapterPool.getInstance(mContext).returnUsedViewToPool(removedView);
+         }
+     }
 
       Bitmap bitmap = bitmapLruCache.getBitmap(url);
       if (bitmap != null) {
           imageView.setImageBitmap(bitmap);
+          Log.i("browsercall","browsercall cached");
       } else if (ImageLoaderTask.cancelPotentialWork(url, imageView)) {
           Log.i("BitmapLoading", "BitmapLoading... 2");
           imageView.setImageBitmap(null);
