@@ -80,7 +80,7 @@ public class CardWithFlipper extends DataAdapter{
             viewHolder = (CardViewHolder) convertView.getTag();
         }
         //TODO: Algarthm to decide when to show the special card.
-       /* if (position % 2 == 0) {*/
+        if (position % 2 == 0) {
             viewHolder.aisleCard.setVisibility(View.VISIBLE);
             viewHolder.specialCard.setVisibility(View.GONE);
             // set the params based on the best image height in the aisle.
@@ -93,7 +93,7 @@ public class CardWithFlipper extends DataAdapter{
             Bitmap suggesterIcon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.vuetest);
             viewHolder.productSuggesterPic.setImageBitmap(suggesterIcon);
             viewHolder.aisleContentBrowser.setLayoutParams(params);
-            viewHolder.productImage.setImageResource(R.drawable.image);
+            viewHolder.productImage.setImageResource(R.drawable.common_signin_btn_text_focus_dark);
             String url = null;
           //loadBitMap(viewHolder.productImage,windowList.get(position).imageList.get(0).getExternalURL());
 
@@ -121,7 +121,7 @@ public class CardWithFlipper extends DataAdapter{
 
                 }
             });
-   /*     } else {
+        } else {
             Log.i("profile","profile start *************************************");
             viewHolder.aisleCard.setVisibility(View.GONE);
             viewHolder.specialCard.setVisibility(View.VISIBLE);
@@ -134,7 +134,7 @@ public class CardWithFlipper extends DataAdapter{
             }
             Log.i("profile","profile end ######################################## ");
 
-        }*/
+        }
 
         return convertView;
     }

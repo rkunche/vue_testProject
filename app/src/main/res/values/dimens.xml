@@ -34,7 +34,7 @@
 
     <dimen name="margin_2dp">2dp</dimen>
     <dimen name="margin_4dp">4dp</dimen>
-    <dimen name="margin_8dp">8dp</dimen>
+    <dimen name="margin_8dp">12dp</dimen>
 
     <dimen name="icon">36dp</dimen>
     <dimen name="icon_mask">55dp</dimen>

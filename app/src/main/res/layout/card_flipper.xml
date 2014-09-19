@@ -88,8 +88,8 @@
         android:visibility="gone"
         android:layout_marginLeft="-6dp"
         android:layout_marginRight="-6dp"
-        android:background="@drawable/big_card"
-        android:layout_height="240dp">
+
+        android:layout_height="wrap_content">
 
         </RelativeLayout>
 </RelativeLayout><!--each icon size is 32 dp and its touch area is 42 dp.-->

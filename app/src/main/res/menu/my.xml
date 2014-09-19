@@ -2,4 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MyActivity" >
 
+    <item
+
+        android:id="@+id/menu_upload"
+        android:actionLayout="@layout/actionbar_msg_layout"
+        android:showAsAction="ifRoom"
+        android:title="testing"/>
 </menu>

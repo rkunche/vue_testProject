@@ -4,15 +4,24 @@ package com.test.vue.vuetest.presenters;
 
 //android imports
 
+import android.app.ActionBar;
 import android.app.Dialog;
+import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.telephony.TelephonyManager;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -33,9 +42,13 @@ import com.test.vue.vuetest.utils.VueConstants;
  * 2. Check to see if the app was launched because the user clicked on notifications - maybe we might redirect them to a new activity in that case
  */
 
-public class LandingPageActivity extends FragmentActivity {
+public class LandingPageActivity extends FragmentActivity implements Trending_Menu_Fragment.OnFragmentInteractionListener {
     private CardFragment mLandingAislesFrag;
     private GoogleApiClient mGoogleApiClient;
+
+    private TextView trending_list;
+    private boolean mTrendingFragLoaded = false;
+    private  Fragment  mTrendingFragment;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -43,6 +56,7 @@ public class LandingPageActivity extends FragmentActivity {
         Logger.console("onCreate of LandingPage invoked", "VueDebug");
         setContentView(R.layout.landing_page);
         VueContentModelImpl.getContentModel();
+        setActionBar();
         Message message = new Message();
         message.what = VueContentModelImpl.AISLE_DATA_GET;
         VueContentModelImpl.sendMessage(message);
@@ -53,6 +67,57 @@ public class LandingPageActivity extends FragmentActivity {
         //load cards fragment into screen.
         loadVueCardsFragment();
         getDeviceId();
+    }
+
+    private void setActionBar() {
+        getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+
+        LayoutInflater mInflater = LayoutInflater.from(this);
+
+        View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
+        trending_list = (TextView) mCustomView.findViewById(R.id.my_feed_text_id);
+        trending_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!mTrendingFragLoaded){
+                    mTrendingFragLoaded = true;
+                    AddTrendingFrag();
+                }else {
+                    RemoveTrendingFrag();
+                    mTrendingFragLoaded = false;
+                }
+
+            }
+        });
+        getActionBar().setCustomView(mCustomView);
+
+    }
+
+    private void RemoveTrendingFrag() {
+        if (mTrendingFragment != null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction transaction = fragmentManager
+                    .beginTransaction();
+            transaction.setCustomAnimations(R.animator.slide_in_left,
+                    R.animator.slide_out_right);
+            transaction
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            transaction.remove(mTrendingFragment);
+            transaction.commit();
+        }
+    }
+
+    private void AddTrendingFrag() {
+        mTrendingFragment = new Trending_Menu_Fragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction transaction = fragmentManager
+                .beginTransaction();
+        transaction.setCustomAnimations(R.animator.slide_in_left,
+                R.animator.slide_out_right);
+        transaction
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        transaction.add(R.id.trending_frag, mTrendingFragment);
+        transaction.commit();
     }
 
     @Override
@@ -77,6 +142,18 @@ public class LandingPageActivity extends FragmentActivity {
     public void onDestroy() {
         super.onDestroy();
         Logger.console("VueDebug", "onDestroy of LandingPage invoked");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 
     public static class LocationErrorFragment extends DialogFragment {
