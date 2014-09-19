@@ -1,6 +1,16 @@
 package com.test.vue.vuetest.presenters;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+
+import com.test.vue.vuetest.AnchoredContext;
+import com.test.vue.vuetest.R;
+import com.test.vue.vuetest.domain.client.ClientProductImage;
+import com.test.vue.vuetest.models.ImageLoaderTask;
+import com.test.vue.vuetest.utils.BitmapLruCache;
 
 
 public class AisleContentAdapter implements IAisleContentAdapter {
@@ -44,14 +54,19 @@ public class AisleContentAdapter implements IAisleContentAdapter {
     @Override
     public boolean setAisleContent(AisleContentBrowser contentBrowser,
                                    int currentIndex, int wantedIndex, boolean shiftPivot,
-                                   int imagesCount) {
-        return false;
+                                   int imagesCount, Context context) {
+        if (wantedIndex >= imagesCount)
+            return false;
+        if (0 >= currentIndex && wantedIndex < currentIndex)
+            return false;
+        Log.i("browsercall", "browsercall LOADING NEW WINDOW");
+        ClientProductImage image = contentBrowser.getClientAisle().getProductList().get(wantedIndex).getProductImages().get(0);
+        View view = ProductAdapterPool.getInstance(context).getProductLayout();
+        contentBrowser.addView(view);
+        loadBitmap(image.getExternalURL(), (ImageView) view.findViewById(R.id.product_image));
+        return true;
     }
 
-    public void loadImage(ImageView imageView, String imgUrl,
-                          AisleContentBrowser contentBrowser) {
-
-    }
 
     @Override
     public String getAisleId() {
@@ -65,5 +80,19 @@ public class AisleContentAdapter implements IAisleContentAdapter {
         return null;
     }
 
+    private void loadBitmap(String url, ImageView imageView) {
 
+        Bitmap bitmap = BitmapLruCache.getInstance(AnchoredContext
+                .getInstance()).getBitmap(url);
+        if (bitmap != null) {
+            imageView.setImageBitmap(bitmap);
+
+        } else if (ImageLoaderTask.cancelPotentialWork(url, imageView)) {
+
+            imageView.setImageBitmap(null);
+            ImageLoaderTask imageLoaderTask = new ImageLoaderTask(imageView, url);
+            ((ProductCustomImageVeiw) imageView).setWorkerTaskObject(imageLoaderTask);
+            imageLoaderTask.execute();
+        }
+    }
 }

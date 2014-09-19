@@ -35,6 +35,7 @@ public class AisleContentBrowser extends ViewFlipper {
     private final int MAX_ELAPSED_DURATION_FOR_TAP = 200;
     public static final int SWIPE_MIN_DISTANCE = 30;
     private IAisleContentAdapter mSpecialNeedsAdapter;
+    public static final String EMPTY_AISLE_CONTENT_ID = "EmptyAisleWindow";
     
     public int mFirstX;
     public int mLastX;
@@ -48,11 +49,12 @@ public class AisleContentBrowser extends ViewFlipper {
     private GestureDetector mDetector;
     ClientAisle clientAisle;
     WeakReference<ClientAisle> clientAisleWeakReference;
+
     
     public AisleContentBrowser(Context context) {
         super(context);
         mContext = context;
-       // mAisleUniqueId = AisleWindowContent.EMPTY_AISLE_CONTENT_ID;
+        mAisleUniqueId =  EMPTY_AISLE_CONTENT_ID;
         mScrollIndex = 0;
     }
     public void setClientAisle(ClientAisle clientAisle){
@@ -62,9 +64,15 @@ public class AisleContentBrowser extends ViewFlipper {
     public ClientAisle getClientAisle(){
         return  clientAisle;
     }
+    public void setAisleUniqueId(String aisleId){
+        mAisleUniqueId = aisleId;
+    }
+    public String getAisleUniqueId(){
+        return  mAisleUniqueId;
+    }
     public AisleContentBrowser(Context context, AttributeSet attribs) {
         super(context, attribs);
-       // mAisleUniqueId = AisleWindowContent.EMPTY_AISLE_CONTENT_ID;
+       mAisleUniqueId =  EMPTY_AISLE_CONTENT_ID;
         mScrollIndex = 0;
         mAnimationInProgress = false;
         mContext = context;
@@ -80,13 +88,9 @@ public class AisleContentBrowser extends ViewFlipper {
                 new mListener());
     }
     
-    public void setUniqueId(String id) {
-        mAisleUniqueId = id;
-    }
+
     
-    public String getUniqueId() {
-        return mAisleUniqueId;
-    }
+
     
     public void setScrollIndex(int scrollIndex) {
         mScrollIndex = scrollIndex;
@@ -164,7 +168,7 @@ public class AisleContentBrowser extends ViewFlipper {
 
                         if (!mSpecialNeedsAdapter.setAisleContent(
                                 AisleContentBrowser.this, currentIndex,
-                                currentIndex + 1, true, getImageListCount())) {
+                                currentIndex + 1, true, getImageListCount(),mContext)) {
 
                             mAnimationInProgress = true;
                             Animation cantWrapRight = AnimationUtils
@@ -243,7 +247,7 @@ public class AisleContentBrowser extends ViewFlipper {
                         mLoadImage = true;
                         if (!mSpecialNeedsAdapter.setAisleContent(
                                 AisleContentBrowser.this, currentIndex,
-                                currentIndex - 1, true, getImageListCount())) {
+                                currentIndex - 1, true, getImageListCount(),mContext)) {
                             Animation cantWrapLeft = AnimationUtils
                                     .loadAnimation(mContext,
                                             R.anim.cant_wrap_left);
@@ -359,7 +363,7 @@ public class AisleContentBrowser extends ViewFlipper {
     }
     
     public int getImageListCount() {
-        return mCount;
+        return clientAisle.getProductList().size();
     }
 
 }
