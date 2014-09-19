@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/wallet_hint_foreground_holo_dark"
+        android:background="#efefef"
         >
 
         <ListView
