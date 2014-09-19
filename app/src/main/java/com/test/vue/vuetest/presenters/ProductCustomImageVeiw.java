@@ -25,7 +25,7 @@ public class ProductCustomImageVeiw extends ImageView {
     }
 
     private void init() {
-        this.setScaleType(ScaleType.MATRIX);
+
     }
     public void setWorkerTaskObject(ImageLoaderTask task){
         this.task = task;

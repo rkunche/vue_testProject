@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
 
 
-    android:background="@drawable/card_no_border">
+    android:background="@drawable/card_no_t_border">
 
     <com.test.vue.vuetest.presenters.ProductCustomImageVeiw
         android:id="@+id/product_image"
@@ -81,7 +81,7 @@
                 android:id="@+id/product_suggest_text_id"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/product_card_info_text_views_height"
-                android:layout_marginLeft="66dp"
+                android:layout_marginLeft="62dp"
                 android:text="@string/suggested_by"
                 android:gravity="bottom"
                 android:textColor="@android:color/black"
@@ -92,7 +92,7 @@
                   android:layout_width="wrap_content"
                   android:layout_height="@dimen/product_card_info_text_views_height"
                   android:layout_below="@+id/product_suggest_text_id"
-                  android:layout_marginLeft="66dp"
+                  android:layout_marginLeft="62dp"
                   android:ellipsize="end"
                   android:singleLine="true"
                   android:layout_marginTop="@dimen/margin_2dp"

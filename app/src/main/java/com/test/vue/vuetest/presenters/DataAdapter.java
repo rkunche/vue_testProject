@@ -1,6 +1,8 @@
 package com.test.vue.vuetest.presenters;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +21,7 @@ import java.util.ArrayList;
 public class DataAdapter extends BaseAdapter implements DataContainer {
     //ArrayList<AisleWindowContent> mAisleWindowList = new ArrayList<AisleWindowContent>();
  VueContentModelImpl mVueContentModel;
-    ArrayList<AisleWindow> windowList = new ArrayList<AisleWindow>();
+    ArrayList<ClientAisle> windowList = new ArrayList<ClientAisle>();
 
     DataAdapter(Context context) {
         mVueContentModel = (VueContentModelImpl) VueContentModelImpl.getContentModel();
@@ -29,7 +31,7 @@ public class DataAdapter extends BaseAdapter implements DataContainer {
     public int getCount() {
         // TODO Auto-generated method stub
         // return mAisleWindowList.size();
-        return 50;
+        return windowList.size();
     }
 
     public Object getItem(int position) {
@@ -66,6 +68,16 @@ public class DataAdapter extends BaseAdapter implements DataContainer {
 
     }
 
+    @Override
+    public void addMoreData(ArrayList<ClientAisle> aisleList) {
+        for(int i=0;i<aisleList.size();i++){
+            Log.i("serverDAta","serverDAta: "+aisleList.get(i).getLookingFor());
+        }
+        windowList.addAll(aisleList);
+        messageHandler.sendEmptyMessage(0);
+
+    }
+
     public void getData(){
         AisleManager aisleManager = new AisleManager();
         WeakReference<AisleManager> aisleManagerWeakReference = new WeakReference<AisleManager>(aisleManager);
@@ -83,7 +95,7 @@ public class DataAdapter extends BaseAdapter implements DataContainer {
                     if(clientAisle.get(i).getProductList() != null && clientAisle.get(i).getCurrentAisleState() != ClientAisle.AisleStateEnum.DELETED ) {
                         AisleWindow aisleWindow = new AisleWindow( clientAisle.get(i));
                         aisleWindow.setAisleData();
-                        windowList.add(aisleWindow);
+                        //windowList.add(aisleWindow);
                     }
                 }
                 Log.i("aisleSize","aisle Size: "+windowList.size());
@@ -94,5 +106,10 @@ public class DataAdapter extends BaseAdapter implements DataContainer {
             }
         }
     }
-
+    private Handler messageHandler = new Handler() {
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            notifyAdapters();
+        }
+    };
 }

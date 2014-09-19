@@ -2,6 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/product_card_top_layout_height"
     android:layout_marginBottom="@dimen/margin_2dp"
+    android:layout_marginTop="@dimen/margin_2dp"
     android:layout_marginLeft="@dimen/activity_horizontal_margin"
     android:layout_marginRight="@dimen/activity_horizontal_margin">
 
