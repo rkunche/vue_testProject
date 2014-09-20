@@ -19,12 +19,12 @@ import android.support.v4.app.FragmentActivity;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
-import android.view.ViewGroup;
+
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -38,7 +38,11 @@ import com.test.vue.vuetest.services.logging.Logger;
 import com.test.vue.vuetest.services.sidekick.PersistentWatcher;
 import com.test.vue.vuetest.utils.VueConstants;
 
+
 import java.util.ArrayList;
+
+import java.lang.ref.WeakReference;
+
 
 
 /**
@@ -54,15 +58,21 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
     private CardFragment mLandingAislesFrag;
     private GoogleApiClient mGoogleApiClient;
 
-    private RelativeLayout trending_list;
-    private boolean mTrendingFragLoaded = false;
 
     private boolean mMessageCenterLoaded = false;
-
-    private Fragment mTrendingFragment;
-
     private Fragment mMessageCenterFragment;
     private ImageView action_icon;
+    private RelativeLayout trending_list;
+    private ImageView settingId;
+    private ImageView actionUpId;
+    private TextView actionBarTextView;
+    private boolean mTrendingFragLoaded = false;
+    private  Fragment mTrendingFragment;
+    private  Fragment mSettingsFragment;
+    private RelativeLayout settingLayId;
+    private WeakReference<Fragment> trendingFragmentWeakReference;
+    private WeakReference<Fragment> settingsFragmentWeakReference;
+
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -113,9 +123,14 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
 
         // View mCustomView = mInflater.inflate(R.layout.custom_actionbar,null);
         actionBar.setCustomView(R.layout.custom_actionbar);
+
         trending_list = (RelativeLayout) actionBar.getCustomView().findViewById(R.id.feed_touch_layout);
         action_icon = (ImageView) actionBar.getCustomView().findViewById(R.id.myfeed_action_icon);
         action_icon.setImageResource(R.drawable.ic_action_up);
+        settingId = (ImageView)  actionBar.getCustomView().findViewById(R.id.setting_id);
+        actionUpId = (ImageView) actionBar.getCustomView().findViewById(R.id.action_up_id);
+        actionBarTextView = (TextView) actionBar.getCustomView().findViewById(R.id.my_feed_text_id);
+        settingLayId = (RelativeLayout) actionBar.getCustomView().findViewById(R.id.setting_lay_id);
         trending_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,40 +143,60 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
                     action_icon.setImageResource(R.drawable.ic_action_up);
                     RemoveTrendingFrag();
                     mTrendingFragLoaded = false;
-                }
 
+                }
             }
         });
+        settingLayId.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                   if(mSettingsFragment == null){
+                       addSettingsFragment();
+                       settingId.setImageResource(R.drawable.ic_action_arrow);
+                       actionUpId.setVisibility(View.GONE);
+                       actionBarTextView.setText("Settings");
+                   } else {
+                       removeSettingsFragment();
+                       settingId.setImageResource(R.drawable.ic_action_settings);
+                       actionUpId.setVisibility(View.VISIBLE);
+                       actionBarTextView.setText("My Feed");
+                   }
+               }
+           });
 
 
     }
 
-    private void RemoveTrendingFrag() {
+    private void removeTrendingFrag() {
         if (mTrendingFragment != null) {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction transaction = fragmentManager
                     .beginTransaction();
-            transaction.setCustomAnimations(R.animator.slide_in_left,
-                    R.animator.slide_out_right);
+            transaction.setCustomAnimations(R.animator.slide_in_top,
+                    R.animator.slide_out_bottom);
             transaction
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             transaction.remove(mTrendingFragment);
+            mTrendingFragment = null;
             transaction.commit();
         }
     }
 
-    private void AddTrendingFrag() {
+    private void addTrendingFrag() {
         mTrendingFragment = new Trending_Menu_Fragment();
+        trendingFragmentWeakReference = new WeakReference<Fragment>(mTrendingFragment);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager
                 .beginTransaction();
-        transaction.setCustomAnimations(R.animator.slide_in_left,
-                R.animator.slide_out_right);
+        transaction.setCustomAnimations(R.animator.slide_in_top,
+                R.animator.slide_out_bottom);
         transaction
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         transaction.add(R.id.trending_frag, mTrendingFragment);
         transaction.commit();
     }
+    private void addSettingsFragment(){
+
 
 
     private void RemoveMessageCenterFrag() {
@@ -199,6 +234,33 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
     private ArrayList<NotificationAisle> getUserNotifacation() {
         NotificationManager notificationManager = new NotificationManager();
         return notificationManager.getUserNotifications();
+
+        mSettingsFragment = new SettingsFragment();
+        settingsFragmentWeakReference = new WeakReference<Fragment>(mSettingsFragment);
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction transaction = fragmentManager
+                .beginTransaction();
+        transaction.setCustomAnimations(R.animator.slide_in_right,
+                R.animator.slide_out_left);
+        transaction
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        transaction.add(R.id.trending_frag, mSettingsFragment);
+        transaction.commit();
+    }
+    private void removeSettingsFragment(){
+
+          if(mSettingsFragment != null){
+              FragmentManager fragmentManager = getFragmentManager();
+              FragmentTransaction transaction = fragmentManager
+                      .beginTransaction();
+              transaction.setCustomAnimations(R.animator.slide_in_right,
+                      R.animator.slide_out_left);
+              transaction
+                      .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+              transaction.remove(mSettingsFragment);
+              mSettingsFragment = null;
+              transaction.commit();
+          }
 
     }
     @Override

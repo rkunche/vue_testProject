@@ -78,4 +78,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="undo">Undo</string>
     <string name="undoall">Undo All</string>
+    <string name="setting_notifications">Notifications</string>
+    <string name="setting_location_tracking">Location Tracking</string>
+    <string name="setting_versions">Version</string>
+    <string name="setting_privacy">Privacy policy</string>
+
 </resources>

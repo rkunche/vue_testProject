@@ -54,4 +54,5 @@
     <color name="start_in_two_days">#666666</color>
     <color name="text_color_black">#1f1f1f</color>
     <color name="dismiss_text_color">#666666</color>
+    <color name="setting_small_text_color">#6d6d72</color>
 </resources>

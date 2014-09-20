@@ -40,6 +40,10 @@
     <dimen name="icon_mask">55dp</dimen>
     <dimen name="product_add_photo_layout_height">150dp</dimen>
 
+    <dimen name="text_size_large">20dp</dimen>
+    <dimen name="text_size_small">16dp</dimen>
+    <dimen name="setting_text_left_margin">16dp</dimen>
+
 
     <dimen name="feedback_editlay_height">100dp</dimen>
 </resources>
