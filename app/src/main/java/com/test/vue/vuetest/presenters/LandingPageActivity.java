@@ -221,7 +221,7 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
     }
 
     private void addMessageCenterFrag() {
-        mMessageCenterFragment = new PopupFragment(getUserNotifacation());
+        mMessageCenterFragment = new PopupFragment();
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager
                 .beginTransaction();

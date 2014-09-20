@@ -25,13 +25,13 @@ public class NotificationListAdapter extends BaseAdapter {
     public NotificationListAdapter(Context context,
             ArrayList<NotificationAisle> notificationList) {
         this.mContext = context;
-        this.mNotificationList = notificationList;
+        this.mNotificationList = new ArrayList<NotificationAisle>();
     }
     
     @Override
     public int getCount() {
         try {
-            return mNotificationList.size();
+            return 10;
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
@@ -50,7 +50,7 @@ public class NotificationListAdapter extends BaseAdapter {
     
     public NotificationAisle removeItem(int position) {
         NotificationAisle notificatinAisle = null;
-        if (mNotificationList != null && mNotificationList.size() > 0) {
+     /*   if (mNotificationList != null && mNotificationList.size() > 0) {
             notificatinAisle = mNotificationList.remove(position);
         }
         Log.i("notificationLIstSize", "notificationLIstSize: "
@@ -58,7 +58,7 @@ public class NotificationListAdapter extends BaseAdapter {
         
         if (mNotificationList.size() == 0) {
             addTempItem();
-        }
+        }*/
         notifyDataSetChanged();
         return notificatinAisle;
     }
@@ -136,13 +136,13 @@ public class NotificationListAdapter extends BaseAdapter {
 //                    position).getNotificationText());
 //            holder.notificationAisleTitle.setText(mNotificationList.get(
 //                    position).getAisleTitle());
-            if (mNotificationList.get(position).isReadStatus()) { // read
+          /*  if (mNotificationList.get(position).isReadStatus()) { // read
                 holder.overflow_listlayout_layout.setBackgroundColor(Color
                         .parseColor("#C0C0C0"));
             } else { // unread
                 holder.overflow_listlayout_layout.setBackgroundColor(Color
                         .parseColor("#FFFFFF"));
-            }
+            }*/
         }
         return convertView;
     }

@@ -54,9 +54,9 @@ public class PopupFragment extends Fragment {
         mContext = activity;
     }
     
-    public PopupFragment(ArrayList<NotificationAisle> notificationList) {
+  /*  public PopupFragment(ArrayList<NotificationAisle> notificationList) {
         mNotificationList = notificationList;
-    }
+    }*/
     
     public PopupFragment() {
         
