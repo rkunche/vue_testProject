@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +57,7 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
     private boolean mTrendingFragLoaded = false;
     private  Fragment mTrendingFragment;
     private  Fragment mSettingsFragment;
+    private RelativeLayout settingLayId;
     private WeakReference<Fragment> trendingFragmentWeakReference;
     private WeakReference<Fragment> settingsFragmentWeakReference;
 
@@ -89,6 +91,8 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
         settingId = (ImageView)  actionBar.getCustomView().findViewById(R.id.setting_id);
         actionUpId = (ImageView) actionBar.getCustomView().findViewById(R.id.action_up_id);
         actionBarTextView = (TextView) actionBar.getCustomView().findViewById(R.id.my_feed_text_id);
+        settingLayId = (RelativeLayout) actionBar.getCustomView().findViewById(R.id.setting_lay_id);
+
         trending_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +107,7 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
                 }
             }
         });
-           settingId.setOnClickListener(new View.OnClickListener() {
+        settingLayId.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View view) {
                    if(mSettingsFragment == null){
