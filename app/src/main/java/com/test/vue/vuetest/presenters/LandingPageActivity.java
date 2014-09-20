@@ -92,14 +92,15 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
         trending_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!mTrendingFragLoaded){
-                    mTrendingFragLoaded = true;
-                    addTrendingFrag();
-                }else {
-                    removeTrendingFrag();
-                    mTrendingFragLoaded = false;
+                if(trending_list.getText().toString().equalsIgnoreCase("My Feed")) {
+                    if (!mTrendingFragLoaded) {
+                        mTrendingFragLoaded = true;
+                        addTrendingFrag();
+                    } else {
+                        removeTrendingFrag();
+                        mTrendingFragLoaded = false;
+                    }
                 }
-
             }
         });
            settingId.setOnClickListener(new View.OnClickListener() {
