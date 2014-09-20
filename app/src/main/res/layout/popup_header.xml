@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/overflow_listlayout_layout"
     android:layout_width="match_parent"
+
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@android:color/white"
@@ -17,20 +18,20 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"/>
 
+
     <RelativeLayout
         android:id="@+id/edit_id"
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
         android:padding="4dp"
         android:background="#804eb6f1"
         >
 
-
-
-
         <ImageView
             android:id="@+id/send_button"
             android:layout_width="32dp"
+
             android:layout_height="32dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
@@ -44,6 +45,7 @@
             android:layout_marginLeft="22dp"
             android:textSize="20sp"
             android:layout_toRightOf="@id/send_button" android:textColor="@android:color/white"/>
+
     </RelativeLayout>
 
 </LinearLayout>

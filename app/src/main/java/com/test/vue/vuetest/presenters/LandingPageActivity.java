@@ -128,7 +128,7 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
         action_icon = (ImageView) actionBar.getCustomView().findViewById(R.id.myfeed_action_icon);
         action_icon.setImageResource(R.drawable.ic_action_up);
         settingId = (ImageView)  actionBar.getCustomView().findViewById(R.id.setting_id);
-        actionUpId = (ImageView) actionBar.getCustomView().findViewById(R.id.action_up_id);
+
         actionBarTextView = (TextView) actionBar.getCustomView().findViewById(R.id.my_feed_text_id);
         settingLayId = (RelativeLayout) actionBar.getCustomView().findViewById(R.id.setting_lay_id);
         trending_list.setOnClickListener(new View.OnClickListener() {
@@ -153,12 +153,12 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
                    if(mSettingsFragment == null){
                        addSettingsFragment();
                        settingId.setImageResource(R.drawable.ic_action_arrow);
-                       actionUpId.setVisibility(View.GONE);
+                       action_icon.setVisibility(View.GONE);
                        actionBarTextView.setText("Settings");
                    } else {
                        removeSettingsFragment();
                        settingId.setImageResource(R.drawable.ic_action_settings);
-                       actionUpId.setVisibility(View.VISIBLE);
+                       action_icon.setVisibility(View.VISIBLE);
                        actionBarTextView.setText("My Feed");
                    }
                }
@@ -195,10 +195,6 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
         transaction.add(R.id.trending_frag, mTrendingFragment);
         transaction.commit();
     }
-    private void addSettingsFragment(){
-
-
-
     private void RemoveMessageCenterFrag() {
         if ( mMessageCenterFragment != null) {
             FragmentManager fragmentManager = getFragmentManager();
@@ -213,6 +209,10 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
         }
 
     }
+
+
+
+
 
     private void AddMessageCenterFrag() {
         mMessageCenterFragment = new PopupFragment(getUserNotifacation());
