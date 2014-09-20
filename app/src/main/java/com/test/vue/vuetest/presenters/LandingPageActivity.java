@@ -104,9 +104,13 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
                 if (!mMessageCenterLoaded) {
                     addMessageCenterFrag();
                     mMessageCenterLoaded = true;
+                    action_icon.setVisibility(View.GONE);
+                    actionBarTextView.setText("Messages");
                 } else {
+                    actionBarTextView.setText("My Feed");
                     removeMessageCenterFrag();
                     mMessageCenterLoaded = false;
+                    action_icon.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -133,6 +137,9 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
         trending_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!actionBarTextView.getText().toString().equalsIgnoreCase("My Feed")){
+                    return;
+                }
                 if (!mTrendingFragLoaded) {
                     action_icon.setImageResource(R.drawable.ic_action_dropdown);
                     mTrendingFragLoaded = true;
@@ -302,7 +309,7 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
 
     @Override
     public void onDoneButtonClickFromRatingScreen() {
-        RemoveMessageCenterFrag();
+        removeMessageCenterFrag();
     }
 
     public static class LocationErrorFragment extends DialogFragment {
