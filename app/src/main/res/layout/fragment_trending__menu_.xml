@@ -8,14 +8,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#efefef"
+        android:background="#ffffff"
         >
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/trending_list"
-            android:divider="@null">
+            android:divider="@null"
+            android:scrollbars="none">
         </ListView>
     </RelativeLayout>
 </FrameLayout>

@@ -20,7 +20,8 @@
 
         android:layout_width="wrap_content"
         android:layout_height="@dimen/vue_icon_touch_area_dimensions"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:id="@+id/feed_touch_layout">
 
         <TextView
             android:id="@+id/my_feed_text_id"
@@ -36,11 +37,13 @@
         <ImageView
             android:layout_width="36dp"
             android:layout_height="28dp"
-
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="4dp"
             android:layout_toRightOf="@+id/my_feed_text_id"
-            android:background="@drawable/ic_action_up"
+
             android:layout_centerVertical="true"
-            android:layout_marginLeft="2dp"/>
+            android:layout_marginLeft="2dp"
+            android:id="@+id/myfeed_action_icon"/>
     </RelativeLayout>
 
 
@@ -50,7 +53,7 @@
         android:layout_height="@dimen/vue_icon_touch_area_dimensions"
         android:layout_alignParentRight="true"
 
-
+        android:id="@+id/message_center_touch"
         android:layout_centerVertical="true"
         android:layout_marginRight="12dp"
         android:background="@drawable/my_selector">

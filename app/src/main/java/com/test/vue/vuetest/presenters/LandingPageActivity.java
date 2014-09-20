@@ -22,16 +22,23 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.test.vue.vuetest.R;
+import com.test.vue.vuetest.messagecenter.NotificationAisle;
+import com.test.vue.vuetest.messagecenter.NotificationManager;
+import com.test.vue.vuetest.messagecenter.PopupFragment;
 import com.test.vue.vuetest.models.VueContentModelImpl;
 import com.test.vue.vuetest.services.logging.Logger;
 import com.test.vue.vuetest.services.sidekick.PersistentWatcher;
 import com.test.vue.vuetest.utils.VueConstants;
+
+import java.util.ArrayList;
 
 
 /**
@@ -43,13 +50,19 @@ import com.test.vue.vuetest.utils.VueConstants;
  * 2. Check to see if the app was launched because the user clicked on notifications - maybe we might redirect them to a new activity in that case
  */
 
-public class LandingPageActivity extends FragmentActivity implements Trending_Menu_Fragment.OnFragmentInteractionListener {
+public class LandingPageActivity extends FragmentActivity implements Trending_Menu_Fragment.OnFragmentInteractionListener ,ActivityFragmentCommunicator{
     private CardFragment mLandingAislesFrag;
     private GoogleApiClient mGoogleApiClient;
 
-    private TextView trending_list;
+    private RelativeLayout trending_list;
     private boolean mTrendingFragLoaded = false;
-    private  Fragment  mTrendingFragment;
+
+    private boolean mMessageCenterLoaded = false;
+
+    private Fragment mTrendingFragment;
+
+    private Fragment mMessageCenterFragment;
+    private ImageView action_icon;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -68,23 +81,51 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
         //load cards fragment into screen.
         loadVueCardsFragment();
         getDeviceId();
+
+        setMessageCenterActions();
     }
+
+    private void setMessageCenterActions() {
+        ActionBar actionBar = getActionBar();
+        RelativeLayout message_center_touch = (RelativeLayout) actionBar.getCustomView().findViewById(R.id.message_center_touch);
+
+        message_center_touch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!mMessageCenterLoaded) {
+                    AddMessageCenterFrag();
+                    mMessageCenterLoaded = true;
+                } else {
+                    RemoveMessageCenterFrag();
+                    mMessageCenterLoaded = false;
+                }
+
+            }
+        });
+    }
+
+
 
     private void setActionBar() {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         LayoutInflater mInflater = LayoutInflater.from(this);
 
-       // View mCustomView = mInflater.inflate(R.layout.custom_actionbar,null);
+        // View mCustomView = mInflater.inflate(R.layout.custom_actionbar,null);
         actionBar.setCustomView(R.layout.custom_actionbar);
-        trending_list = (TextView) actionBar.getCustomView().findViewById(R.id.my_feed_text_id);
+        trending_list = (RelativeLayout) actionBar.getCustomView().findViewById(R.id.feed_touch_layout);
+        action_icon = (ImageView) actionBar.getCustomView().findViewById(R.id.myfeed_action_icon);
+        action_icon.setImageResource(R.drawable.ic_action_up);
         trending_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!mTrendingFragLoaded){
+                if (!mTrendingFragLoaded) {
+                    action_icon.setImageResource(R.drawable.ic_action_dropdown);
                     mTrendingFragLoaded = true;
                     AddTrendingFrag();
-                }else {
+
+                } else {
+                    action_icon.setImageResource(R.drawable.ic_action_up);
                     RemoveTrendingFrag();
                     mTrendingFragLoaded = false;
                 }
@@ -122,6 +163,44 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
         transaction.commit();
     }
 
+
+    private void RemoveMessageCenterFrag() {
+        if ( mMessageCenterFragment != null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction transaction = fragmentManager
+                    .beginTransaction();
+            transaction.setCustomAnimations(R.animator.open_msg_center,
+                    R.animator.close_msg_center);
+            transaction
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            transaction.remove( mMessageCenterFragment);
+            transaction.commit();
+        }
+
+    }
+
+    private void AddMessageCenterFrag() {
+        mMessageCenterFragment = new PopupFragment(getUserNotifacation());
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction transaction = fragmentManager
+                .beginTransaction();
+        transaction.setCustomAnimations(R.animator.open_msg_center,
+                R.animator.close_msg_center);
+        transaction
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        transaction.add(R.id.trending_frag,  mMessageCenterFragment);
+        transaction.commit();
+    }
+    /**
+     *
+     * returns all the user notifications if no notifications are found, then
+     * return a dummy notification aisle in list will be return.
+     */
+    private ArrayList<NotificationAisle> getUserNotifacation() {
+        NotificationManager notificationManager = new NotificationManager();
+        return notificationManager.getUserNotifications();
+
+    }
     @Override
     public void onResume() {
         super.onResume();
@@ -156,6 +235,11 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    public void onDoneButtonClickFromRatingScreen() {
+        RemoveMessageCenterFrag();
     }
 
     public static class LocationErrorFragment extends DialogFragment {
@@ -198,8 +282,9 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
         fragmentManager.beginTransaction()
                 .replace(R.id.content_frame, mLandingAislesFrag).commit();
     }
-     public void getDeviceId(){
-         TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-         VueConstants.deviceId = telephonyManager.getDeviceId();
-     }
+
+    public void getDeviceId() {
+        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        VueConstants.deviceId = telephonyManager.getDeviceId();
+    }
 }

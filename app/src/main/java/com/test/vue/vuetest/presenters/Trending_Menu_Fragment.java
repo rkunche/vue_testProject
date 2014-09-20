@@ -169,6 +169,9 @@ public class Trending_Menu_Fragment extends Fragment {
             String name = listonNames[position];
             if(name.equalsIgnoreCase("My Feed")){
                 textView_name.setTextColor(Color.parseColor("#28aad4"));
+            }else {
+                textView_name.setTextColor(Color.parseColor("#1f1f1f"));
+
             }
 
             if(name.equalsIgnoreCase("Urgent action needed")|| name.equalsIgnoreCase("Featured")){
