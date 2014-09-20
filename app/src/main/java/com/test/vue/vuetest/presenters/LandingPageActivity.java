@@ -58,13 +58,12 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
     private CardFragment mLandingAislesFrag;
     private GoogleApiClient mGoogleApiClient;
 
-
     private boolean mMessageCenterLoaded = false;
     private Fragment mMessageCenterFragment;
     private ImageView action_icon;
     private RelativeLayout trending_list;
     private ImageView settingId;
-    private ImageView actionUpId;
+
     private TextView actionBarTextView;
     private boolean mTrendingFragLoaded = false;
     private  Fragment mTrendingFragment;
@@ -103,10 +102,10 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
             @Override
             public void onClick(View v) {
                 if (!mMessageCenterLoaded) {
-                    AddMessageCenterFrag();
+                    addMessageCenterFrag();
                     mMessageCenterLoaded = true;
                 } else {
-                    RemoveMessageCenterFrag();
+                    removeMessageCenterFrag();
                     mMessageCenterLoaded = false;
                 }
 
@@ -137,11 +136,11 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
                 if (!mTrendingFragLoaded) {
                     action_icon.setImageResource(R.drawable.ic_action_dropdown);
                     mTrendingFragLoaded = true;
-                    AddTrendingFrag();
+                    addTrendingFrag();
 
                 } else {
                     action_icon.setImageResource(R.drawable.ic_action_up);
-                    RemoveTrendingFrag();
+                    removeTrendingFrag();
                     mTrendingFragLoaded = false;
 
                 }
@@ -166,6 +165,8 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
 
 
     }
+
+
 
     private void removeTrendingFrag() {
         if (mTrendingFragment != null) {
@@ -195,7 +196,9 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
         transaction.add(R.id.trending_frag, mTrendingFragment);
         transaction.commit();
     }
-    private void RemoveMessageCenterFrag() {
+
+
+    private void removeMessageCenterFrag() {
         if ( mMessageCenterFragment != null) {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction transaction = fragmentManager
@@ -210,11 +213,7 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
 
     }
 
-
-
-
-
-    private void AddMessageCenterFrag() {
+    private void addMessageCenterFrag() {
         mMessageCenterFragment = new PopupFragment(getUserNotifacation());
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager
@@ -234,7 +233,9 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
     private ArrayList<NotificationAisle> getUserNotifacation() {
         NotificationManager notificationManager = new NotificationManager();
         return notificationManager.getUserNotifications();
+    }
 
+        private void addSettingsFragment(){
         mSettingsFragment = new SettingsFragment();
         settingsFragmentWeakReference = new WeakReference<Fragment>(mSettingsFragment);
         FragmentManager fragmentManager = getFragmentManager();
@@ -247,22 +248,22 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
         transaction.add(R.id.trending_frag, mSettingsFragment);
         transaction.commit();
     }
-    private void removeSettingsFragment(){
+    private void removeSettingsFragment() {
 
-          if(mSettingsFragment != null){
-              FragmentManager fragmentManager = getFragmentManager();
-              FragmentTransaction transaction = fragmentManager
-                      .beginTransaction();
-              transaction.setCustomAnimations(R.animator.slide_in_right,
-                      R.animator.slide_out_left);
-              transaction
-                      .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-              transaction.remove(mSettingsFragment);
-              mSettingsFragment = null;
-              transaction.commit();
-          }
-
+        if (mSettingsFragment != null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction transaction = fragmentManager
+                    .beginTransaction();
+            transaction.setCustomAnimations(R.animator.slide_in_right,
+                    R.animator.slide_out_left);
+            transaction
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            transaction.remove(mSettingsFragment);
+            mSettingsFragment = null;
+            transaction.commit();
+        }
     }
+
     @Override
     public void onResume() {
         super.onResume();
