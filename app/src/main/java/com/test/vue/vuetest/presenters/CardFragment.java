@@ -22,11 +22,7 @@ import com.test.vue.vuetest.domain.client.ClientProductProvider;
 import com.test.vue.vuetest.domain.client.ClientProductTag;
 import com.test.vue.vuetest.login.VueFacebookLoginActivity;
 import com.test.vue.vuetest.personal.aisle.AisleManager;
-import com.test.vue.vuetest.personal.product.ProductManager;
-import com.test.vue.vuetest.personal.product.ProductTagManager;
-import com.test.vue.vuetest.personal.product.ProviderManager;
 import com.test.vue.vuetest.personal.user.SaveUser;
-import com.test.vue.vuetest.personal.user.UserManager;
 
 import java.util.ArrayList;
 
@@ -68,27 +64,27 @@ public class CardFragment extends Fragment {
         mCard = new CardWithFlipper(getActivity());
         //add header view to the list.
         View cardHeaderView = inflater.inflate(
-                 R.layout.card_fragment_listview_header, null);
+                R.layout.card_fragment_listview_header, null);
         //add header view to the list.
         RelativeLayout facebook_id = (RelativeLayout) cardHeaderView.findViewById(R.id.facebook_id);
         RelativeLayout gPlus_LayoutId = (RelativeLayout) cardHeaderView.findViewById(R.id.g_plus_layout_id);
         facebook_id.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),VueFacebookLoginActivity.class);
+                Intent intent = new Intent(getActivity(), VueFacebookLoginActivity.class);
                 startActivity(intent);
             }
         });
         gPlus_LayoutId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              // Intent intent = new Intent(getActivity(),GooglePlayServicesActivity.class);
-               // startActivity(intent);
-                AisleManager productManager  = new AisleManager();
+                // Intent intent = new Intent(getActivity(),GooglePlayServicesActivity.class);
+                // startActivity(intent);
+                AisleManager productManager = new AisleManager();
                 // productManager.retrieveAisleByUser(6419807607980032L);
             }
         });
-       // mCardList.addHeaderView(cardHeaderView);
+        // mCardList.addHeaderView(cardHeaderView);
         mCardList.setAdapter(mCard);
         mCardList.setOnScrollListener(new OnScrollListener() {
 
@@ -116,30 +112,31 @@ public class CardFragment extends Fragment {
         });
         return view;
     }
+
     /**
-     *
      * test code
      */
-    private ClientProduct createProduct()
-    {
+    private ClientProduct createProduct() {
         ClientProduct product = new ClientProduct();
         product.setDescription("Need a Shirt");
-      product.setOwnerAisleId(Long.valueOf("5732910535540736"));
+        product.setOwnerAisleId(Long.valueOf("5732910535540736"));
         product.setCurrentProductState(ProductBase.ProductStateEnum.USER_CREATED);
         product.setTitle("White Shirts");
         return product;
     }
-    private ClientProductTag createClientProductTag(){
+
+    private ClientProductTag createClientProductTag() {
         ClientProductTag productTag = new ClientProductTag();
         productTag.setTagCategory("PRODUCT_TYPE");
         productTag.setTagString("Dress");
         productTag.setTagSubCategory(null);
         return productTag;
     }
+
     /**
      * test code.
      */
-    private ClientProduct updateClientProductObject(){
+    private ClientProduct updateClientProductObject() {
         ClientProduct product = new ClientProduct();
         product.setId(5748418722922496L);
         product.setOwnerProductListId(null);
@@ -151,14 +148,14 @@ public class CardFragment extends Fragment {
         product.setTitle("Mobile shopping");
         ArrayList<ClientProductTag> images = new ArrayList<ClientProductTag>();
         images.add(getClientProductTag());
-        product. setProductTags(images);
+        product.setProductTags(images);
         return product;
     }
+
     /**
-     *
      * test code to be deleted later.
      */
-    private ClientProductImage getSampleImage(){
+    private ClientProductImage getSampleImage() {
         ClientProductImage image = new ClientProductImage();
         image.setDescription("imageDescripiton");
         image.setExternalURL("http://ecx.images-amazon.com/images/I/91kHfDTB1-L._UL1500_.jpg");
@@ -167,19 +164,21 @@ public class CardFragment extends Fragment {
         image.setModifiedHeight(583f);
         image.setModifiedWidth(380f);
         image.setOwnerProductId(5308304431513600L);
-        return  image;
+        return image;
     }
-    private ClientProductTag getClientProductTag(){
+
+    private ClientProductTag getClientProductTag() {
         ClientProductTag clientProductTag = new ClientProductTag();
-          clientProductTag.setTagCategory("Occassion");
-          clientProductTag.setTagString("Dress");
-          clientProductTag.setTagSubCategory(null);
-        return  clientProductTag;
+        clientProductTag.setTagCategory("Occassion");
+        clientProductTag.setTagString("Dress");
+        clientProductTag.setTagSubCategory(null);
+        return clientProductTag;
     }
+
     /**
      * test code to be deleted.
      */
-    private ClientAisle getSampleAisle(){
+    private ClientAisle getSampleAisle() {
         long userId = SaveUser.getUserFromFile().getId();
         ClientAisle clientAisle = new ClientAisle();
         clientAisle.setOwnerUserId(userId);
@@ -189,18 +188,19 @@ public class CardFragment extends Fragment {
         clientAisle.setDescription("Pary shirt");
         return clientAisle;
     }
+
     /**
      *
      */
-    private ClientProductProvider getProvider(){
+    private ClientProductProvider getProvider() {
 
         ClientProductProvider provider = new ClientProductProvider();
-          provider.setExternalURL("http://shop.nordstrom.com/s/bb-dakota-renley-lace-fit-flare-dress-nordstrom-exclusive/3524970?origin=category-personalizedsort&contextualcategoryid=0&fashionColor=Sapphire&resultback=196&cm_sp=personalizedsort-_-browseresults-_-1_1_A");
-          provider.setCurrencyCode("USD");
-          provider.setAvailability(ProductProviderBase.ProductAvailabilityEnum.IN_STOCK);
-          provider.setPrice(88.00);
-          provider.setOnSale(false);
-          provider.setStore("Nordstrom");
-         return  provider;
+        provider.setExternalURL("http://shop.nordstrom.com/s/bb-dakota-renley-lace-fit-flare-dress-nordstrom-exclusive/3524970?origin=category-personalizedsort&contextualcategoryid=0&fashionColor=Sapphire&resultback=196&cm_sp=personalizedsort-_-browseresults-_-1_1_A");
+        provider.setCurrencyCode("USD");
+        provider.setAvailability(ProductProviderBase.ProductAvailabilityEnum.IN_STOCK);
+        provider.setPrice(88.00);
+        provider.setOnSale(false);
+        provider.setStore("Nordstrom");
+        return provider;
     }
 }

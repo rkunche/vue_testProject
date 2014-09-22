@@ -2,7 +2,6 @@ package com.test.vue.vuetest.presenters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -59,7 +58,7 @@ public class AisleContentAdapter implements IAisleContentAdapter {
             return false;
         if (0 >= currentIndex && wantedIndex < currentIndex)
             return false;
-        Log.i("browsercall", "browsercall LOADING NEW WINDOW");
+
         ClientProductImage image = contentBrowser.getClientAisle().getProductList().get(wantedIndex).getProductImages().get(0);
         View view = ProductAdapterPool.getInstance(context).getProductLayout();
         contentBrowser.addView(view);
@@ -81,7 +80,7 @@ public class AisleContentAdapter implements IAisleContentAdapter {
     }
 
     private void loadBitmap(String url, ImageView imageView) {
-
+        imageView.setImageBitmap(null);
         Bitmap bitmap = BitmapLruCache.getInstance(AnchoredContext
                 .getInstance()).getBitmap(url);
         if (bitmap != null) {

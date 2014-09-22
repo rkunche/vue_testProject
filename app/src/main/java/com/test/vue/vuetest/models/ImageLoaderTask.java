@@ -1,12 +1,9 @@
 package com.test.vue.vuetest.models;
 
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.ImageView;
 
-import com.facebook.android.Util;
 import com.test.vue.vuetest.presenters.ProductCustomImageVeiw;
 import com.test.vue.vuetest.utils.BitmapLoaderUtils;
 import com.test.vue.vuetest.utils.Utils;
@@ -30,9 +27,7 @@ public class ImageLoaderTask extends AsyncTask<Void, Void, Bitmap> {
 
     @Override
     protected Bitmap doInBackground(Void... voids) {
-        Log.i("BitmapLoading", "BitmapLoading... doInBackground");
-       Bitmap bitmap = BitmapLoaderUtils.getInstance().getBitmap(url,true, Utils.sCardWidth, Utils.sCardHeight,"Trending");
-
+        Bitmap bitmap = BitmapLoaderUtils.getInstance().getBitmap(url, true, Utils.sCardWidth, Utils.sCardHeight, "Trending");
         return bitmap;
     }
 
