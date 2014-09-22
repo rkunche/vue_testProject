@@ -20,7 +20,7 @@ import java.lang.ref.WeakReference;
 
 
 public class AisleContentBrowser extends ViewFlipper {
-    private String mAisleUniqueId;
+    private Long mAisleUniqueId;
     int mCurrentIndex;
 
 
@@ -35,7 +35,7 @@ public class AisleContentBrowser extends ViewFlipper {
     private final int MAX_ELAPSED_DURATION_FOR_TAP = 200;
     public static final int SWIPE_MIN_DISTANCE = 30;
     private IAisleContentAdapter mSpecialNeedsAdapter;
-    public static final String EMPTY_AISLE_CONTENT_ID = "EmptyAisleWindow";
+    public static final Long EMPTY_AISLE_CONTENT_ID = 0000000L;
     
     public int mFirstX;
     public int mLastX;
@@ -64,10 +64,10 @@ public class AisleContentBrowser extends ViewFlipper {
     public ClientAisle getClientAisle(){
         return  clientAisle;
     }
-    public void setAisleUniqueId(String aisleId){
+    public void setAisleUniqueId(Long aisleId){
         mAisleUniqueId = aisleId;
     }
-    public String getAisleUniqueId(){
+    public Long getAisleUniqueId(){
         return  mAisleUniqueId;
     }
     public AisleContentBrowser(Context context, AttributeSet attribs) {
@@ -332,7 +332,7 @@ public class AisleContentBrowser extends ViewFlipper {
         @Override
         public boolean onDoubleTap(MotionEvent e) {
             if (mClickListener != null && null != mSpecialNeedsAdapter) {
-                mClickListener.onDoubleTap(mAisleUniqueId);
+                //mClickListener.onDoubleTap(mAisleUniqueId);
             }
             return super.onDoubleTap(e);
         }

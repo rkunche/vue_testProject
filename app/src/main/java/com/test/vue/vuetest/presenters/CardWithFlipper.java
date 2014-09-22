@@ -96,8 +96,6 @@ public class CardWithFlipper extends DataAdapter {
 
         viewHolder.aisleCardUserNameId.setText(windowList.get(position).getName());
         viewHolder.cardUserHeadingId.setText(windowList.get(position).getLookingFor());
-
-
         loadBitMap(viewHolder.productImage, windowList.get(position).getProductList().get(0).getProductImages().get(0).getExternalURL(), viewHolder.aisleContentBrowser, windowList.get(position));
 
 
@@ -148,24 +146,28 @@ public class CardWithFlipper extends DataAdapter {
      * to allow horizontal swipe
      */
     private void loadBitMap(ImageView imageView, String url, AisleContentBrowser browser, ClientAisle aisleWindow) {
-        if (browser.getAisleUniqueId().equals(aisleWindow.getId().toString())) {
+        if (browser.getAisleUniqueId() == aisleWindow.getId()) {
             return;
         }
-        browser.setAisleUniqueId(aisleWindow.getId().toString());
-        browser.setClientAisle(aisleWindow);
-        //TODO: CLEAR ALL THE CONTENT FROM THE BROWSER.
         bitmapLruCache = BitmapLruCache.getInstance(AnchoredContext
                 .getInstance());
         if (browser.getChildCount() > 1) {
             //clear the aisle browser window before using for another window.
-            for (int i = 1; i < browser.getChildCount(); i++) {
-                View removedView = browser.getChildAt(i);
+            View initialView = browser.getChildAt(0);
+            int count = browser.getChildCount();
+            for (int i = 0; i < count; i++) {
+                View removedView = browser.getChildAt(0);
                 ((ImageView) removedView.findViewById(R.id.product_image)).setImageBitmap(null);
-                browser.removeViewAt(i);
+                browser.removeViewAt(0);
+                //don't add initial view to pool, it is a static view.
+                if (i == 0) continue;
                 ProductAdapterPool.getInstance(mContext).returnUsedViewToPool(removedView);
             }
+            browser.addView(initialView);
         }
 
+        browser.setAisleUniqueId(aisleWindow.getId());
+        browser.setClientAisle(aisleWindow);
         Bitmap bitmap = bitmapLruCache.getBitmap(url);
         if (bitmap != null) {
             imageView.setImageBitmap(bitmap);

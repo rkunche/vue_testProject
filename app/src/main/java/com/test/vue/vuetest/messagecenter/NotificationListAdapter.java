@@ -125,7 +125,7 @@ public class NotificationListAdapter extends BaseAdapter {
                 holder.likeId.setVisibility(View.VISIBLE);
                 holder.bottom_lay_id.setVisibility(View.VISIBLE);
             }*/
-            ((ImageView) holder.userImage).setImageResource(R.drawable.image);
+            ((ImageView) holder.userImage).setImageResource(R.drawable.vuetest);
            /* holder.bookmarks.setText(mNotificationList.get(position)
                     .getBookmarkCount() + "");
             holder.likes.setText(mNotificationList.get(position).getLikeCount()

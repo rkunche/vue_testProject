@@ -2,6 +2,7 @@ package com.test.vue.vuetest.presenters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -62,6 +63,7 @@ public class AisleContentAdapter implements IAisleContentAdapter {
         ClientProductImage image = contentBrowser.getClientAisle().getProductList().get(wantedIndex).getProductImages().get(0);
         View view = ProductAdapterPool.getInstance(context).getProductLayout();
         contentBrowser.addView(view);
+        Log.i("old browser", "old browser vuew adding count is : " +contentBrowser.getChildCount() );
         loadBitmap(image.getExternalURL(), (ImageView) view.findViewById(R.id.product_image));
         return true;
     }
