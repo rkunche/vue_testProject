@@ -302,7 +302,7 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
 
     @Override
     public void onDoneButtonClickFromRatingScreen() {
-        RemoveMessageCenterFrag();
+        removeMessageCenterFrag();
     }
 
     public static class LocationErrorFragment extends DialogFragment {
