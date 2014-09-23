@@ -26,6 +26,8 @@ public class DataAdapter extends BaseAdapter implements DataContainer {
     DataAdapter(Context context) {
         mVueContentModel = (VueContentModelImpl) VueContentModelImpl.getContentModel();
         mVueContentModel.setDataRegisterListener(this);
+        ClientAisle tempAisle = new ClientAisle();
+        windowList.add(tempAisle);
     }
 
     public int getCount() {
@@ -70,8 +72,8 @@ public class DataAdapter extends BaseAdapter implements DataContainer {
 
     @Override
     public void addMoreData(ArrayList<ClientAisle> aisleList) {
-        for(int i=0;i<aisleList.size();i++){
-            Log.i("serverDAta","serverDAta: "+aisleList.get(i).getLookingFor());
+        if(windowList.size() == 1){
+            windowList.remove(0);
         }
         windowList.addAll(aisleList);
         messageHandler.sendEmptyMessage(0);
