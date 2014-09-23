@@ -11,7 +11,7 @@ public class CardViewHolder {
     ImageView aisleOwnerProfilePic;
     ImageView productSuggesterPic;
     ImageView productImage;
-    ImageView productMenuId;
+    RelativeLayout productMenuId;
     RelativeLayout productCreateAisle;
     RelativeLayout suggesterLayout;
     RelativeLayout commentsShowId;

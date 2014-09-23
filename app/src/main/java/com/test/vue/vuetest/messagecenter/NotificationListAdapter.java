@@ -25,13 +25,13 @@ public class NotificationListAdapter extends BaseAdapter {
     public NotificationListAdapter(Context context,
             ArrayList<NotificationAisle> notificationList) {
         this.mContext = context;
-        this.mNotificationList = notificationList;
+        this.mNotificationList = new ArrayList<NotificationAisle>();
     }
     
     @Override
     public int getCount() {
         try {
-            return mNotificationList.size();
+            return 10;
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
@@ -50,7 +50,7 @@ public class NotificationListAdapter extends BaseAdapter {
     
     public NotificationAisle removeItem(int position) {
         NotificationAisle notificatinAisle = null;
-        if (mNotificationList != null && mNotificationList.size() > 0) {
+     /*   if (mNotificationList != null && mNotificationList.size() > 0) {
             notificatinAisle = mNotificationList.remove(position);
         }
         Log.i("notificationLIstSize", "notificationLIstSize: "
@@ -58,7 +58,7 @@ public class NotificationListAdapter extends BaseAdapter {
         
         if (mNotificationList.size() == 0) {
             addTempItem();
-        }
+        }*/
         notifyDataSetChanged();
         return notificatinAisle;
     }
@@ -70,8 +70,7 @@ public class NotificationListAdapter extends BaseAdapter {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(
-                    R.layout.notification_popup_window_row, null);
+            convertView = inflater.inflate(R.layout.custom_row, parent, false);
             holder = new ViewHolder();
             holder.notificationDescription = (TextView) convertView
                     .findViewById(R.id.notification_description);
@@ -125,7 +124,7 @@ public class NotificationListAdapter extends BaseAdapter {
                 holder.likeId.setVisibility(View.VISIBLE);
                 holder.bottom_lay_id.setVisibility(View.VISIBLE);
             }*/
-            ((ImageView) holder.userImage).setImageResource(R.drawable.image);
+            ((ImageView) holder.userImage).setImageResource(R.drawable.vuetest);
            /* holder.bookmarks.setText(mNotificationList.get(position)
                     .getBookmarkCount() + "");
             holder.likes.setText(mNotificationList.get(position).getLikeCount()
@@ -136,13 +135,13 @@ public class NotificationListAdapter extends BaseAdapter {
 //                    position).getNotificationText());
 //            holder.notificationAisleTitle.setText(mNotificationList.get(
 //                    position).getAisleTitle());
-            if (mNotificationList.get(position).isReadStatus()) { // read
+          /*  if (mNotificationList.get(position).isReadStatus()) { // read
                 holder.overflow_listlayout_layout.setBackgroundColor(Color
                         .parseColor("#C0C0C0"));
             } else { // unread
                 holder.overflow_listlayout_layout.setBackgroundColor(Color
                         .parseColor("#FFFFFF"));
-            }
+            }*/
         }
         return convertView;
     }

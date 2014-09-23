@@ -31,4 +31,54 @@
         <item name="@android:windowEnterAnimation">@anim/popup_show</item>
         <item name="@android:windowExitAnimation">@anim/popup_hide</item>
     </style>
+    <style name="aisle_card">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginLeft">-8dp</item>
+        <item name="android:layout_marginRight">-8dp</item>
+        <item name="android:background">@drawable/big_card</item>
+    </style>
+    <style name="prev_next">
+        <item name="android:layout_width">@dimen/vue_icon_dimensions</item>
+        <item name="android:layout_height">@dimen/vue_icon_dimensions</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="product_card_bottom_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/product_card_info_text_views_height</item>
+        <item name="android:layout_marginLeft">@dimen/product_card_suggester_left_margin</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="vue_icon_area">
+        <item name="android:layout_width">@dimen/vue_icon_dimensions</item>
+        <item name="android:layout_height">@dimen/vue_icon_dimensions</item>
+        <item name="android:layout_centerInParent">true</item>
+    </style>
+    <style name="vue_icon_touch_area">
+        <item name="android:layout_width">@dimen/vue_icon_touch_area_dimensions</item>
+        <item name="android:layout_height">@dimen/vue_icon_touch_area_dimensions</item>
+        <item name="android:background">@drawable/my_selector</item>
+    </style>
+    <style name="aisle_top_user_pic_card">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+    </style>
+    <style name="aisle_card_top_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">2dp</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="MyListBackContent"><item name="android:layout_width">fill_parent</item><item name="android:layout_height">fill_parent</item><item name="android:background">@color/white</item><item name="android:gravity">right</item></style><style name="MyListFrontContent"><item name="android:layout_width">fill_parent</item><item name="android:layout_height">fill_parent</item><item name="android:background">@drawable/aisle_baground</item><item name="android:padding">8dp</item></style><style name="MyListButtonAction"><item name="android:layout_margin">5dp</item><item name="android:layout_width">80dp</item><item name="android:layout_height">30dp</item></style><style name="MyListImage"><item name="android:layout_width">64dp</item><item name="android:layout_height">64dp</item><item name="android:scaleGravity">fill</item><item name="android:layout_marginRight">8dp</item></style><style name="MyListTitle"><item name="android:paddingBottom">8dp</item><item name="android:textSize">17sp</item><item name="android:textStyle">bold</item><item name="android:maxLines">2</item><item name="android:ellipsize">end</item></style>
 </resources>

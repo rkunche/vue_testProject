@@ -85,9 +85,8 @@ public class Utils {
 		// 24 notification bar
 		// 48 action bar
 		// 64 card heading info
-		// 72 card bottom info
 		// 48 card bottom text card_bottom_text_height
-		// 8 shading space.
+
 		if (sCardHeight == 0) {
 			int cardHeadingInfo =   context.getResources().getInteger(
                     R.integer.top_card_height);
@@ -104,7 +103,7 @@ public class Utils {
 			int deductValue = Utils.getPixel(context, (notificationBarHeight+actionBarHeight+10+cardHeadingInfo+cardBottomText+10));
 			sCardHeight = dimensions.mScreenHeight - deductValue;
             int deductMarginValue = 16 + 16;
-            sCardWidth =  dimensions.mScreenHeight - Utils.getPixel(context,deductMarginValue);
+            sCardWidth =  dimensions.mScreenWidth - Utils.getPixel(context,deductMarginValue);
 		}
 		return sCardHeight;
 

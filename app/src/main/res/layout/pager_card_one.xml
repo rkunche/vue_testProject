@@ -3,37 +3,25 @@
     android:id="@+id/product_card"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-
     android:background="@drawable/card_no_t_border">
 
     <com.test.vue.vuetest.presenters.ProductCustomImageVeiw
         android:id="@+id/product_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottomLayout"
-
-        />
+        android:layout_above="@+id/bottomLayout" />
 
     <ImageView
         android:id="@+id/product_next_id"
-        android:layout_width="@dimen/vue_icon_dimensions"
-        android:layout_height="@dimen/vue_icon_dimensions"
+        style="@style/prev_next"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:gravity="center"
-        android:src="@drawable/ic_action_right_white"
-          />
+        android:src="@drawable/ic_action_right_white" />
 
     <ImageView
         android:id="@+id/product_prev_id"
-        android:layout_width="@dimen/vue_icon_dimensions"
-        android:layout_height="@dimen/vue_icon_dimensions"
+        style="@style/prev_next"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:gravity="center"
-        android:src="@drawable/ic_action_left_white"
-        android:textSize="@dimen/vue_icon_dimensions" />
+        android:src="@drawable/ic_action_left_white" />
 
 
     <RelativeLayout
@@ -51,14 +39,16 @@
             android:text="$199 @ Nordstrom's"
             android:textColor="@color/white" />
 
-        <ImageView
+        <RelativeLayout
             android:id="@+id/product_menu_id"
-            android:layout_width="@dimen/vue_icon_dimensions"
-            android:layout_height="match_parent"
+            style="@style/vue_icon_touch_area"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="8dp"
-            android:background="@drawable/my_selector"
-            android:src="@drawable/ic_action_more_white" />
+            android:layout_marginRight="8dp">
+
+            <ImageView
+                style="@style/vue_icon_area"
+                android:src="@drawable/ic_action_more_white" />
+        </RelativeLayout>
 
     </RelativeLayout>
 
@@ -66,8 +56,7 @@
         android:id="@+id/product_bottom_content"
         android:layout_width="match_parent"
         android:layout_height="@dimen/product_suggester_content_layout_height"
-        android:layout_alignBottom="@+id/product_image"
-         >
+        android:layout_alignBottom="@+id/product_image">
 
 
         <RelativeLayout
@@ -79,60 +68,41 @@
 
             <TextView
                 android:id="@+id/product_suggest_text_id"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/product_card_info_text_views_height"
-                android:layout_marginLeft="62dp"
-                android:text="@string/suggested_by"
+                style="@style/product_card_bottom_text"
                 android:gravity="bottom"
-                android:textColor="@android:color/black"
-                android:textSize="16dp" />
+                android:text="@string/suggested_by"
+                android:textColor="@android:color/black" />
             <!--66 = 64+2, 64 is profile pic width-->
-              <TextView
-                  android:id="@+id/product_card_suggester_name"
-                  android:layout_width="wrap_content"
-                  android:layout_height="@dimen/product_card_info_text_views_height"
-                  android:layout_below="@+id/product_suggest_text_id"
-                  android:layout_marginLeft="62dp"
-                  android:ellipsize="end"
-                  android:singleLine="true"
-                  android:layout_marginTop="@dimen/margin_2dp"
-                  android:gravity="top"
-                  android:text="@string/sample_corol_white"
-                  android:textColor="@color/white"
-                  android:textSize="16dp"
-                  android:textStyle="bold" />
+            <TextView
+                android:id="@+id/product_card_suggester_name"
+                style="@style/product_card_bottom_text"
+                android:layout_below="@+id/product_suggest_text_id"
+                android:layout_marginTop="@dimen/margin_2dp"
+                android:gravity="top"
+                android:text="@string/sample_corol_white"
+                android:textColor="@color/white" />
             <!--66 = 64+2, 64 is profile pic width-->
-              <RelativeLayout
-                  android:id="@+id/card_create_aisle_id"
-                  android:layout_width="@dimen/vue_icon_touch_area_dimensions"
-                  android:layout_height="@dimen/vue_icon_touch_area_dimensions"
-                  android:layout_alignParentRight="true"
-                  android:layout_centerVertical="true"
-                  android:background="@drawable/my_selector"
-                  android:layout_marginRight="@dimen/margin_8dp">
+            <RelativeLayout
+                android:id="@+id/card_create_aisle_id"
+                style="@style/vue_icon_touch_area"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/margin_8dp">
 
-                  <ImageView
-                      android:layout_width="@dimen/vue_icon_dimensions"
-                      android:layout_height="@dimen/vue_icon_dimensions"
-                      android:layout_centerInParent="true"
-                      android:src="@drawable/ic_action_folder_white" />
-              </RelativeLayout>
+                <ImageView
+                    style="@style/vue_icon_area"
+                    android:src="@drawable/ic_action_folder_white" />
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/product_comments_show_id"
-                android:layout_width="@dimen/vue_icon_touch_area_dimensions"
-                android:layout_height="@dimen/vue_icon_touch_area_dimensions"
+                style="@style/vue_icon_touch_area"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/margin_8dp"
-                android:background="@drawable/my_selector"
                 android:layout_toLeftOf="@+id/card_create_aisle_id">
 
                 <ImageView
-                    android:layout_width="@dimen/vue_icon_dimensions"
-                    android:layout_height="@dimen/vue_icon_dimensions"
-                    android:layout_centerInParent="true"
-                    android:layout_centerVertical="true"
-
+                    style="@style/vue_icon_area"
                     android:src="@drawable/ic_action_comments_white" />
 
                 <TextView
@@ -146,24 +116,23 @@
                     android:textColor="@color/white" />
             </RelativeLayout>
         </RelativeLayout>
-
-
     </RelativeLayout>
+
     <com.test.vue.vuetest.uihelper.CircularImageView
         android:id="@+id/product_suggester_image_id"
-        android:layout_alignTop="@+id/product_bottom_content"
         android:layout_width="@dimen/product_card_top_layout_profile_pic_dimensions"
         android:layout_height="@dimen/product_card_top_layout_profile_pic_dimensions"
         android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/product_bottom_content"
         android:layout_marginLeft="@dimen/margin_2dp"
         android:layout_marginTop="-12dp"
-        android:src="@drawable/image" />
+        android:src="@drawable/vuetest" />
+
     <RelativeLayout
         android:id="@+id/product_add_photo_lay_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/product_image">
-
         <!--<include layout="@layout/add_new_product_helper" />-->
     </RelativeLayout>
 

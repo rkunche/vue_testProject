@@ -1,94 +1,66 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_marginTop="@dimen/margin_8dp"
-    android:layout_height="wrap_content">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:id="@+id/aisle_card"
-    android:layout_marginLeft="-8dp"
-    android:layout_marginRight="-8dp"
-    android:background="@drawable/big_card"
-    android:layout_height="match_parent">
-    <include
-        android:id="@+id/card_top_id"
-        layout="@layout/card_top" />
+    android:layout_height="wrap_content"
+    >
 
     <RelativeLayout
-        android:id="@+id/pager_layout_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/card_top_id">
+        android:id="@+id/aisle_card"
+        style="@style/aisle_card">
 
-        <com.test.vue.vuetest.presenters.AisleContentBrowser
-            android:id="@+id/pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            android:focusable="true">
-
-            <include layout="@layout/pager_card_one" />
-        </com.test.vue.vuetest.presenters.AisleContentBrowser>
+        <include
+            android:id="@+id/card_top_id"
+            layout="@layout/card_top" />
 
         <RelativeLayout
-            android:id="@+id/pager_overflow_layout_id"
-            android:layout_width="@dimen/vue_icon_touch_area_dimensions"
-            android:layout_height="@dimen/vue_icon_touch_area_dimensions"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/product_card_overflow_icon_top_margin">
+            android:id="@+id/pager_layout_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card_top_id">
 
-            <ImageView
-                android:id="@+id/pager_overflow_id"
-                android:layout_width="@dimen/vue_icon_dimensions"
-                android:layout_height="@dimen/vue_icon_dimensions" />
+            <com.test.vue.vuetest.presenters.AisleContentBrowser
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="true">
+
+                <include layout="@layout/pager_card_one" />
+            </com.test.vue.vuetest.presenters.AisleContentBrowser>
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/pager_next_layout_id"
-            android:layout_width="@dimen/vue_icon_touch_area_dimensions"
-            android:layout_height="@dimen/vue_icon_touch_area_dimensions"
-            android:layout_alignParentRight="true"
-            android:layout_centerInParent="true"
-            android:layout_marginRight="@dimen/activity_horizontal_margin">
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_below="@+id/pager_layout_id"
+            android:layout_centerHorizontal="true">
 
-            <ImageView
-                android:id="@+id/pager_next_id"
-                android:layout_width="@dimen/vue_icon_dimensions"
-                android:layout_height="@dimen/vue_icon_dimensions" />
+            <TextView
+                android:id="@+id/bottom_view_id"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/sample_starts_in_two_days"
+                android:textColor="@color/start_in_two_days" />
+
+            <TextView
+                android:id="@+id/bottom_view_id_rate_now"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@+id/bottom_view_id"
+                android:gravity="center_vertical"
+                android:text="@string/sample_rate_now"
+                android:textColor="#141313" />
         </RelativeLayout>
     </RelativeLayout>
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="42dp"
-    android:layout_centerHorizontal="true"
-    android:layout_below="@+id/pager_layout_id">
-    <TextView
-        android:id="@+id/bottom_view_id"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:gravity="center_vertical"
-        android:textColor="@color/start_in_two_days"
-        android:text="@string/sample_starts_in_two_days" />
-    <TextView
-        android:id="@+id/bottom_view_id_rate_now"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_toRightOf="@+id/bottom_view_id"
-        android:gravity="center_vertical"
-        android:layout_marginLeft="4dp"
-        android:text="@string/sample_rate_now"
-        android:textColor="#141313" />
-</RelativeLayout>
-</RelativeLayout>
+
     <RelativeLayout
-        android:layout_width="match_parent"
         android:id="@+id/special_card"
-        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="-6dp"
         android:layout_marginRight="-6dp"
 
-        android:layout_height="wrap_content">
+        android:visibility="gone">
 
-        </RelativeLayout>
+    </RelativeLayout>
 </RelativeLayout><!--each icon size is 32 dp and its touch area is 42 dp.-->

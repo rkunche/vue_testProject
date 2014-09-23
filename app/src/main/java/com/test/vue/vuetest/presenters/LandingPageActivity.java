@@ -24,7 +24,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -54,7 +53,7 @@ import java.lang.ref.WeakReference;
  * 2. Check to see if the app was launched because the user clicked on notifications - maybe we might redirect them to a new activity in that case
  */
 
-public class LandingPageActivity extends FragmentActivity implements Trending_Menu_Fragment.OnFragmentInteractionListener ,ActivityFragmentCommunicator{
+public class LandingPageActivity extends FragmentActivity implements TrendingMenuFragment.OnFragmentInteractionListener ,ActivityFragmentCommunicator{
     private CardFragment mLandingAislesFrag;
     private GoogleApiClient mGoogleApiClient;
 
@@ -104,9 +103,13 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
                 if (!mMessageCenterLoaded) {
                     addMessageCenterFrag();
                     mMessageCenterLoaded = true;
+                    action_icon.setVisibility(View.GONE);
+                    actionBarTextView.setText("Messages");
                 } else {
+                    actionBarTextView.setText("My Feed");
                     removeMessageCenterFrag();
                     mMessageCenterLoaded = false;
+                    action_icon.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -133,6 +136,9 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
         trending_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!actionBarTextView.getText().toString().equalsIgnoreCase("My Feed")){
+                    return;
+                }
                 if (!mTrendingFragLoaded) {
                     action_icon.setImageResource(R.drawable.ic_action_dropdown);
                     mTrendingFragLoaded = true;
@@ -184,7 +190,7 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
     }
 
     private void addTrendingFrag() {
-        mTrendingFragment = new Trending_Menu_Fragment();
+        mTrendingFragment = new TrendingMenuFragment();
         trendingFragmentWeakReference = new WeakReference<Fragment>(mTrendingFragment);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager
@@ -214,7 +220,7 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
     }
 
     private void addMessageCenterFrag() {
-        mMessageCenterFragment = new PopupFragment(getUserNotifacation());
+        mMessageCenterFragment = new PopupFragment();
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager
                 .beginTransaction();
