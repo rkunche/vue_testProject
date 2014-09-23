@@ -16,6 +16,7 @@ import com.test.vue.vuetest.AnchoredContext;
 import com.test.vue.vuetest.R;
 import com.test.vue.vuetest.domain.client.ClientAisle;
 import com.test.vue.vuetest.models.ImageLoaderTask;
+import com.test.vue.vuetest.uihelper.CircularImageView;
 import com.test.vue.vuetest.utils.BitmapLruCache;
 import com.test.vue.vuetest.utils.Utils;
 
@@ -48,7 +49,20 @@ public class CardWithFlipper extends DataAdapter {
         birthDaySpecial = mInflater.inflate(R.layout.surprice_card, null);
         WeakReference<View> bSpecialCardRef = new WeakReference<View>(birthDaySpecial);
         weekSpecialCards.put(BIRTH_DAY_CARD, birthDaySpecial);
-        View friendsList = creator.createFriendsListCard();
+     //   View friendsList = creator.createFriendsListCard();
+        View friendsList = mInflater.inflate(R.layout.friends_list_spl_card, null);
+
+        CircularImageView img1= (CircularImageView) friendsList.findViewById(R.id.friend_1);
+        img1.setImageResource(R.drawable.vuetest);
+
+        CircularImageView img2= (CircularImageView) friendsList.findViewById(R.id.friend_2);
+        img2.setImageResource(R.drawable.vuetest);
+
+        CircularImageView img3= (CircularImageView) friendsList.findViewById(R.id.friend_3);
+        img3.setImageResource(R.drawable.vuetest);
+
+
+
         WeakReference<View> friendsListRef = new WeakReference<View>(friendsList);
         weekSpecialCards.put(FRIENDS_CARD, friendsList);
         suggesterIcon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.vuetest);
@@ -86,7 +100,7 @@ public class CardWithFlipper extends DataAdapter {
             viewHolder = (CardViewHolder) convertView.getTag();
         }
         //TODO: Algarthm to decide when to show the special card.
-      /*  if (position % 2 == 0) {*/
+      // if (position % 2 == 0) {
         viewHolder.aisleCard.setVisibility(View.VISIBLE);
         viewHolder.specialCard.setVisibility(View.GONE);
 
@@ -123,20 +137,20 @@ public class CardWithFlipper extends DataAdapter {
 
             }
         });
-       /* } else {
-            Log.i("profile","profile start *************************************");
-            viewHolder.aisleCard.setVisibility(View.GONE);
-            viewHolder.specialCard.setVisibility(View.VISIBLE);
-            if (position == 3 || position == 5) {
-                viewHolder.specialCard.removeAllViews();
-                viewHolder.specialCard.addView(weekSpecialCards.get(FRIENDS_CARD));
-            } else {
-                viewHolder.specialCard.removeAllViews();
-                viewHolder.specialCard.addView(weekSpecialCards.get(BIRTH_DAY_CARD));
-            }
-            Log.i("profile","profile end ######################################## ");
-
-        }*/
+//        } else {
+//           Log.i("profile", "profile start *************************************");
+//            viewHolder.aisleCard.setVisibility(View.GONE);
+//            viewHolder.specialCard.setVisibility(View.VISIBLE);
+//            if (position == 3 || position == 5) {
+//                viewHolder.specialCard.removeAllViews();
+//                viewHolder.specialCard.addView(weekSpecialCards.get(FRIENDS_CARD));
+//            } else {
+//                viewHolder.specialCard.removeAllViews();
+//                viewHolder.specialCard.addView(weekSpecialCards.get(BIRTH_DAY_CARD));
+//            }
+//            Log.i("profile", "profile end ######################################## ");
+//
+//        }
 
         return convertView;
     }

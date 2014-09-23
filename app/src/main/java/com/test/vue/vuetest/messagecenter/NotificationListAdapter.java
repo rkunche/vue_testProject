@@ -70,8 +70,7 @@ public class NotificationListAdapter extends BaseAdapter {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(
-                    R.layout.notification_popup_window_row, null);
+            convertView = inflater.inflate(R.layout.custom_row, parent, false);
             holder = new ViewHolder();
             holder.notificationDescription = (TextView) convertView
                     .findViewById(R.id.notification_description);

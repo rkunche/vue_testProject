@@ -10,26 +10,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.test.vue.vuetest.R;
 
-import java.util.List;
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Trending_Menu_Fragment.OnFragmentInteractionListener} interface
+ * {@link TrendingMenuFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Trending_Menu_Fragment#newInstance} factory method to
+ * Use the {@link TrendingMenuFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Trending_Menu_Fragment extends Fragment {
+public class TrendingMenuFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -49,11 +45,11 @@ public class Trending_Menu_Fragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Trending_Menu_Fragment.
+     * @return A new instance of fragment TrendingMenuFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Trending_Menu_Fragment newInstance(String param1, String param2) {
-        Trending_Menu_Fragment fragment = new Trending_Menu_Fragment();
+    public static TrendingMenuFragment newInstance(String param1, String param2) {
+        TrendingMenuFragment fragment = new TrendingMenuFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,7 +57,7 @@ public class Trending_Menu_Fragment extends Fragment {
         return fragment;
     }
 
-    public Trending_Menu_Fragment() {
+    public TrendingMenuFragment() {
         // Required empty public constructor
     }
 

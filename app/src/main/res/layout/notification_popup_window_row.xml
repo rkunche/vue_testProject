@@ -8,6 +8,7 @@
         android:padding="8dp"
         android:background="@android:color/white">
 
+
         <com.test.vue.vuetest.uihelper.CircularImageView
             android:id="@+id/user_image"
             android:layout_width="@dimen/product_card_top_layout_profile_pic_dimensions"

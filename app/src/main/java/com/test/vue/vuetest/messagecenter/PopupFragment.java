@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -35,6 +36,9 @@ import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.test.vue.vuetest.R;
+import com.test.vue.vuetest.swipeoption.ListViewSwipeGesture;
+import com.test.vue.vuetest.swipeoption.swipelistview.BaseSwipeListViewListener;
+import com.test.vue.vuetest.swipeoption.swipelistview.SwipeListView;
 
 
 public class PopupFragment extends Fragment {
@@ -44,8 +48,8 @@ public class PopupFragment extends Fragment {
     BaseAdapter mNotificationAdapter;
     private ArrayList<NotificationAisle> mNotificationList;
     private SwipeDismissList mSwipeList;
-    ListView mListView;
-    RelativeLayout relBg;
+    SwipeListView mListView;
+
    // EditText mFeedbackEditText;
     //TextView mFeedbackHintTview;
     boolean animStarted = false;
@@ -79,31 +83,96 @@ public class PopupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.popup_list_layout, container, false);
-      relBg = (RelativeLayout) v
-                .findViewById(R.id.overflow_listlayout_layout);
 
+        View header_messages_list = inflater.inflate(R.layout.popup_header, null);
 
-        View heder = inflater.inflate(R.layout.popup_header, null);
         
-       // mFeedbackEditText = (EditText) heder.findViewById(R.id.message_id);
-      //  mFeedbackHintTview = (TextView) heder.findViewById(R.id.text_id);
+       // mFeedbackEditText = (EditText) header_messages_list.findViewById(R.id.message_id);
+      //  mFeedbackHintTview = (TextView) header_messages_list.findViewById(R.id.text_id);
        // mFeedbackHintTview.setVisibility(View.GONE);
       //  final ColorStateList colors = mFeedbackEditText.getHintTextColors();
       //  mFeedbackHintTview.setTextColor(colors);
-        ImageView sendButton = (ImageView) heder.findViewById(R.id.send_button);
+        ImageView sendButton = (ImageView) header_messages_list.findViewById(R.id.send_button);
         LinearLayout listLay = (LinearLayout) v.findViewById(R.id.list_lay_id);
-        mListView = (ListView) v.findViewById(R.id.list_id);
+        mListView = (SwipeListView) v.findViewById(R.id.list_id);
         LayoutParams params = new LayoutParams(
                 getLayoutWidth(), LayoutParams.MATCH_PARENT);
 
         params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 
         listLay.setLayoutParams(params);
-        mListView.addHeaderView(heder);
+        mListView.addHeaderView(header_messages_list);
         mNotificationAdapter = new NotificationListAdapter(mContext,
                 mNotificationList);
+
+        mListView.setSwipeListViewListener(new BaseSwipeListViewListener() {
+            @Override
+            public void onOpened(int position, boolean toRight) {
+            }
+
+            @Override
+            public void onClosed(int position, boolean fromRight) {
+            }
+
+            @Override
+            public void onListChanged() {
+            }
+
+            @Override
+            public void onMove(int position, float x) {
+            }
+
+            @Override
+            public void onStartOpen(int position, int action, boolean right) {
+                Log.d("swipe", String.format("onStartOpen %d - action %d", position, action));
+            }
+
+            @Override
+            public void onStartClose(int position, boolean right) {
+                Log.d("swipe", String.format("onStartClose %d", position));
+            }
+
+            @Override
+            public void onClickFrontView(int position) {
+                Log.d("swipe", String.format("onClickFrontView %d", position));
+
+
+             //   mListView.openAnimate(position); //when you touch front view it will open
+
+
+            }
+
+            @Override
+            public void onClickBackView(int position) {
+                Log.d("swipe", String.format("onClickBackView %d", position));
+
+                mListView.closeAnimate(position);//when you touch back view it will close
+            }
+
+            @Override
+            public void onDismiss(int[] reverseSortedPositions) {
+
+            }
+
+        });
+
+        //These are the swipe listview settings. you can change these
+        //setting as your requirement
+        mListView.setSwipeMode(SwipeListView.SWIPE_MODE_LEFT); // there are five swiping modes
+        mListView.setSwipeActionLeft(SwipeListView.SWIPE_ACTION_REVEAL); //there are four swipe actions
+        mListView.setSwipeActionRight(SwipeListView.SWIPE_ACTION_NONE);
+        mListView.setOffsetLeft(convertDpToPixel(120f)); // left side offset
+       // mListView.setOffsetRight(convertDpToPixel(60f)); // right side offset
+        mListView.setAnimationTime(500); // Animation time
+      //  mListView.setSwipeOpenOnLongPress(true); // enable or disable SwipeOpenOnLongPress
+
         mListView.setAdapter(mNotificationAdapter);
-        
+
+        //for like ios swipe
+//        final ListViewSwipeGesture touchListener = new ListViewSwipeGesture(
+//                mListView, swipeListener, getActivity());
+//        touchListener.SwipeType	=	ListViewSwipeGesture.Double;
+       // mListView.setOnTouchListener(touchListener);
  /*       mFeedbackEditText.addTextChangedListener(new TextWatcher() {
             
             @Override
@@ -154,7 +223,7 @@ public class PopupFragment extends Fragment {
                 
             }
         });*/
-        mListView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
+      /*  mListView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
         mListView.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -162,7 +231,7 @@ public class PopupFragment extends Fragment {
 //                        .requestDisallowInterceptTouchEvent(false);
                 return false;
             }
-        });
+        });*/
 //        mFeedbackEditText.setOnTouchListener(new OnTouchListener() {
 //
 //            @Override
@@ -172,7 +241,7 @@ public class PopupFragment extends Fragment {
 //                return false;
 //            }
 //        });
-        SwipeDismissList.UndoMode mode = SwipeDismissList.UndoMode.values()[0];
+       /* SwipeDismissList.UndoMode mode = SwipeDismissList.UndoMode.values()[0];
         // Create a new SwipeDismissList from the activities listview.
         mSwipeList = new SwipeDismissList(
         // 1st parameter is the ListView you want to use
@@ -186,7 +255,7 @@ public class PopupFragment extends Fragment {
                 // the
                 // deletion).
                 new SwipeDismissList.OnDismissCallback() {
-                    /**
+                    *//**
                      * Will be called, whenever the user swiped out an list
                      * item.
                      * 
@@ -197,7 +266,7 @@ public class PopupFragment extends Fragment {
                      *            The position of the item, that was deleted.
                      * @return An {@link com.test.vue.vuetest.messagecenter.SwipeDismissList.Undoable} or {@code null} if this
                      *         deletion shouldn't be undoable.
-                     */
+                     *//*
                     public SwipeDismissList.Undoable onDismiss(
                             AbsListView listView, final int position) {
                         // Delete that item from the adapter.
@@ -208,7 +277,7 @@ public class PopupFragment extends Fragment {
                             slNo = notificationAisle.getId();
                         }
                         
-                        if (slNo != 0) {/*
+                        if (slNo != 0) {*//*
                                          * if
                                          * (notificationAisle.getAggregatedAisles
                                          * () != null &&
@@ -223,24 +292,24 @@ public class PopupFragment extends Fragment {
                                          * {
                                          * DataBaseManager.getInstance(mContext)
                                          * .deleteNotificationAisle(slNo); }
-                                         */
+                                         *//*
                         }
                         
                         // Return an Undoable, for that deletion. If you write
                         // return null
                         // instead, this deletion won't be undoable.
                         return new SwipeDismissList.Undoable() {
-                            /**
+                            *//**
                              * Optional method. If you implement this method,
                              * the returned String will be presented in the undo
                              * view to the user.
-                             */
+                             *//*
                             @Override
                             public String getTitle() {
-                                return /* item + */" deleted";
+                                return *//* item + *//*" deleted";
                             }
                             
-                            /**
+                            *//**
                              * Will be called when the user hits undo. You want
                              * to reinsert the item to the adapter again. The
                              * library will always call undo in the reverse
@@ -255,14 +324,14 @@ public class PopupFragment extends Fragment {
                              * (after you modified the list somewhere else) you
                              * will need to calculate the new position of this
                              * item yourself.
-                             */
+                             *//*
                             @Override
                             public void undo() {
                                 // Reinsert the item at its previous position.
                                 // mNotificationAdapter.insert(item, position);
                             }
                             
-                            /**
+                            *//**
                              * Will be called, when the user doesn't have the
                              * possibility to undo the action anymore. This can
                              * either happen, because the undo timed out or
@@ -271,24 +340,29 @@ public class PopupFragment extends Fragment {
                              * persistent (e.g. a database) you might want to
                              * use this method to delete the object from this
                              * persistent storage.
-                             */
+                             *//*
                             @Override
                             public void discard() {
                                 // Just write a log message (use logcat to see
                                 // the effect)
-                                /*
+                                *//*
                                  * Log.w("DISCARD", "item " + item "" +
                                  * " now finally discarded");
-                                 */
+                                 *//*
                             }
                         };
                         
                     }
+
+
+
                 },
                 // 3rd parameter needs to be the mode the list is generated.
                 mode);
-        
-        mListView.setOnItemClickListener(new OnItemClickListener() {
+
+        mSwipeList.setSwipeDirection(SwipeDismissList.SwipeDirection.START);
+        mSwipeList.discardUndo();*/
+     /*   mListView.setOnItemClickListener(new OnItemClickListener() {
             
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -296,10 +370,14 @@ public class PopupFragment extends Fragment {
                 ((NotificationListAdapter) mNotificationAdapter)
                         .loadScreenForNotificationAisle(arg2 - 1);
             }
-        });
+        });*/
         return v;
     }
-    
+    public int convertDpToPixel(float dp) {
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        float px = dp * (metrics.densityDpi / 160f);
+        return (int) px;
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -315,7 +393,47 @@ public class PopupFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
     }
-    
+
+    ListViewSwipeGesture.TouchCallbacks swipeListener = new ListViewSwipeGesture.TouchCallbacks() {
+
+        @Override
+        public void FullSwipeListView(int position) {
+            // TODO Auto-generated method stub
+            Toast.makeText(getActivity(),"Action_2", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void HalfSwipeListView(int position) {
+            // TODO Auto-generated method stub
+            Toast.makeText(getActivity(),"Action_1", Toast.LENGTH_SHORT).show();
+
+        }
+
+        @Override
+        public void LoadDataForScroll(int count) {
+            // TODO Auto-generated method stub
+
+        }
+
+        @Override
+        public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+            // TODO Auto-generated method stub
+            Toast.makeText(getActivity(),"Delete", Toast.LENGTH_SHORT).show();
+            for(int i:reverseSortedPositions){
+                NotificationAisle notificationAisle = ((NotificationListAdapter) mNotificationAdapter)
+                        .removeItem(i - 1);
+                mNotificationAdapter.notifyDataSetChanged();
+            }
+        }
+
+        @Override
+        public void OnClickListView(int position) {
+            // TODO Auto-generated method stub
+            //	startActivity(new Intent(getApplicationContext(),TestActivity.class));
+        }
+
+    };
+
     /**
      * 
      * returns % of the screen width. This is the width of the Notification

@@ -6,7 +6,9 @@
         android:id="@+id/card_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:dividerHeight="8dp"
-        android:background="@color/white"></ListView>
+        android:dividerHeight="12dp"
+        android:divider="@drawable/gap"
+        android:background="@color/white"
+        android:longClickable="false"></ListView>
 
 </LinearLayout>

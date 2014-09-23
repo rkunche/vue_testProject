@@ -50,7 +50,9 @@ import java.util.ArrayList;
  * 2. Check to see if the app was launched because the user clicked on notifications - maybe we might redirect them to a new activity in that case
  */
 
-public class LandingPageActivity extends FragmentActivity implements Trending_Menu_Fragment.OnFragmentInteractionListener, ActivityFragmentCommunicator {
+
+public class LandingPageActivity extends FragmentActivity implements TrendingMenuFragment.OnFragmentInteractionListener ,ActivityFragmentCommunicator{
+
     private CardFragment mLandingAislesFrag;
     private GoogleApiClient mGoogleApiClient;
 
@@ -178,7 +180,7 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
     private void addTrendingFrag() {
         if (isFragmentOpened) return;
         isFragmentOpened = true;
-        mTrendingFragment = new Trending_Menu_Fragment();
+        mTrendingFragment = new TrendingMenuFragment();
         trendingFragmentWeakReference = new WeakReference<Fragment>(mTrendingFragment);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager
