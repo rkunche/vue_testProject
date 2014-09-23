@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +31,7 @@ public class CardWithFlipper extends DataAdapter {
     SpecialCardCreator creator;
     private static final String BIRTH_DAY_CARD = "birth_day_card";
     private static final String FRIENDS_CARD = "friends_card";
-
+    Typeface typeface;
     View birthDaySpecial;
     WeakHashMap<String, View> weekSpecialCards;
     Bitmap suggesterIcon;
@@ -60,7 +60,7 @@ public class CardWithFlipper extends DataAdapter {
 
         CircularImageView img3= (CircularImageView) friendsList.findViewById(R.id.friend_3);
         img3.setImageResource(R.drawable.vuetest);
-
+          typeface = Typeface.createFromAsset(mContext.getAssets(), "Roboto-Regular.ttf");
 
 
         WeakReference<View> friendsListRef = new WeakReference<View>(friendsList);
@@ -95,6 +95,9 @@ public class CardWithFlipper extends DataAdapter {
                     android.widget.RelativeLayout.LayoutParams.MATCH_PARENT, mCardHeight);
             params.setMargins(Utils.getPixel(mContext, 16), 0, Utils.getPixel(mContext, 16), 0);
             viewHolder.aisleContentBrowser.setLayoutParams(params);
+
+            viewHolder.cardUserHeadingId.setTypeface(typeface);
+            viewHolder.aisleCardUserNameId.setTypeface(typeface);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (CardViewHolder) convertView.getTag();
@@ -107,10 +110,10 @@ public class CardWithFlipper extends DataAdapter {
 
         viewHolder.productSuggesterPic.setImageBitmap(suggesterIcon);
 
-         if(windowList.size() != 1) {
-             viewHolder.aisleCardUserNameId.setText(windowList.get(position).getName());
-             viewHolder.cardUserHeadingId.setText(windowList.get(position).getLookingFor());
-             loadBitMap(viewHolder.productImage, windowList.get(position).getProductList().get(0).getProductImages().get(0).getExternalURL(), viewHolder.aisleContentBrowser, windowList.get(position));
+         if(listListDataContainer.getWindowList().size() != 1) {
+             viewHolder.aisleCardUserNameId.setText(listListDataContainer.getWindowList().get(position).getName().trim());
+             viewHolder.cardUserHeadingId.setText(listListDataContainer.getWindowList().get(position).getLookingFor().trim());
+             loadBitMap(viewHolder.productImage, listListDataContainer.getWindowList().get(position).getProductList().get(0).getProductImages().get(0).getExternalURL(), viewHolder.aisleContentBrowser, listListDataContainer.getWindowList().get(position));
          }
 
         viewHolder.commentsShowId.setOnClickListener(new View.OnClickListener() {

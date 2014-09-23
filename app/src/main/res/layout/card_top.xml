@@ -22,7 +22,6 @@
             android:id="@+id/card_user_heading_id"
             style="@style/aisle_card_top_text"
             android:fontFamily="sans-serif"
-
             android:gravity="bottom"
             android:text="@string/sample_Dress_for_pool_party"
             android:textColor="@color/aisle_title_color"
