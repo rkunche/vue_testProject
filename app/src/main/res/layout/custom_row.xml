@@ -17,7 +17,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:id="@+id/swipe_button1"
-android:layout_marginRight="12dp"
+android:layout_marginRight="16dp"
 
            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
@@ -25,6 +25,16 @@ android:layout_marginRight="12dp"
               android:background="@drawable/ic_action_undo"/>
 
 
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:id="@+id/swipe_button2"
+                android:layout_marginRight="16dp"
+
+
+                android:layout_centerVertical="true"
+android:layout_toLeftOf="@+id/swipe_button1"
+                android:background="@drawable/ic_action_rectangle_white"/>
 
     </RelativeLayout>
      <RelativeLayout

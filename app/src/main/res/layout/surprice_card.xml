@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
 
     android:background="@drawable/backgroundresize"
+    android:padding="12dp"
     >
 
 <RelativeLayout
@@ -12,7 +13,7 @@
     android:id="@+id/test_rel"
     android:layout_marginLeft="24dp"
     android:layout_marginRight="24dp"
-    android:layout_marginTop="8dp">
+    android:layout_marginTop="4dp">
     <TextView
         android:id="@+id/surprise"
         android:layout_width="match_parent"
@@ -31,7 +32,7 @@
         android:layout_below="@+id/surprise"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:text="@string/we_send_only_good_ones"
         android:textColor="@color/text_color_black"
         android:textSize="16dp"
@@ -44,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/test_rel"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/round_corner_product"
         android:padding="@dimen/margin_4dp">
 
@@ -72,8 +73,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/button"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="16dp"
         android:gravity="center_horizontal"
         android:text="@string/dismiss"
         android:textColor="@color/dismiss_text_color"

@@ -103,7 +103,7 @@ public class CardWithFlipper extends DataAdapter {
             viewHolder = (CardViewHolder) convertView.getTag();
         }
         //TODO: Algarthm to decide when to show the special card.
-      // if (position % 2 == 0) {
+       if (position  != 3 && position!=5) {
         viewHolder.aisleCard.setVisibility(View.VISIBLE);
         viewHolder.specialCard.setVisibility(View.GONE);
 
@@ -140,20 +140,27 @@ public class CardWithFlipper extends DataAdapter {
 
             }
         });
-//        } else {
-//           Log.i("profile", "profile start *************************************");
-//            viewHolder.aisleCard.setVisibility(View.GONE);
-//            viewHolder.specialCard.setVisibility(View.VISIBLE);
-//            if (position == 3 || position == 5) {
-//                viewHolder.specialCard.removeAllViews();
-//                viewHolder.specialCard.addView(weekSpecialCards.get(FRIENDS_CARD));
-//            } else {
-//                viewHolder.specialCard.removeAllViews();
-//                viewHolder.specialCard.addView(weekSpecialCards.get(BIRTH_DAY_CARD));
-//            }
-//            Log.i("profile", "profile end ######################################## ");
-//
-//        }
+        } else {
+           Log.i("profile", "profile start *************************************");
+            viewHolder.aisleCard.setVisibility(View.GONE);
+            viewHolder.specialCard.setVisibility(View.VISIBLE);
+            if (position == 3) {
+                viewHolder.specialCard.removeAllViews();
+                ViewGroup parentView =(ViewGroup)weekSpecialCards.get(FRIENDS_CARD).getParent();
+                if(parentView != null)
+                parentView.removeAllViews();
+
+                viewHolder.specialCard.addView(weekSpecialCards.get(FRIENDS_CARD));
+            } else {
+                viewHolder.specialCard.removeAllViews();
+                ViewGroup parentView =(ViewGroup)weekSpecialCards.get(BIRTH_DAY_CARD).getParent();
+                if(parentView != null)
+                parentView.removeAllViews();
+                viewHolder.specialCard.addView(weekSpecialCards.get(BIRTH_DAY_CARD));
+            }
+            Log.i("profile", "profile end ######################################## ");
+
+        }
 
         return convertView;
     }

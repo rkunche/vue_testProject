@@ -3,7 +3,9 @@ package com.test.vue.vuetest.presenters;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,12 +29,15 @@ import com.test.vue.vuetest.personal.user.SaveUser;
 import java.util.ArrayList;
 
 
+
 public class CardFragment extends Fragment {
 
     private ListView mCardList;
     private CardWithFlipper mCard;
     public static boolean sIsListScrolling;
     public static boolean sIsTouchScrollingCall;
+
+  //  private PullToRefreshLayout mPullToRefreshLayoutTemp;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -113,6 +118,74 @@ public class CardFragment extends Fragment {
         return view;
     }
 
+/*    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ViewGroup viewGroup = (ViewGroup) view;
+
+        // We need to create a PullToRefreshLayout manually
+        mPullToRefreshLayoutTemp = new PullToRefreshLayout(
+                viewGroup.getContext());
+
+        Log.v("CardFragment", "onViewCreated is created");
+
+        // We can now setup the PullToRefreshLayout
+        ActionBarPullToRefresh.from(getActivity())
+
+                // We need to insert the PullToRefreshLayout into the Fragment's
+                // ViewGroup
+                .insertLayoutInto(viewGroup)
+
+                        // We need to mark the ListView and it's Empty View as pullable
+                        // This is because they are not dirent children of the ViewGroup
+                .theseChildrenArePullable(android.R.id.empty,
+                        android.R.id.empty)
+
+                        // We can now complete the setup as desired
+                .listener(new RefListener()).setup(mPullToRefreshLayoutTemp);
+        //if (!callbacksCompleted)
+        //    mPullToRefreshLayoutTemp.setRefreshing(true);
+
+    }*/
+
+ /*   private class RefListener implements OnRefreshListener {
+
+        @Override
+        public void onRefreshStarted(View view) {
+            new AsyncTask<Void, Void, Void>() {
+
+                @Override
+                protected Void doInBackground(Void... params) {
+                    try {
+                        Thread.sleep(5000); // 5 seconds
+
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Void result) {
+                    super.onPostExecute(result);
+
+
+                    // Notify PullToRefreshLayout that the refresh has finished
+                    mPullToRefreshLayoutTemp.setRefreshComplete();
+
+                    // if you set the "setListShown(false)" then you have to
+                    //uncomment the below code segment
+
+//                        if (getView() != null) {
+//                            // Show the list again
+//                            setListShown(true);
+//                        }
+                }
+            }.execute();
+        }
+
+    }*/
     /**
      * test code
      */
