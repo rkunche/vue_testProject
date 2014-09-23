@@ -363,7 +363,10 @@ public class AisleContentBrowser extends ViewFlipper {
     }
     
     public int getImageListCount() {
-        return clientAisle.getProductList().size();
+        if(clientAisle.getProductList() != null && clientAisle != null) {
+            return clientAisle.getProductList().size();
+        }
+        return  1;
     }
 
 }
