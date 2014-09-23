@@ -54,20 +54,21 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
     private CardFragment mLandingAislesFrag;
     private GoogleApiClient mGoogleApiClient;
 
-    private boolean mMessageCenterLoaded = false;
+
     private Fragment mMessageCenterFragment;
     private ImageView action_icon;
     private RelativeLayout trending_list;
     private ImageView settingId;
 
     private TextView actionBarTextView;
-    private boolean mTrendingFragLoaded = false;
+
     private Fragment mTrendingFragment;
     private Fragment mSettingsFragment;
     private Fragment mTransparentFragment;
     private RelativeLayout settingLayId;
     private WeakReference<Fragment> trendingFragmentWeakReference;
     private WeakReference<Fragment> settingsFragmentWeakReference;
+    private WeakReference<Fragment> messageFragmentWeakReference;
 
     private boolean isFragmentOpened;
 
@@ -75,7 +76,6 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        Logger.console("onCreate of LandingPage invoked", "VueDebug");
         setContentView(R.layout.landing_page);
         VueContentModelImpl.getContentModel();
         setActionBar();
@@ -171,7 +171,7 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
             mTrendingFragment = null;
             transaction.commit();
             isFragmentOpened = false;
-            action_icon.setImageResource(R.drawable.ic_action_up);
+            action_icon.setImageResource(R.drawable.ic_action_dropdown);
         }
     }
 
@@ -189,7 +189,7 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         transaction.add(R.id.trending_frag, mTrendingFragment);
         transaction.commit();
-        action_icon.setImageResource(R.drawable.ic_action_dropdown);
+        action_icon.setImageResource(R.drawable.ic_action_up);
     }
 
 
@@ -232,6 +232,7 @@ public class LandingPageActivity extends FragmentActivity implements Trending_Me
         transactionTransparent.commit();
 
         mMessageCenterFragment = new PopupFragment();
+        messageFragmentWeakReference = new WeakReference<Fragment>(mMessageCenterFragment);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager
                 .beginTransaction();
