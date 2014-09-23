@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#c1ced9"
+    android:layout_height="wrap_content"
+    android:background="@drawable/invite_card"
     android:orientation="vertical">
     <TextView
         android:layout_width="match_parent"
@@ -42,6 +42,7 @@
                 android:textColor="@color/black"
                 android:layout_below="@+id/friend_1"
                 android:gravity="center"
+                android:layout_centerHorizontal="true"
              />
         </RelativeLayout>
 
@@ -65,7 +66,8 @@
                 android:textColor="@color/black"
                 android:layout_below="@+id/friend_2"
 
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_centerHorizontal="true"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -85,10 +87,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Katy Perry"
-                android:gravity="center"
+                android:gravity="center_vertical"
                 android:textColor="@color/black"
                 android:layout_below="@+id/friend_3"
-               />
+                android:layout_centerHorizontal="true" />
         </RelativeLayout>
 
    <!--     <RelativeLayout
@@ -122,7 +124,7 @@
             <TextView
                 android:layout_width="58dp"
                 android:layout_height="58dp"
-                 android:background="@drawable/round_corners"
+                 android:background="@drawable/round_corners_blue"
                 android:id="@+id/friend_5"
                 android:layout_alignParentTop="true"
                 android:text="+"
@@ -137,6 +139,8 @@
                 android:text="more friends"
                 android:textColor="@color/black"
                 android:layout_below="@+id/friend_5"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
             />
         </RelativeLayout>
     </LinearLayout>
@@ -149,5 +153,5 @@ android:layout_marginTop="8dp"
         android:textSize="16sp"
         android:textColor="@color/black"
         android:gravity="center"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="12dp"/>
 </LinearLayout>
