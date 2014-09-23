@@ -6,7 +6,9 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
@@ -47,6 +49,7 @@ public class PopupFragment extends Fragment {
     private ArrayList<NotificationAisle> mNotificationList;
     private SwipeDismissList mSwipeList;
     SwipeListView mListView;
+
    // EditText mFeedbackEditText;
     //TextView mFeedbackHintTview;
     boolean animStarted = false;
@@ -80,11 +83,9 @@ public class PopupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.popup_list_layout, container, false);
-        RelativeLayout relBg = (RelativeLayout) v
-                .findViewById(R.id.overflow_listlayout_layout);
-        relBg.getBackground().setAlpha(85);
-        
+
         View header_messages_list = inflater.inflate(R.layout.popup_header, null);
+
         
        // mFeedbackEditText = (EditText) header_messages_list.findViewById(R.id.message_id);
       //  mFeedbackHintTview = (TextView) header_messages_list.findViewById(R.id.text_id);
@@ -96,7 +97,9 @@ public class PopupFragment extends Fragment {
         mListView = (SwipeListView) v.findViewById(R.id.list_id);
         LayoutParams params = new LayoutParams(
                 getLayoutWidth(), LayoutParams.MATCH_PARENT);
+
         params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+
         listLay.setLayoutParams(params);
         mListView.addHeaderView(header_messages_list);
         mNotificationAdapter = new NotificationListAdapter(mContext,
@@ -378,6 +381,7 @@ public class PopupFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+
     }
     
     @Override
@@ -452,9 +456,10 @@ public class PopupFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
         
     }
-    
+
     public void moveDownAnim() {
         
         Animation animation = AnimationUtils.loadAnimation(getActivity(),
@@ -489,4 +494,6 @@ public class PopupFragment extends Fragment {
       //  mFeedbackHintTview.startAnimation(animation);
      //   mFeedbackHintTview.setVisibility(View.VISIBLE);
     }
+
+
 }
