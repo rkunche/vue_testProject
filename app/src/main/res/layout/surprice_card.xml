@@ -78,12 +78,12 @@
         android:text="@string/dismiss"
         android:textColor="@color/dismiss_text_color"
         android:textSize="16dp" android:id="@+id/dismiss_text"/>
-    <ImageView
+    <!--<ImageView
         android:layout_below="@+id/dismiss_text"
         android:id="@+id/dismiss_bottom"
         android:layout_width="match_parent"
         android:layout_height="8dp"
         android:visibility="visible"
-        android:background="@drawable/gap"/>
+        android:background="@drawable/gap"/>-->
     </RelativeLayout>
 

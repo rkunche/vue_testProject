@@ -36,7 +36,7 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_marginLeft">-8dp</item>
         <item name="android:layout_marginRight">-8dp</item>
-        <item name="android:background">@drawable/big_card</item>
+        <item name="android:background">@drawable/greenbg</item>
     </style>
     <style name="prev_next">
         <item name="android:layout_width">@dimen/vue_icon_dimensions</item>
