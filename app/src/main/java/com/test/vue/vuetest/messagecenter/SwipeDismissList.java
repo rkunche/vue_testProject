@@ -276,7 +276,7 @@ public final class SwipeDismissList implements View.OnTouchListener {
         mUndoText = (TextView) v.findViewById(R.id.text);
         
         mUndoPopup = new PopupWindow(v);
-        mUndoPopup.setAnimationStyle(R.style.fade_animation);
+       // mUndoPopup.setAnimationStyle(R.style.fade_animation);
         // Get scren width in dp and set width respectively
         int xdensity = (int) (mListView.getContext().getResources()
                 .getDisplayMetrics().widthPixels / mDensity);

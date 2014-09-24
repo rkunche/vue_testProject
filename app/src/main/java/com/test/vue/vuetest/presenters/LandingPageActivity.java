@@ -124,7 +124,7 @@ public class LandingPageActivity extends FragmentActivity implements TrendingMen
 
         trending_list = (RelativeLayout) actionBar.getCustomView().findViewById(R.id.feed_touch_layout);
         action_icon = (ImageView) actionBar.getCustomView().findViewById(R.id.myfeed_action_icon);
-        action_icon.setImageResource(R.drawable.ic_action_up);
+        action_icon.setImageResource(R.drawable.ic_action_dropdown);
         settingId = (ImageView) actionBar.getCustomView().findViewById(R.id.setting_id);
 
         actionBarTextView = (TextView) actionBar.getCustomView().findViewById(R.id.my_feed_text_id);
@@ -165,8 +165,8 @@ public class LandingPageActivity extends FragmentActivity implements TrendingMen
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction transaction = fragmentManager
                     .beginTransaction();
-            transaction.setCustomAnimations(R.animator.slide_in_top,
-                    R.animator.slide_out_bottom);
+            transaction.setCustomAnimations(R.anim.slide_in_top,
+                    R.anim.slide_out_bottom);
             transaction
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             transaction.remove(mTrendingFragment);
@@ -185,8 +185,8 @@ public class LandingPageActivity extends FragmentActivity implements TrendingMen
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager
                 .beginTransaction();
-        transaction.setCustomAnimations(R.animator.slide_in_top,
-                R.animator.slide_out_bottom);
+        transaction.setCustomAnimations(R.anim.slide_in_top,
+                R.anim.slide_out_bottom);
         transaction
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         transaction.add(R.id.trending_frag, mTrendingFragment);
@@ -209,8 +209,8 @@ public class LandingPageActivity extends FragmentActivity implements TrendingMen
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction transaction = fragmentManager
                     .beginTransaction();
-            transaction.setCustomAnimations(R.animator.open_msg_center,
-                    R.animator.close_msg_center);
+            transaction.setCustomAnimations(R.anim.open_msg_center,
+                    R.anim.close_msg_center);
             transaction
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             transaction.remove(mMessageCenterFragment);
@@ -238,8 +238,8 @@ public class LandingPageActivity extends FragmentActivity implements TrendingMen
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager
                 .beginTransaction();
-        transaction.setCustomAnimations(R.animator.open_msg_center,
-                R.animator.close_msg_center);
+        transaction.setCustomAnimations(R.anim.open_msg_center,
+                R.anim.close_msg_center);
         transaction
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 
@@ -267,8 +267,8 @@ public class LandingPageActivity extends FragmentActivity implements TrendingMen
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager
                 .beginTransaction();
-        transaction.setCustomAnimations(R.animator.slide_in_right,
-                R.animator.slide_out_left);
+        transaction.setCustomAnimations(R.anim.slide_in_right,
+                R.anim.slide_out_left);
         transaction
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         transaction.add(R.id.trending_frag, mSettingsFragment);
@@ -284,8 +284,8 @@ public class LandingPageActivity extends FragmentActivity implements TrendingMen
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction transaction = fragmentManager
                     .beginTransaction();
-            transaction.setCustomAnimations(R.animator.slide_in_right,
-                    R.animator.slide_out_left);
+            transaction.setCustomAnimations(R.anim.slide_in_right,
+                    R.anim.slide_out_left);
             transaction
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             transaction.remove(mSettingsFragment);

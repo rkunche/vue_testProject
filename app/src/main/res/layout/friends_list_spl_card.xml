@@ -29,8 +29,7 @@
             android:layout_marginLeft="4dp"
           >
             <com.test.vue.vuetest.uihelper.CircularImageView
-                android:layout_width="58dp"
-                android:layout_height="58dp"
+                style="@style/profile_pic_size"
 
                 android:id="@+id/friend_1"
                 android:layout_alignParentTop="true"
@@ -53,8 +52,7 @@
             android:layout_weight="1"
             android:layout_marginLeft="4dp">
             <com.test.vue.vuetest.uihelper.CircularImageView
-                android:layout_width="58dp"
-                android:layout_height="58dp"
+                style="@style/profile_pic_size"
 
                 android:id="@+id/friend_2"
                 android:layout_alignParentTop="true"
@@ -77,8 +75,7 @@
             android:layout_weight="1"
             android:layout_marginLeft="4dp">
             <com.test.vue.vuetest.uihelper.CircularImageView
-                android:layout_width="58dp"
-                android:layout_height="58dp"
+                style="@style/profile_pic_size"
 
                 android:id="@+id/friend_3"
                 android:layout_alignParentTop="true"

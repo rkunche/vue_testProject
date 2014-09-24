@@ -460,40 +460,8 @@ public class PopupFragment extends Fragment {
         
     }
 
-    public void moveDownAnim() {
-        
-        Animation animation = AnimationUtils.loadAnimation(getActivity(),
-                R.anim.translate);
-       // mFeedbackHintTview.startAnimation(animation);
-        animation.setAnimationListener(new AnimationListener() {
-            
-            @Override
-            public void onAnimationStart(Animation animation) {
-                
-            }
-            
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-                
-            }
-            
-            @Override
-            public void onAnimationEnd(Animation animation) {
-          //      mFeedbackHintTview.setVisibility(View.GONE);
-              //  mFeedbackEditText.setText("");
-                animStarted = false;
-                
-            }
-        });
-    }
-    
-    public void moveUpAnim() {
-        
-        Animation animation = AnimationUtils.loadAnimation(getActivity(),
-                R.anim.translateback);
-      //  mFeedbackHintTview.startAnimation(animation);
-     //   mFeedbackHintTview.setVisibility(View.VISIBLE);
-    }
+
+
 
 
 }

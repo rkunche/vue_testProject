@@ -10,6 +10,7 @@
     <integer name="medium_text_size">20</integer>
     <integer name="large_text_size">22</integer>
     <integer name="friend_text_size">14</integer>
+    <integer name="fragment_anim_duration">500</integer>
 
 
 </resources>

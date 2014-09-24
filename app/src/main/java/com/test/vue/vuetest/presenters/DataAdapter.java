@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class DataAdapter extends BaseAdapter implements DataContainer {
 
- VueContentModelImpl mVueContentModel;
-    ListDataContainer listListDataContainer;
+    private VueContentModelImpl mVueContentModel;
+    protected ListDataContainer listListDataContainer;
 
 
     DataAdapter(Context context) {
@@ -47,6 +47,7 @@ public class DataAdapter extends BaseAdapter implements DataContainer {
         notifyDataSetChanged();
 
     }
+
     @Override
     public void clearAllData() {
         notifyDataSetChanged();
@@ -55,7 +56,7 @@ public class DataAdapter extends BaseAdapter implements DataContainer {
 
     @Override
     public void addMoreData(ArrayList<ClientAisle> aisleList) {
-        if(listListDataContainer.getWindowList().size() == 1){
+        if (listListDataContainer.getWindowList().size() == 1) {
             listListDataContainer.getWindowList().remove(0);
         }
         listListDataContainer.getWindowList().addAll(aisleList);

@@ -14,11 +14,11 @@ import java.util.ArrayList;
  */
 public class ProductAdapterPool {
     String TAG = "ProductAdapterPool";
-    static ProductAdapterPool sProductAdapterPool;
-    final static int PRODUCT_LIST_INITIAL_SIZE = 3;
-    final static int PRODUCT_LIST_EXPAND = 3;
+    public static ProductAdapterPool sProductAdapterPool;
+    private final int PRODUCT_LIST_INITIAL_SIZE = 3;
+    private final int PRODUCT_LIST_EXPAND = 3;
     private LayoutInflater mInflater;
-    ArrayList<View> productLayoutList = new ArrayList<View>();
+    private ArrayList<View> productLayoutList = new ArrayList<View>();
 
     public ProductAdapterPool(Context context) {
         mInflater = (LayoutInflater) context

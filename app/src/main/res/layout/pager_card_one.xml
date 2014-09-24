@@ -3,7 +3,7 @@
     android:id="@+id/product_card"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/card_no_t_border">
+    android:background="@drawable/card_no_border">
 
     <com.test.vue.vuetest.presenters.ProductCustomImageVeiw
         android:id="@+id/product_image"
@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/card_source_name_area_height">
 
-        <TextView
+        <com.test.vue.vuetest.presenters.CustomFontText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -66,14 +66,14 @@
             android:layout_alignParentBottom="true"
             android:background="@color/light_blue">
 
-            <TextView
+            <com.test.vue.vuetest.presenters.CustomFontText
                 android:id="@+id/product_suggest_text_id"
                 style="@style/product_card_bottom_text"
                 android:gravity="bottom"
                 android:text="@string/suggested_by"
                 android:textColor="@android:color/black" />
             <!--66 = 64+2, 64 is profile pic width-->
-            <TextView
+            <com.test.vue.vuetest.presenters.CustomFontText
                 android:id="@+id/product_card_suggester_name"
                 style="@style/product_card_bottom_text"
                 android:layout_below="@+id/product_suggest_text_id"
@@ -120,8 +120,7 @@
 
     <com.test.vue.vuetest.uihelper.CircularImageView
         android:id="@+id/product_suggester_image_id"
-        android:layout_width="@dimen/product_card_top_layout_profile_pic_dimensions"
-        android:layout_height="@dimen/product_card_top_layout_profile_pic_dimensions"
+        style="@style/profile_pic_size"
         android:layout_alignParentLeft="true"
         android:layout_alignTop="@+id/product_bottom_content"
         android:layout_marginLeft="@dimen/margin_2dp"

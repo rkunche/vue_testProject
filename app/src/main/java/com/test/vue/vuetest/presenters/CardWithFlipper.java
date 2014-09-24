@@ -25,17 +25,22 @@ import java.util.WeakHashMap;
 
 
 public class CardWithFlipper extends DataAdapter {
-    private Context mContext;
-    private LayoutInflater mInflater;
-    private int mCardHeight = 1000;
-    SpecialCardCreator creator;
+
     private static final String BIRTH_DAY_CARD = "birth_day_card";
     private static final String FRIENDS_CARD = "friends_card";
-    Typeface typeface;
-    View birthDaySpecial;
-    WeakHashMap<String, View> weekSpecialCards;
-    Bitmap suggesterIcon;
-    BitmapLruCache bitmapLruCache;
+
+    private Context mContext;
+    private LayoutInflater mInflater;
+    private int mCardHeight;
+    private SpecialCardCreator creator;
+    private Typeface typeface;
+    private View birthDaySpecial;
+
+    //to save the special cards and avoid the inflation when list scrolling
+    private WeakHashMap<String, View> weekSpecialCards;
+
+    private Bitmap suggesterIcon;
+    private BitmapLruCache bitmapLruCache;
 
     CardWithFlipper(Context context) {
         super(context);
@@ -49,18 +54,18 @@ public class CardWithFlipper extends DataAdapter {
         birthDaySpecial = mInflater.inflate(R.layout.surprice_card, null);
         WeakReference<View> bSpecialCardRef = new WeakReference<View>(birthDaySpecial);
         weekSpecialCards.put(BIRTH_DAY_CARD, birthDaySpecial);
-     //   View friendsList = creator.createFriendsListCard();
+        //   View friendsList = creator.createFriendsListCard();
         View friendsList = mInflater.inflate(R.layout.friends_list_spl_card, null);
 
-        CircularImageView img1= (CircularImageView) friendsList.findViewById(R.id.friend_1);
+        CircularImageView img1 = (CircularImageView) friendsList.findViewById(R.id.friend_1);
         img1.setImageResource(R.drawable.vuetest);
 
-        CircularImageView img2= (CircularImageView) friendsList.findViewById(R.id.friend_2);
+        CircularImageView img2 = (CircularImageView) friendsList.findViewById(R.id.friend_2);
         img2.setImageResource(R.drawable.vuetest);
 
-        CircularImageView img3= (CircularImageView) friendsList.findViewById(R.id.friend_3);
+        CircularImageView img3 = (CircularImageView) friendsList.findViewById(R.id.friend_3);
         img3.setImageResource(R.drawable.vuetest);
-          typeface = Typeface.createFromAsset(mContext.getAssets(), "Roboto-Regular.ttf");
+        //typeface = Typeface.createFromAsset(mContext.getAssets(), "Roboto-Regular.ttf");
 
 
         WeakReference<View> friendsListRef = new WeakReference<View>(friendsList);
@@ -76,7 +81,7 @@ public class CardWithFlipper extends DataAdapter {
             viewHolder = new CardViewHolder();
             convertView = mInflater.inflate(R.layout.card_flipper, null);
             viewHolder.aisleContentBrowser = (AisleContentBrowser) convertView
-                    .findViewById(R.id.pager);
+                    .findViewById(R.id.horizontal_flipper);
             viewHolder.productSuggesterPic = (ImageView) convertView.findViewById(R.id.product_suggester_image_id);
             viewHolder.suggesterLayout = (RelativeLayout) convertView.findViewById(R.id.product_suggester_lay_id);
             viewHolder.commentsShowId = (RelativeLayout) convertView.findViewById(R.id.product_comments_show_id);
@@ -103,63 +108,59 @@ public class CardWithFlipper extends DataAdapter {
             viewHolder = (CardViewHolder) convertView.getTag();
         }
         //TODO: Algarthm to decide when to show the special card.
-       if (position  != 3 && position!=5) {
-        viewHolder.aisleCard.setVisibility(View.VISIBLE);
-        viewHolder.specialCard.setVisibility(View.GONE);
+        if (position != 3 && position != 5) {
+            viewHolder.aisleCard.setVisibility(View.VISIBLE);
+            viewHolder.specialCard.setVisibility(View.GONE);
 
+            viewHolder.productSuggesterPic.setImageBitmap(suggesterIcon);
 
-        viewHolder.productSuggesterPic.setImageBitmap(suggesterIcon);
-
-         if(listListDataContainer.getWindowList().size() != 1) {
-             viewHolder.aisleCardUserNameId.setText(listListDataContainer.getWindowList().get(position).getName().trim());
-             viewHolder.cardUserHeadingId.setText(listListDataContainer.getWindowList().get(position).getLookingFor().trim());
-             loadBitMap(viewHolder.productImage, listListDataContainer.getWindowList().get(position).getProductList().get(0).getProductImages().get(0).getExternalURL(), viewHolder.aisleContentBrowser, listListDataContainer.getWindowList().get(position));
-         }
-
-        viewHolder.commentsShowId.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Toast.makeText(mContext, "click received", Toast.LENGTH_SHORT).show();
+            if (listListDataContainer.getWindowList().size() != 1) {
+                viewHolder.aisleCardUserNameId.setText(listListDataContainer.getWindowList().get(position).getName().trim());
+                viewHolder.cardUserHeadingId.setText(listListDataContainer.getWindowList().get(position).getLookingFor().trim());
+                loadBitMap(viewHolder.productImage, listListDataContainer.getWindowList().get(position).getProductList().get(0).getProductImages().get(0).getExternalURL(), viewHolder.aisleContentBrowser, listListDataContainer.getWindowList().get(position));
             }
-        });
-        viewHolder.productCreateAisle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Toast.makeText(mContext, "click received", Toast.LENGTH_SHORT).show();
-            }
-        });
-        viewHolder.productMenuId.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
-        viewHolder.aisleSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            viewHolder.commentsShowId.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Toast.makeText(mContext, "click received", Toast.LENGTH_SHORT).show();
+                }
+            });
+            viewHolder.productCreateAisle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Toast.makeText(mContext, "click received", Toast.LENGTH_SHORT).show();
+                }
+            });
+            viewHolder.productMenuId.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-            }
-        });
+                }
+            });
+            viewHolder.aisleSettings.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
         } else {
-
             viewHolder.aisleCard.setVisibility(View.GONE);
             viewHolder.specialCard.setVisibility(View.VISIBLE);
             if (position == 3) {
                 viewHolder.specialCard.removeAllViews();
-                ViewGroup parentView =(ViewGroup)weekSpecialCards.get(FRIENDS_CARD).getParent();
-                if(parentView != null)
-                parentView.removeAllViews();
+                ViewGroup parentView = (ViewGroup) weekSpecialCards.get(FRIENDS_CARD).getParent();
+                if (parentView != null)
+                    parentView.removeAllViews();
 
                 viewHolder.specialCard.addView(weekSpecialCards.get(FRIENDS_CARD));
             } else {
                 viewHolder.specialCard.removeAllViews();
-                ViewGroup parentView =(ViewGroup)weekSpecialCards.get(BIRTH_DAY_CARD).getParent();
-                if(parentView != null)
-                parentView.removeAllViews();
+                ViewGroup parentView = (ViewGroup) weekSpecialCards.get(BIRTH_DAY_CARD).getParent();
+                if (parentView != null)
+                    parentView.removeAllViews();
                 viewHolder.specialCard.addView(weekSpecialCards.get(BIRTH_DAY_CARD));
             }
-
-
         }
 
         return convertView;

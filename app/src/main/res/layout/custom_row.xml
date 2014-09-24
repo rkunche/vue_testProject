@@ -53,8 +53,7 @@ android:layout_toLeftOf="@+id/swipe_button1"
 
          <com.test.vue.vuetest.uihelper.CircularImageView
              android:id="@+id/user_image"
-             android:layout_width="@dimen/product_card_top_layout_profile_pic_dimensions"
-             android:layout_height="@dimen/product_card_top_layout_profile_pic_dimensions"
+             style="@style/profile_pic_size"
 
              android:layout_centerVertical="true"/>
 

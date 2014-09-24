@@ -115,15 +115,13 @@ public class BitmapLoaderUtils {
 	// decodes image and scales it to reduce memory consumption
 	public Bitmap decodeFile(File f, int bestHeight, int bestWidth,
 			String source) {
-        Log.i("BitmapLoading", "BitmapLoading... deCodeFile");
+
 
 		try {
 			// decode image size
 			BitmapFactory.Options o = new BitmapFactory.Options();
 			o.inJustDecodeBounds = true;
-			Log.i("imageHeight", "imageHeight: " + o.outHeight);
-			Log.i("imageHeight", "imageHeight: " + o.outWidth);
-			Log.i("imageHeight", "imageUri: " + f.getAbsolutePath());
+
 
 			FileInputStream stream1 = new FileInputStream(f);
 			BitmapFactory.decodeStream(stream1, null, o);
@@ -132,9 +130,11 @@ public class BitmapLoaderUtils {
 			// final int REQUIRED_SIZE = mScreenWidth/2;
 			int height = o.outHeight;
 			int width = o.outWidth;
-			Log.i("window", "clickedwindow ID bitmap Height4 bestHeight: "
-					+ bestHeight);
-			Log.i("window", "clickedwindow ID original height: " + height);
+            Log.i("imageHeight", "image  original height: " + o.outHeight);
+            Log.i("imageHeight", "image  original with: " + o.outWidth);
+            Log.i("imageHeight", "image  bestHeight  : " + bestHeight);
+            Log.i("imageHeight", "image  bestWidth  : " + bestWidth);
+            Log.i("imageHeight", "imageUri: " + f.getAbsolutePath());
 
 			int reqWidth = bestWidth;
 			int scale = 1;
@@ -192,7 +192,8 @@ public class BitmapLoaderUtils {
 					bitmap = getModifiedBitmap(bitmap, reqWidth, height);
 				}
 			}
-
+            Log.i("imageHeight", "image  after resize Height  : " + bitmap.getHeight());
+            Log.i("imageHeight", "image  after resize Width  : " + bitmap.getWidth());
 			return bitmap;
 		} catch (FileNotFoundException e) {
 

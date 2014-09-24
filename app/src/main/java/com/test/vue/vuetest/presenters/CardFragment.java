@@ -29,15 +29,12 @@ import com.test.vue.vuetest.personal.user.SaveUser;
 import java.util.ArrayList;
 
 
-
 public class CardFragment extends Fragment {
 
     private ListView mCardList;
     private CardWithFlipper mCard;
     public static boolean sIsListScrolling;
     public static boolean sIsTouchScrollingCall;
-
-  //  private PullToRefreshLayout mPullToRefreshLayoutTemp;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -51,11 +48,6 @@ public class CardFragment extends Fragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
     }
@@ -65,11 +57,14 @@ public class CardFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.card_fragment_listview_holder, null);
         mCardList = (ListView) view.findViewById(R.id.card_list);
+
         //create adapter for card fragment.
         mCard = new CardWithFlipper(getActivity());
-        //add header view to the list.
+
+        //inflate header
         View cardHeaderView = inflater.inflate(
                 R.layout.card_fragment_listview_header, null);
+
         //add header view to the list.
         RelativeLayout facebook_id = (RelativeLayout) cardHeaderView.findViewById(R.id.facebook_id);
         RelativeLayout gPlus_LayoutId = (RelativeLayout) cardHeaderView.findViewById(R.id.g_plus_layout_id);
@@ -118,6 +113,10 @@ public class CardFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 /*    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -186,6 +185,7 @@ public class CardFragment extends Fragment {
         }
 
     }*/
+
     /**
      * test code
      */
