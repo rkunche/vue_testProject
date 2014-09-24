@@ -141,7 +141,7 @@ public class CardWithFlipper extends DataAdapter {
             }
         });
         } else {
-           Log.i("profile", "profile start *************************************");
+
             viewHolder.aisleCard.setVisibility(View.GONE);
             viewHolder.specialCard.setVisibility(View.VISIBLE);
             if (position == 3) {
@@ -158,7 +158,7 @@ public class CardWithFlipper extends DataAdapter {
                 parentView.removeAllViews();
                 viewHolder.specialCard.addView(weekSpecialCards.get(BIRTH_DAY_CARD));
             }
-            Log.i("profile", "profile end ######################################## ");
+
 
         }
 
