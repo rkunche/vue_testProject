@@ -29,7 +29,6 @@ import com.test.vue.vuetest.personal.user.SaveUser;
 import java.util.ArrayList;
 
 
-
 public class CardFragment extends Fragment {
 
     private ListView mCardList;
@@ -37,7 +36,7 @@ public class CardFragment extends Fragment {
     public static boolean sIsListScrolling;
     public static boolean sIsTouchScrollingCall;
 
-  //  private PullToRefreshLayout mPullToRefreshLayoutTemp;
+    //  private PullToRefreshLayout mPullToRefreshLayoutTemp;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -186,6 +185,7 @@ public class CardFragment extends Fragment {
         }
 
     }*/
+
     /**
      * test code
      */

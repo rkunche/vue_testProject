@@ -12,15 +12,19 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.DrawerLayout;
 import android.telephony.TelephonyManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -31,7 +35,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.test.vue.vuetest.R;
 import com.test.vue.vuetest.messagecenter.NotificationAisle;
 import com.test.vue.vuetest.messagecenter.NotificationManager;
-import com.test.vue.vuetest.messagecenter.PopupFragment;
 import com.test.vue.vuetest.models.VueContentModelImpl;
 import com.test.vue.vuetest.services.logging.Logger;
 import com.test.vue.vuetest.services.sidekick.PersistentWatcher;
@@ -51,10 +54,13 @@ import java.util.ArrayList;
  */
 
 
-public class LandingPageActivity extends FragmentActivity implements TrendingMenuFragment.OnFragmentInteractionListener ,ActivityFragmentCommunicator{
+public class LandingPageActivity extends FragmentActivity implements TrendingMenuFragment.OnFragmentInteractionListener, ActivityFragmentCommunicator {
 
     private CardFragment mLandingAislesFrag;
     private GoogleApiClient mGoogleApiClient;
+
+    private DrawerLayout mDrawerLayout;
+    private View messageCenterFrag, mSettingsFrag;
 
 
     private Fragment mMessageCenterFragment;
@@ -66,6 +72,8 @@ public class LandingPageActivity extends FragmentActivity implements TrendingMen
 
     private Fragment mTrendingFragment;
     private Fragment mSettingsFragment;
+
+    private boolean isSettings,isMessageCenterOpened;
     private Fragment mTransparentFragment;
     private RelativeLayout settingLayId;
     private WeakReference<Fragment> trendingFragmentWeakReference;
@@ -73,12 +81,18 @@ public class LandingPageActivity extends FragmentActivity implements TrendingMen
     private WeakReference<Fragment> messageFragmentWeakReference;
 
     private boolean isFragmentOpened;
-
+    private ActionBarDrawerToggle mDrawerToggle;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.landing_page);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.main_fragment);
+        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+
+        messageCenterFrag = findViewById(R.id.messages_frag);
+        mSettingsFrag = findViewById(R.id.settings_frag);
+
         VueContentModelImpl.getContentModel();
         setActionBar();
         Message message = new Message();
@@ -102,25 +116,63 @@ public class LandingPageActivity extends FragmentActivity implements TrendingMen
         message_center_touch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mSettingsFrag!=null)
+                    mDrawerLayout.closeDrawer(mSettingsFrag);
 
-                if (mMessageCenterFragment == null) {
-                    addMessageCenterFrag();
+
+                if (!mDrawerLayout.isDrawerVisible(messageCenterFrag)) {
+                    mDrawerLayout.openDrawer(messageCenterFrag);
+                    isMessageCenterOpened = true;
+                    action_icon.setVisibility(View.GONE);
+                    actionBarTextView.setText("Messages");
+                    //addMessageCenterFrag();
                 } else {
-                    removeMessageCenterFrag();
+                    mDrawerLayout.closeDrawer(messageCenterFrag);
+                    isMessageCenterOpened = false;
+                    actionBarTextView.setText("My Feed");
+                    action_icon.setVisibility(View.VISIBLE);
                 }
 
             }
         });
     }
 
-
+    private float lastTranslate = 0.0f;
     private void setActionBar() {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         LayoutInflater mInflater = LayoutInflater.from(this);
 
-        // View mCustomView = mInflater.inflate(R.layout.custom_actionbar,null);
         actionBar.setCustomView(R.layout.custom_actionbar);
+
+        final View frame = findViewById(R.id.content_frame);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_launcher, R.string.app_name, R.string.app_name)
+        {
+              @Override
+            public void onDrawerSlide(View drawerView, float slideOffset)
+            {
+
+                if(drawerView.getId()==R.id.settings_frag){
+                    float moveFactor = (mDrawerLayout.getWidth() * slideOffset/4);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+                    {
+                        frame.setTranslationX(moveFactor);
+                    }
+                    else
+                    {
+                        TranslateAnimation anim = new TranslateAnimation(lastTranslate, moveFactor, 0.0f, 0.0f);
+                        anim.setDuration(0);
+                        anim.setFillAfter(true);
+                        frame.startAnimation(anim);
+
+                        lastTranslate = moveFactor;
+                    }
+                }
+
+            }
+        };
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         trending_list = (RelativeLayout) actionBar.getCustomView().findViewById(R.id.feed_touch_layout);
         action_icon = (ImageView) actionBar.getCustomView().findViewById(R.id.myfeed_action_icon);
@@ -146,19 +198,25 @@ public class LandingPageActivity extends FragmentActivity implements TrendingMen
         settingLayId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (messageCenterFrag!=null)
+                    mDrawerLayout.closeDrawer(messageCenterFrag);
 
-                if (mSettingsFragment == null) {
-                    addSettingsFragment();
-
+                if (!isSettings) {
+                    mDrawerLayout.openDrawer(mSettingsFrag);
+                    //addSettingsFragment();
+                    isSettings = true;
+                    action_icon.setVisibility(View.GONE);
+                    actionBarTextView.setText("Settings");
                 } else {
-                    removeSettingsFragment();
+                    mDrawerLayout.closeDrawer(mSettingsFrag);
+                    isSettings = false;
+                    action_icon.setVisibility(View.VISIBLE);
+                    actionBarTextView.setText("My Feed");
                 }
             }
         });
 
-
     }
-
 
     private void removeTrendingFrag() {
         if (mTrendingFragment != null) {
@@ -179,6 +237,7 @@ public class LandingPageActivity extends FragmentActivity implements TrendingMen
 
     private void addTrendingFrag() {
         if (isFragmentOpened) return;
+
         isFragmentOpened = true;
         mTrendingFragment = new TrendingMenuFragment();
         trendingFragmentWeakReference = new WeakReference<Fragment>(mTrendingFragment);
@@ -195,61 +254,6 @@ public class LandingPageActivity extends FragmentActivity implements TrendingMen
     }
 
 
-    private void removeMessageCenterFrag() {
-        if (mMessageCenterFragment != null) {
-            if (mTransparentFragment != null) {
-                FragmentManager fragmentManagerTransparent = getFragmentManager();
-                FragmentTransaction transactionTransparent = fragmentManagerTransparent
-                        .beginTransaction();
-                transactionTransparent.remove(mTransparentFragment);
-                transactionTransparent.commit();
-            }
-
-
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction transaction = fragmentManager
-                    .beginTransaction();
-            transaction.setCustomAnimations(R.animator.open_msg_center,
-                    R.animator.close_msg_center);
-            transaction
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            transaction.remove(mMessageCenterFragment);
-            transaction.commit();
-            mMessageCenterFragment = null;
-            isFragmentOpened = false;
-            actionBarTextView.setText("My Feed");
-            action_icon.setVisibility(View.VISIBLE);
-        }
-
-    }
-
-    private void addMessageCenterFrag() {
-        if (isFragmentOpened) return;
-        isFragmentOpened = true;
-        mTransparentFragment = new TransperentFragment();
-        FragmentManager fragmentManagerTransparent = getFragmentManager();
-        FragmentTransaction transactionTransparent = fragmentManagerTransparent
-                .beginTransaction();
-        transactionTransparent.add(R.id.trending_frag, mTransparentFragment);
-        transactionTransparent.commit();
-
-        mMessageCenterFragment = new PopupFragment();
-        messageFragmentWeakReference = new WeakReference<Fragment>(mMessageCenterFragment);
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction transaction = fragmentManager
-                .beginTransaction();
-        transaction.setCustomAnimations(R.animator.open_msg_center,
-                R.animator.close_msg_center);
-        transaction
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-
-        transaction.add(R.id.trending_frag, mMessageCenterFragment);
-        transaction.commit();
-        action_icon.setVisibility(View.GONE);
-        actionBarTextView.setText("Messages");
-
-    }
-
     /**
      * returns all the user notifications if no notifications are found, then
      * return a dummy notification aisle in list will be return.
@@ -259,44 +263,6 @@ public class LandingPageActivity extends FragmentActivity implements TrendingMen
         return notificationManager.getUserNotifications();
     }
 
-    private void addSettingsFragment() {
-        if (isFragmentOpened) return;
-        isFragmentOpened = true;
-        mSettingsFragment = new SettingsFragment();
-        settingsFragmentWeakReference = new WeakReference<Fragment>(mSettingsFragment);
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction transaction = fragmentManager
-                .beginTransaction();
-        transaction.setCustomAnimations(R.animator.slide_in_right,
-                R.animator.slide_out_left);
-        transaction
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        transaction.add(R.id.trending_frag, mSettingsFragment);
-        transaction.commit();
-        settingId.setImageResource(R.drawable.ic_action_arrow);
-        action_icon.setVisibility(View.GONE);
-        actionBarTextView.setText("Settings");
-    }
-
-    private void removeSettingsFragment() {
-
-        if (mSettingsFragment != null) {
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction transaction = fragmentManager
-                    .beginTransaction();
-            transaction.setCustomAnimations(R.animator.slide_in_right,
-                    R.animator.slide_out_left);
-            transaction
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            transaction.remove(mSettingsFragment);
-            mSettingsFragment = null;
-            transaction.commit();
-            isFragmentOpened = false;
-            settingId.setImageResource(R.drawable.ic_action_settings);
-            action_icon.setVisibility(View.VISIBLE);
-            actionBarTextView.setText("My Feed");
-        }
-    }
 
     @Override
     public void onResume() {
@@ -334,28 +300,10 @@ public class LandingPageActivity extends FragmentActivity implements TrendingMen
 
     }
 
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (isFragmentOpened) {
-                if (mSettingsFragment != null) {
-                    removeSettingsFragment();
-                } else if (mTrendingFragment != null) {
-                    removeTrendingFrag();
-                } else if (mMessageCenterFragment != null) {
-                    removeMessageCenterFrag();
-                }
-                return true;
-            }
-
-        }
-        super.onBackPressed();
-        return false;
-    }
 
     @Override
     public void onDoneButtonClickFromRatingScreen() {
-        removeMessageCenterFrag();
+
     }
 
     public static class LocationErrorFragment extends DialogFragment {
@@ -403,5 +351,4 @@ public class LandingPageActivity extends FragmentActivity implements TrendingMen
         TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         VueConstants.deviceId = telephonyManager.getDeviceId();
     }
-
 }
