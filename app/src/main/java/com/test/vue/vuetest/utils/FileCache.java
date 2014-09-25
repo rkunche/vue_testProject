@@ -31,7 +31,6 @@ public class FileCache {
     }
 
     public File getFile(String url) {
-        Log.i("BitmapLoading", "BitmapLoading... getFile");
         int hashCode = url.hashCode();
         String filename = String.valueOf(hashCode);
         File f = new File(cacheDir, filename + ".jpg");

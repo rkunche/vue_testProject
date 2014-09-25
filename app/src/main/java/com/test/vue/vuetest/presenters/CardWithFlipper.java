@@ -1,16 +1,27 @@
 package com.test.vue.vuetest.presenters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.Adapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.test.vue.vuetest.AnchoredContext;
 import com.test.vue.vuetest.R;
@@ -19,6 +30,7 @@ import com.test.vue.vuetest.models.ImageLoaderTask;
 import com.test.vue.vuetest.uihelper.CircularImageView;
 import com.test.vue.vuetest.utils.BitmapLruCache;
 import com.test.vue.vuetest.utils.Utils;
+import com.test.vue.vuetest.utils.logs.Logging;
 
 import java.lang.ref.WeakReference;
 import java.util.WeakHashMap;
@@ -35,6 +47,8 @@ public class CardWithFlipper extends DataAdapter {
     private SpecialCardCreator creator;
     private Typeface typeface;
     private View birthDaySpecial;
+    private final String TAG = "CardWithFlipper";
+    private boolean classLevelLogsEnabled = true;
 
     //to save the special cards and avoid the inflation when list scrolling
     private WeakHashMap<String, View> weekSpecialCards;
@@ -44,6 +58,7 @@ public class CardWithFlipper extends DataAdapter {
 
     CardWithFlipper(Context context) {
         super(context);
+        Logging.i(TAG, "Constructor Starts AT" + System.currentTimeMillis(), false, classLevelLogsEnabled);
         mContext = context;
         mCardHeight = Utils.getMaxCardHeight(context);
         weekSpecialCards = new WeakHashMap<String, View>();
@@ -72,6 +87,7 @@ public class CardWithFlipper extends DataAdapter {
         weekSpecialCards.put(FRIENDS_CARD, friendsList);
         suggesterIcon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.vuetest);
 
+        Logging.i(TAG, "Constructor Ends AT "+System.currentTimeMillis(), false,classLevelLogsEnabled);
     }
 
     @Override
@@ -139,7 +155,7 @@ public class CardWithFlipper extends DataAdapter {
             viewHolder.productMenuId.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    showPopup(view);
                 }
             });
             viewHolder.aisleSettings.setOnClickListener(new View.OnClickListener() {
@@ -206,6 +222,56 @@ public class CardWithFlipper extends DataAdapter {
             ImageLoaderTask imageLoaderTask = new ImageLoaderTask(imageView, url);
             ((ProductCustomImageVeiw) imageView).setWorkerTaskObject(imageLoaderTask);
             imageLoaderTask.execute();
+        }
+    }
+    public void showPopup(View anchorView) {
+
+        View popupView = mInflater.inflate(R.layout.popup_layout, null);
+
+        PopupWindow popupWindow = new PopupWindow(popupView,
+                Utils.getPixel(mContext,200), AbsListView.LayoutParams.WRAP_CONTENT);
+
+        // Example: If you have a TextView inside `popup_layout.xml`
+        ListView list = (ListView) popupView.findViewById(R.id.popup_list);
+        list.setAdapter(new PopupListAdapter());
+        // If the PopupWindow should be focusable
+        popupWindow.setFocusable(true);
+
+        // If you need the PopupWindow to dismiss when when touched outside
+        popupWindow.setBackgroundDrawable(new ColorDrawable());
+
+        int location[] = new int[2];
+
+        // Get the View's(the one that was clicked in the Fragment) location
+        anchorView.getLocationOnScreen(location);
+
+        // Using location, the PopupWindow will be displayed right under anchorView
+        popupWindow.showAtLocation(anchorView, Gravity.NO_GRAVITY,
+                location[0], location[1] + anchorView.getHeight());
+
+    }
+    private class PopupListAdapter extends BaseAdapter {
+        @Override
+        public int getCount() {
+            return 8;
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            view = mInflater.inflate(R.layout.popup_item, null);
+            TextView item = (TextView)view.findViewById(R.id.popup_item);
+            item.setText("Product");
+            return view;
         }
     }
 }

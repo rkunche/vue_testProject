@@ -36,6 +36,7 @@ import com.test.vue.vuetest.models.VueContentModelImpl;
 import com.test.vue.vuetest.services.logging.Logger;
 import com.test.vue.vuetest.services.sidekick.PersistentWatcher;
 import com.test.vue.vuetest.utils.VueConstants;
+import com.test.vue.vuetest.utils.logs.Logging;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -52,7 +53,8 @@ import java.util.ArrayList;
 
 
 public class LandingPageActivity extends FragmentActivity implements TrendingMenuFragment.OnFragmentInteractionListener ,ActivityFragmentCommunicator{
-
+    private String TAG = "LandingPageActivity";
+    private boolean classLevelLogEnabled = true;
     private CardFragment mLandingAislesFrag;
     private GoogleApiClient mGoogleApiClient;
 
@@ -78,6 +80,7 @@ public class LandingPageActivity extends FragmentActivity implements TrendingMen
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        Logging.i(TAG,"LandingPage Starts At: "+System.currentTimeMillis(),false,classLevelLogEnabled);
         setContentView(R.layout.landing_page);
         VueContentModelImpl.getContentModel();
         setActionBar();
@@ -301,25 +304,25 @@ public class LandingPageActivity extends FragmentActivity implements TrendingMen
     @Override
     public void onResume() {
         super.onResume();
-        Logger.console("VueDebug", "onResume of LandingPage invoked");
+        Logging.i(TAG,"LandingPage Visible At: "+System.currentTimeMillis(),false,classLevelLogEnabled);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        Logger.console("VueDebug", "onPause of LandingPage invoked");
+
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        Logger.console("VueDebug", "onStop of LandingPage invoked");
+
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Logger.console("VueDebug", "onDestroy of LandingPage invoked");
+
     }
 
     @Override

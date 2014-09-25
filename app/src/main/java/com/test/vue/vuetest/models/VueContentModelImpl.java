@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.test.vue.vuetest.AnchoredContext;
 import com.test.vue.vuetest.domain.AisleBase;
 import com.test.vue.vuetest.domain.client.ClientAisle;
+import com.test.vue.vuetest.presenters.CardFragment;
 import com.test.vue.vuetest.presenters.DataContainer;
 import com.test.vue.vuetest.utils.Logger;
 
@@ -189,6 +190,7 @@ public class VueContentModelImpl implements VueContentModel {
     //internal APIs
     private void notifyMoreAislesLoaded(JSONArray jsonArray, int offset, int limit) {
         //ArrayList<AisleWindowContent> aisleWindowContentList = new ArrayList<AisleWindowContent>();
+
         mOffset = offset + limit;
         if (mOffset >= 1000) {
             if (mTimeTakenToFetch1000Aisles == -1) {

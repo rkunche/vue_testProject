@@ -28,8 +28,12 @@ public class NetworkContentAccessor {
 
     public void getAislesInRange(int offset, int limit) {
         StringBuilder builder = new StringBuilder();
-        //6419807607980032L
-        builder.append("https://3dot1.vue-server-dev.appspot.com/api/aisles/user/"+5769457217568768L);
+
+        builder.append("https://3dot1.vue-server-dev.appspot.com/api/aisles/trending/modifiedtime?limit=");
+        builder.append(String.valueOf(limit));
+        builder.append("&offset=");
+        builder.append(String.valueOf(offset));
+        //builder.append("https://3dot1.vue-server-dev.appspot.com/api/aisles/user/"+5769457217568768L);
        // builder.append(UrlConstants.GET_TRENDINGAISLES_RESTURL).append("/").
        //                                                         append(String.valueOf(limit)).
         //                                                        append("/").

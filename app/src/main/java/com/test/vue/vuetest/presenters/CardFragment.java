@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,8 +24,10 @@ import com.test.vue.vuetest.domain.client.ClientProductImage;
 import com.test.vue.vuetest.domain.client.ClientProductProvider;
 import com.test.vue.vuetest.domain.client.ClientProductTag;
 import com.test.vue.vuetest.login.VueFacebookLoginActivity;
+import com.test.vue.vuetest.models.VueContentModelImpl;
 import com.test.vue.vuetest.personal.aisle.AisleManager;
 import com.test.vue.vuetest.personal.user.SaveUser;
+import com.test.vue.vuetest.utils.logs.Logging;
 
 import java.util.ArrayList;
 
@@ -35,6 +38,9 @@ public class CardFragment extends Fragment {
     private CardWithFlipper mCard;
     public static boolean sIsListScrolling;
     public static boolean sIsTouchScrollingCall;
+    public static boolean sRequestForMoreAisles = false;
+    private final String TAG = "CardFragment";
+    private boolean classLevelLogEnabled = true;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -65,6 +71,10 @@ public class CardFragment extends Fragment {
         View cardHeaderView = inflater.inflate(
                 R.layout.card_fragment_listview_header, null);
 
+        //inflate footer
+        View cardFooterView = inflater.inflate(
+                R.layout.aisle_list_footer, null);
+
         //add header view to the list.
         RelativeLayout facebook_id = (RelativeLayout) cardHeaderView.findViewById(R.id.facebook_id);
         RelativeLayout gPlus_LayoutId = (RelativeLayout) cardHeaderView.findViewById(R.id.g_plus_layout_id);
@@ -85,6 +95,7 @@ public class CardFragment extends Fragment {
             }
         });
         // mCardList.addHeaderView(cardHeaderView);
+        mCardList.addFooterView(cardFooterView);
         mCardList.setAdapter(mCard);
         mCardList.setOnScrollListener(new OnScrollListener() {
 
@@ -100,6 +111,19 @@ public class CardFragment extends Fragment {
                     case SCROLL_STATE_IDLE:
                         sIsListScrolling = false;
                         sIsTouchScrollingCall = false;
+                         if(!sRequestForMoreAisles) {
+                             sRequestForMoreAisles = true;
+                             int threshold = 1;
+                             int count = mCardList.getCount();
+                             if (mCardList.getLastVisiblePosition() >= count
+                                     - threshold) {
+                                 VueContentModelImpl.getContentModel();
+                                 Message message = new Message();
+                                 message.what = VueContentModelImpl.AISLE_DATA_GET;
+                                 VueContentModelImpl.sendMessage(message);
+                                 Logging.i(TAG,"LoadMoreRequest sent",false,classLevelLogEnabled);
+                             }
+                         }
                         break;
                 }
             }

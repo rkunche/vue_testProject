@@ -25,6 +25,7 @@ import android.util.Log;
 import android.webkit.WebView.HitTestResult;
 
 import com.test.vue.vuetest.AnchoredContext;
+import com.test.vue.vuetest.utils.logs.Logging;
 
 public class BitmapLoaderUtils {
 
@@ -33,6 +34,8 @@ public class BitmapLoaderUtils {
 	private FileCache mFileCache;
 	// private VueMemoryCache<Bitmap> mAisleImagesCache;
 	 private BitmapLruCache mAisleImagesCache;
+    private final String TAG = "BitmapLoaderUtils";
+    private boolean classLevelLogEnabled = true;
 
 	// private int mScreenWidth;
 
@@ -68,13 +71,11 @@ public class BitmapLoaderUtils {
 	 */
 	public Bitmap getBitmap(String serverUrl, boolean cacheBitmap,
 			int bestWidth, int bestHeight, String source) {
-        Log.i("BitmapLoading", "BitmapLoading... getBitmap");
 		File f = mFileCache.getFile(serverUrl);
-		 
 		// from SD cache
 		Bitmap b = decodeFile(f, bestHeight, bestWidth, source);
 		if (b != null) {
-			 
+            Logging.i(TAG,"Image Available in SD card: ",false,classLevelLogEnabled);
 			if (cacheBitmap)
 				mAisleImagesCache.putBitmap(serverUrl, b);
 			return b;
@@ -86,6 +87,7 @@ public class BitmapLoaderUtils {
 
 				return null;
 			}
+            Logging.i(TAG,"Image DownLoad Time starts At: "+System.currentTimeMillis(),false,classLevelLogEnabled);
 			Bitmap bitmap = null;
 			URL imageUrl = new URL(serverUrl);
 			HttpURLConnection conn = (HttpURLConnection) imageUrl
@@ -99,7 +101,10 @@ public class BitmapLoaderUtils {
 			OutputStream os = new FileOutputStream(f);
 			Utils.CopyStream(is, os);
 			os.close();
+            Logging.i(TAG,"Image DownLoad Time Ends At: "+System.currentTimeMillis(),false,classLevelLogEnabled);
+            Logging.i(TAG,"Bitmap Decode Time Starts At: "+System.currentTimeMillis(),false,classLevelLogEnabled);
 			bitmap = decodeFile(f, bestHeight, bestWidth, source);
+            Logging.i(TAG,"Bitmap Decode Time Ends At: "+System.currentTimeMillis(),false,classLevelLogEnabled);
 			 if (cacheBitmap)
 				mAisleImagesCache.putBitmap(serverUrl, bitmap);
 			return bitmap;
@@ -130,12 +135,6 @@ public class BitmapLoaderUtils {
 			// final int REQUIRED_SIZE = mScreenWidth/2;
 			int height = o.outHeight;
 			int width = o.outWidth;
-            Log.i("imageHeight", "image  original height: " + o.outHeight);
-            Log.i("imageHeight", "image  original with: " + o.outWidth);
-            Log.i("imageHeight", "image  bestHeight  : " + bestHeight);
-            Log.i("imageHeight", "image  bestWidth  : " + bestWidth);
-            Log.i("imageHeight", "imageUri: " + f.getAbsolutePath());
-
 			int reqWidth = bestWidth;
 			int scale = 1;
 
@@ -192,8 +191,6 @@ public class BitmapLoaderUtils {
 					bitmap = getModifiedBitmap(bitmap, reqWidth, height);
 				}
 			}
-            Log.i("imageHeight", "image  after resize Height  : " + bitmap.getHeight());
-            Log.i("imageHeight", "image  after resize Width  : " + bitmap.getWidth());
 			return bitmap;
 		} catch (FileNotFoundException e) {
 
