@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/grid_image_id"
-        android:src="@drawable/ic_action_create_aisle" />
+        android:src="@drawable/ic_launcher" />
            <TextView
             android:id="@+id/rating_view_id"
             android:layout_width="32dp"

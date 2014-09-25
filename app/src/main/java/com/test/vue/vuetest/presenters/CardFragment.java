@@ -36,8 +36,6 @@ public class CardFragment extends Fragment {
     public static boolean sIsListScrolling;
     public static boolean sIsTouchScrollingCall;
 
-    //  private PullToRefreshLayout mPullToRefreshLayoutTemp;
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -50,11 +48,6 @@ public class CardFragment extends Fragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
     }
@@ -64,11 +57,14 @@ public class CardFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.card_fragment_listview_holder, null);
         mCardList = (ListView) view.findViewById(R.id.card_list);
+
         //create adapter for card fragment.
         mCard = new CardWithFlipper(getActivity());
-        //add header view to the list.
+
+        //inflate header
         View cardHeaderView = inflater.inflate(
                 R.layout.card_fragment_listview_header, null);
+
         //add header view to the list.
         RelativeLayout facebook_id = (RelativeLayout) cardHeaderView.findViewById(R.id.facebook_id);
         RelativeLayout gPlus_LayoutId = (RelativeLayout) cardHeaderView.findViewById(R.id.g_plus_layout_id);
@@ -117,74 +113,10 @@ public class CardFragment extends Fragment {
         return view;
     }
 
-/*    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        ViewGroup viewGroup = (ViewGroup) view;
-
-        // We need to create a PullToRefreshLayout manually
-        mPullToRefreshLayoutTemp = new PullToRefreshLayout(
-                viewGroup.getContext());
-
-        Log.v("CardFragment", "onViewCreated is created");
-
-        // We can now setup the PullToRefreshLayout
-        ActionBarPullToRefresh.from(getActivity())
-
-                // We need to insert the PullToRefreshLayout into the Fragment's
-                // ViewGroup
-                .insertLayoutInto(viewGroup)
-
-                        // We need to mark the ListView and it's Empty View as pullable
-                        // This is because they are not dirent children of the ViewGroup
-                .theseChildrenArePullable(android.R.id.empty,
-                        android.R.id.empty)
-
-                        // We can now complete the setup as desired
-                .listener(new RefListener()).setup(mPullToRefreshLayoutTemp);
-        //if (!callbacksCompleted)
-        //    mPullToRefreshLayoutTemp.setRefreshing(true);
-
-    }*/
-
- /*   private class RefListener implements OnRefreshListener {
-
-        @Override
-        public void onRefreshStarted(View view) {
-            new AsyncTask<Void, Void, Void>() {
-
-                @Override
-                protected Void doInBackground(Void... params) {
-                    try {
-                        Thread.sleep(5000); // 5 seconds
-
-
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    return null;
-                }
-
-                @Override
-                protected void onPostExecute(Void result) {
-                    super.onPostExecute(result);
-
-
-                    // Notify PullToRefreshLayout that the refresh has finished
-                    mPullToRefreshLayoutTemp.setRefreshComplete();
-
-                    // if you set the "setListShown(false)" then you have to
-                    //uncomment the below code segment
-
-//                        if (getView() != null) {
-//                            // Show the list again
-//                            setListShown(true);
-//                        }
-                }
-            }.execute();
-        }
-
-    }*/
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 
     /**
      * test code

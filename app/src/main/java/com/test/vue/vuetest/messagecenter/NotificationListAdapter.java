@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,11 +22,13 @@ import com.test.vue.vuetest.R;
 public class NotificationListAdapter extends BaseAdapter {
     ArrayList<NotificationAisle> mNotificationList;
     Context mContext;
+    Typeface typeface;
     
     public NotificationListAdapter(Context context,
-            ArrayList<NotificationAisle> notificationList) {
+            ArrayList<NotificationAisle> notificationList,Typeface typeface) {
         this.mContext = context;
         this.mNotificationList = new ArrayList<NotificationAisle>();
+        this.typeface = typeface;
     }
     
     @Override
@@ -50,15 +53,6 @@ public class NotificationListAdapter extends BaseAdapter {
     
     public NotificationAisle removeItem(int position) {
         NotificationAisle notificatinAisle = null;
-     /*   if (mNotificationList != null && mNotificationList.size() > 0) {
-            notificatinAisle = mNotificationList.remove(position);
-        }
-        Log.i("notificationLIstSize", "notificationLIstSize: "
-                + mNotificationList.size());
-        
-        if (mNotificationList.size() == 0) {
-            addTempItem();
-        }*/
         notifyDataSetChanged();
         return notificatinAisle;
     }
@@ -76,6 +70,8 @@ public class NotificationListAdapter extends BaseAdapter {
                     .findViewById(R.id.notification_description);
             holder.notificationAisleTitle = (TextView) convertView
                     .findViewById(R.id.notification_aisle_title);
+            holder.notificationDescription.setTypeface(typeface);
+            holder.notificationAisleTitle.setTypeface(typeface);
 
 
             holder.userImage = (ImageView) convertView
@@ -101,14 +97,6 @@ public class NotificationListAdapter extends BaseAdapter {
 
         if (mNotificationList.size() == 1
                 && mNotificationList.get(position).ismEmptyNotification() == true) {
-//            holder.notificationAisleTitle.setText(mNotificationList.get(
-//                    position).getAisleTitle());
-         /*   holder.bookmarks.setVisibility(View.GONE);
-            holder.likes.setVisibility(View.GONE);
-            holder.bookmarkId.setVisibility(View.GONE);
-            holder.commentId.setVisibility(View.GONE);
-            holder.likeId.setVisibility(View.GONE);
-            holder.bottom_lay_id.setVisibility(View.GONE);*/
             LayoutParams params = new LayoutParams(
                     LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
             int pixel = 4;
@@ -118,40 +106,9 @@ public class NotificationListAdapter extends BaseAdapter {
             holder.notificationAisleTitle.setLayoutParams(params);
             ((ImageView) holder.userImage).setVisibility(View.GONE);
         } else {
-          /*  if (mNotificationList.get(position).getNotificationText()
-                    .equals("Your aisle is uploading")) {
-                holder.bookmarks.setVisibility(View.GONE);
-                holder.likes.setVisibility(View.GONE);
-                holder.bookmarkId.setVisibility(View.GONE);
-                holder.commentId.setVisibility(View.GONE);
-                holder.likeId.setVisibility(View.GONE);
-                holder.bottom_lay_id.setVisibility(View.GONE);
-            } else {
-                holder.bookmarks.setVisibility(View.VISIBLE);
-                holder.likes.setVisibility(View.VISIBLE);
-                holder.bookmarkId.setVisibility(View.VISIBLE);
-                holder.commentId.setVisibility(View.VISIBLE);
-                holder.likeId.setVisibility(View.VISIBLE);
-                holder.bottom_lay_id.setVisibility(View.VISIBLE);
-            }*/
+
             ((ImageView) holder.userImage).setImageResource(R.drawable.vuetest);
-           /* holder.bookmarks.setText(mNotificationList.get(position)
-                    .getBookmarkCount() + "");
-            holder.likes.setText(mNotificationList.get(position).getLikeCount()
-                    + "");
-            holder.comments.setText(mNotificationList.get(position)
-                    .getCommentsCount() + "");*/
-//            holder.notificationDescription.setText(mNotificationList.get(
-//                    position).getNotificationText());
-//            holder.notificationAisleTitle.setText(mNotificationList.get(
-//                    position).getAisleTitle());
-          /*  if (mNotificationList.get(position).isReadStatus()) { // read
-                holder.overflow_listlayout_layout.setBackgroundColor(Color
-                        .parseColor("#C0C0C0"));
-            } else { // unread
-                holder.overflow_listlayout_layout.setBackgroundColor(Color
-                        .parseColor("#FFFFFF"));
-            }*/
+
         }
         return convertView;
     }
@@ -171,19 +128,6 @@ public class NotificationListAdapter extends BaseAdapter {
         RelativeLayout overflow_listlayout_layout;
         TextView notificationDescription,
                 notificationAisleTitle;
-       // ImageView likeId, bookmarkId, commentId;
-       // RelativeLayout bottom_lay_id;
-    }
-    
-    private void addTempItem() {
-        mNotificationList.clear();
-        NotificationAisle notificationAisle = new NotificationAisle();
-        
-        notificationAisle
-                .setAisleTitle("Your notifications will be shown here.");
-        notificationAisle.setReadStatus(false);
-        notificationAisle.setAisleId("");
-        notificationAisle.setmEmptyNotification(true);
-        mNotificationList.add(notificationAisle);
+
     }
 }

@@ -34,6 +34,7 @@
 
     </RelativeLayout>
 
+
     <RelativeLayout
         android:orientation="vertical"
         android:tag="front"
@@ -46,8 +47,7 @@
 
         <com.test.vue.vuetest.uihelper.CircularImageView
             android:id="@+id/user_image"
-            android:layout_width="@dimen/product_card_top_layout_profile_pic_dimensions"
-            android:layout_height="@dimen/product_card_top_layout_profile_pic_dimensions"
+            style="@style/profile_pic_size"
             android:layout_centerVertical="true" />
 
 
@@ -55,12 +55,10 @@
             android:id="@+id/notification_aisle_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_toRightOf="@+id/user_image"
             android:ellipsize="end"
             android:text="Alexa Chung"
             android:layout_marginLeft="4dp"
-
             android:textSize="16sp"
             android:textColor="#666666"
             android:textStyle="bold"
@@ -70,8 +68,6 @@
             android:id="@+id/notification_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="2"
@@ -81,7 +77,6 @@
             android:layout_marginLeft="4dp"
             android:textSize="16sp"
             android:textColor="#1f1f1f" />
-
 
     </RelativeLayout>
 

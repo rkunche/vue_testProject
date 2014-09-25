@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -54,6 +55,7 @@ public class PopupFragment extends Fragment {
     //TextView mFeedbackHintTview;
     boolean animStarted = false;
     int mBeforeTextChangeCount = 0;
+    Typeface typeface;
     
     @Override
     public void onAttach(Activity activity) {
@@ -83,7 +85,7 @@ public class PopupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.popup_list_layout, container, false);
-
+        typeface = Typeface.createFromAsset(mContext.getAssets(), "Roboto-Regular.ttf");
         View header_messages_list = inflater.inflate(R.layout.popup_header, null);
 
         
@@ -103,7 +105,7 @@ public class PopupFragment extends Fragment {
         listLay.setLayoutParams(params);
         mListView.addHeaderView(header_messages_list);
         mNotificationAdapter = new NotificationListAdapter(mContext,
-                mNotificationList);
+                mNotificationList,typeface);
 
         mListView.setSwipeListViewListener(new BaseSwipeListViewListener() {
             @Override
@@ -462,40 +464,8 @@ public class PopupFragment extends Fragment {
         
     }
 
-    public void moveDownAnim() {
-        
-        Animation animation = AnimationUtils.loadAnimation(getActivity(),
-                R.anim.translate);
-       // mFeedbackHintTview.startAnimation(animation);
-        animation.setAnimationListener(new AnimationListener() {
-            
-            @Override
-            public void onAnimationStart(Animation animation) {
-                
-            }
-            
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-                
-            }
-            
-            @Override
-            public void onAnimationEnd(Animation animation) {
-          //      mFeedbackHintTview.setVisibility(View.GONE);
-              //  mFeedbackEditText.setText("");
-                animStarted = false;
-                
-            }
-        });
-    }
-    
-    public void moveUpAnim() {
-        
-        Animation animation = AnimationUtils.loadAnimation(getActivity(),
-                R.anim.translateback);
-      //  mFeedbackHintTview.startAnimation(animation);
-     //   mFeedbackHintTview.setVisibility(View.VISIBLE);
-    }
+
+
 
 
 }

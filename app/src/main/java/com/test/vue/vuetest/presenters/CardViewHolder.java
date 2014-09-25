@@ -22,6 +22,8 @@ public class CardViewHolder {
 
     TextView aisleCardUserNameId;
     TextView cardUserHeadingId;
+    TextView productSuggesterText;
+    TextView productSuggesterName;
 
 
 

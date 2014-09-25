@@ -47,4 +47,6 @@
 
     <dimen name="feedback_editlay_height">100dp</dimen>
     <dimen name="product_card_suggester_left_margin">60dp</dimen>
+
+    <dimen name="list_divider_height">12dp</dimen>
 </resources>

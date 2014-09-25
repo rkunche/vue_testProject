@@ -25,6 +25,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/notification_id"
                     android:layout_width="wrap_content"
                     android:layout_height="56dp"
                     android:layout_alignParentLeft="true"
@@ -65,10 +66,10 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/location_id"
                     android:layout_width="wrap_content"
                     android:layout_height="56dp"
                     android:layout_alignParentLeft="true"
-
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/setting_text_left_margin"
                     android:gravity="center"
@@ -130,6 +131,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/version_id"
                     android:layout_width="wrap_content"
                     android:layout_height="56dp"
                     android:layout_alignParentLeft="true"
@@ -169,6 +171,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/privacy_id"
                     android:layout_width="wrap_content"
                     android:layout_height="56dp"
                     android:layout_alignParentLeft="true"

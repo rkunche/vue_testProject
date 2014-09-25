@@ -176,7 +176,7 @@ public class LandingPageActivity extends FragmentActivity implements TrendingMen
 
         trending_list = (RelativeLayout) actionBar.getCustomView().findViewById(R.id.feed_touch_layout);
         action_icon = (ImageView) actionBar.getCustomView().findViewById(R.id.myfeed_action_icon);
-        action_icon.setImageResource(R.drawable.ic_action_up);
+        action_icon.setImageResource(R.drawable.ic_action_dropdown);
         settingId = (ImageView) actionBar.getCustomView().findViewById(R.id.setting_id);
 
         actionBarTextView = (TextView) actionBar.getCustomView().findViewById(R.id.my_feed_text_id);
@@ -223,8 +223,8 @@ public class LandingPageActivity extends FragmentActivity implements TrendingMen
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction transaction = fragmentManager
                     .beginTransaction();
-            transaction.setCustomAnimations(R.animator.slide_in_top,
-                    R.animator.slide_out_bottom);
+            transaction.setCustomAnimations(R.anim.slide_in_top,
+                    R.anim.slide_out_bottom);
             transaction
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             transaction.remove(mTrendingFragment);
@@ -244,15 +244,14 @@ public class LandingPageActivity extends FragmentActivity implements TrendingMen
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager
                 .beginTransaction();
-        transaction.setCustomAnimations(R.animator.slide_in_top,
-                R.animator.slide_out_bottom);
+        transaction.setCustomAnimations(R.anim.slide_in_top,
+                R.anim.slide_out_bottom);
         transaction
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         transaction.add(R.id.trending_frag, mTrendingFragment);
         transaction.commit();
         action_icon.setImageResource(R.drawable.ic_action_up);
     }
-
 
     /**
      * returns all the user notifications if no notifications are found, then
@@ -262,7 +261,6 @@ public class LandingPageActivity extends FragmentActivity implements TrendingMen
         NotificationManager notificationManager = new NotificationManager();
         return notificationManager.getUserNotifications();
     }
-
 
     @Override
     public void onResume() {

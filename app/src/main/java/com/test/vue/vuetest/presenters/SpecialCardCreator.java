@@ -6,12 +6,12 @@ import android.util.Log;
 import android.view.Gravity;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout
-        ;
+import android.widget.LinearLayout;
+import com.test.vue.vuetest.R;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.test.vue.vuetest.R;
+
 import com.test.vue.vuetest.models.ScreenDimensions;
 import com.test.vue.vuetest.uihelper.CircularImageView;
 import com.test.vue.vuetest.utils.Utils;

@@ -1,7 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:id="@+id/aisle_card"
@@ -18,11 +17,10 @@
             android:layout_below="@+id/card_top_id">
 
             <com.test.vue.vuetest.presenters.AisleContentBrowser
-                android:id="@+id/pager"
+                android:id="@+id/horizontal_flipper"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:focusable="true">
-
                 <include layout="@layout/pager_card_one" />
             </com.test.vue.vuetest.presenters.AisleContentBrowser>
         </RelativeLayout>
@@ -49,7 +47,7 @@
                 android:layout_toRightOf="@+id/bottom_view_id"
                 android:gravity="center_vertical"
                 android:text="@string/sample_rate_now"
-                android:textColor="#141313" />
+                android:textColor="@color/rate_now" />
         </RelativeLayout>
     </RelativeLayout>
 
@@ -63,4 +61,5 @@
         android:visibility="gone">
 
     </RelativeLayout>
-</RelativeLayout><!--each icon size is 32 dp and its touch area is 42 dp.-->
+</RelativeLayout>
+  <!--each icon size is 32 dp and its touch area is 42 dp.-->
