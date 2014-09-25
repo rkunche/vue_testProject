@@ -65,7 +65,7 @@ public class CardWithFlipper extends DataAdapter {
 
         CircularImageView img3 = (CircularImageView) friendsList.findViewById(R.id.friend_3);
         img3.setImageResource(R.drawable.vuetest);
-        //typeface = Typeface.createFromAsset(mContext.getAssets(), "Roboto-Regular.ttf");
+        typeface = Typeface.createFromAsset(mContext.getAssets(), "Roboto-Regular.ttf");
 
 
         WeakReference<View> friendsListRef = new WeakReference<View>(friendsList);
@@ -94,6 +94,8 @@ public class CardWithFlipper extends DataAdapter {
             viewHolder.aisleSettings = (RelativeLayout) convertView.findViewById(R.id.aisle_card_user_window_id);
             viewHolder.aisleCardUserNameId = (TextView) convertView.findViewById(R.id.aisle_card_user_name_id);
             viewHolder.cardUserHeadingId = (TextView) convertView.findViewById(R.id.card_user_heading_id);
+            viewHolder.productSuggesterText = (TextView) convertView.findViewById(R.id.product_suggest_text_id);
+            viewHolder.productSuggesterName = (TextView) convertView.findViewById(R.id.product_card_suggester_name);
 
             // set the params based on the best image height in the aisle.
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
@@ -103,6 +105,8 @@ public class CardWithFlipper extends DataAdapter {
 
             viewHolder.cardUserHeadingId.setTypeface(typeface);
             viewHolder.aisleCardUserNameId.setTypeface(typeface);
+            viewHolder.productSuggesterText.setTypeface(typeface);
+            viewHolder.productSuggesterName.setTypeface(typeface);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (CardViewHolder) convertView.getTag();

@@ -3,6 +3,7 @@ package com.test.vue.vuetest.presenters;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -32,6 +33,7 @@ public class TrendingMenuFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     ListView listview;
+    private Typeface typeface;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -75,7 +77,7 @@ public class TrendingMenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.fragment_trending__menu_, container, false);
-
+        typeface = Typeface.createFromAsset(getActivity().getAssets(), "Roboto-Regular.ttf");
         listview = (ListView) layout.findViewById(R.id.trending_list);
 
         String[] items = {"My Feed", "My Aisles", "Urgent action needed", "Latest on Vue", "Trending today", "Featured", "Trending in New York", "Trending in San Francisco", "Trending in Milan", "Trending in Sao Paulo"};
@@ -158,6 +160,7 @@ public class TrendingMenuFragment extends Fragment {
 
             TextView textView_name = (TextView) v
                     .findViewById(R.id.trending_name);
+            textView_name.setTypeface(typeface);
             ImageView image_bottom = (ImageView) v
                     .findViewById(R.id.bottom_line);
              View single_line = v.findViewById(R.id.single_line);

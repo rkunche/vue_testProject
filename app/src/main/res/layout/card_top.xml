@@ -17,7 +17,7 @@
         android:layout_toRightOf="@+id/aisle_card_user_pic_id"
         android:orientation="vertical">
 
-        <com.test.vue.vuetest.presenters.CustomFontText
+        <TextView
             android:id="@+id/card_user_heading_id"
             style="@style/aisle_card_top_text"
             android:gravity="bottom"
@@ -25,7 +25,7 @@
             android:textColor="@color/aisle_title_color"
             android:textSize="18dp" />
 
-        <com.test.vue.vuetest.presenters.CustomFontText
+        <TextView
             android:id="@+id/aisle_card_user_name_id"
             style="@style/aisle_card_top_text"
             android:layout_marginTop="2dp"

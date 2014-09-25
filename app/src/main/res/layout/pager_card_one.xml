@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/card_source_name_area_height">
 
-        <com.test.vue.vuetest.presenters.CustomFontText
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -66,14 +66,14 @@
             android:layout_alignParentBottom="true"
             android:background="@color/light_blue">
 
-            <com.test.vue.vuetest.presenters.CustomFontText
+            <TextView
                 android:id="@+id/product_suggest_text_id"
                 style="@style/product_card_bottom_text"
                 android:gravity="bottom"
                 android:text="@string/suggested_by"
                 android:textColor="@android:color/black" />
             <!--66 = 64+2, 64 is profile pic width-->
-            <com.test.vue.vuetest.presenters.CustomFontText
+            <TextView
                 android:id="@+id/product_card_suggester_name"
                 style="@style/product_card_bottom_text"
                 android:layout_below="@+id/product_suggest_text_id"
