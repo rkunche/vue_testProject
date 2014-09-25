@@ -147,8 +147,10 @@ public class PopupFragment extends Fragment {
             @Override
             public void onClickBackView(int position) {
                 Log.d("swipe", String.format("onClickBackView %d", position));
-
                 mListView.closeAnimate(position);//when you touch back view it will close
+               // mListView.removeViewAt(position);
+              //  mNotificationAdapter.notifyDataSetChanged();
+
             }
 
             @Override

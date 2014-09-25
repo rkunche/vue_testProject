@@ -28,10 +28,12 @@
         <item name="android:minWidth">200dp</item>
         <item name="android:textColor">#707070</item>
     </style>
+
     <!--  <style name="fade_animation">
           <item name="@android:windowEnterAnimation">@anim/popup_show</item>
           <item name="@android:windowExitAnimation">@anim/popup_hide</item>
       </style>-->
+
     <style name="aisle_card">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -122,6 +124,7 @@
         <item name="android:maxLines">2</item>
         <item name="android:ellipsize">end</item>
     </style>
+
     <style name="profile_pic_size">
         <item name="android:layout_width">@dimen/product_card_top_layout_profile_pic_dimensions</item>
         <item name="android:layout_height">@dimen/product_card_top_layout_profile_pic_dimensions</item>

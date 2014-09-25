@@ -79,12 +79,22 @@ public class NotificationListAdapter extends BaseAdapter {
             holder.overflow_listlayout_layout = (RelativeLayout) convertView
                     .findViewById(R.id.overflow_listlayout_layout);
 
-
+            holder.swipe_button1 = (ImageView) convertView
+                    .findViewById(R.id.swipe_button1);
+            holder.swipe_button2 = (ImageView) convertView
+                    .findViewById(R.id.swipe_button2);
 
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        holder.swipe_button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         if (mNotificationList.size() == 1
                 && mNotificationList.get(position).ismEmptyNotification() == true) {
             LayoutParams params = new LayoutParams(
@@ -114,7 +124,7 @@ public class NotificationListAdapter extends BaseAdapter {
     }
     
     class ViewHolder {
-        ImageView userImage;
+        ImageView userImage,swipe_button1,swipe_button2;
         RelativeLayout overflow_listlayout_layout;
         TextView notificationDescription,
                 notificationAisleTitle;
