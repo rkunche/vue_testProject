@@ -44,7 +44,10 @@
         </activity>
 
         <service android:name=".services.sidekick.PersistentWatcher" />
-
+        <provider
+            android:authorities="com.test.vue.vuetest.database.provider.VueContentProvider"
+            android:name="com.dboperations.VueContentProvider"
+            />
         <activity
             android:name=".login.GooglePlayServicesActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:label="@string/title_activity_google_play_services" >

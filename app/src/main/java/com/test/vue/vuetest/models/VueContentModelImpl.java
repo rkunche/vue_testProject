@@ -12,15 +12,13 @@ import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.dboperations.PersistentDatabase;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.test.vue.vuetest.AnchoredContext;
-import com.test.vue.vuetest.domain.AisleBase;
 import com.test.vue.vuetest.domain.client.ClientAisle;
-import com.test.vue.vuetest.presenters.CardFragment;
 import com.test.vue.vuetest.presenters.DataContainer;
 import com.test.vue.vuetest.utils.Logger;
-
 
 import junit.framework.Assert;
 
@@ -165,22 +163,22 @@ public class VueContentModelImpl implements VueContentModel {
             //TODO: lets log this so can look at what happened
 
             //TODO: we need to initialize the DB first
-            mStoredContent = new PersistentDatabase(AnchoredContext.getInstance().getApplicationContext());
-            mStoredContent.getReadableDatabase();
+         //   mStoredContent = new PersistentDatabase(AnchoredContext.getInstance().getApplicationContext());
+        //    mStoredContent.getReadableDatabase();
 
             initializeContinuousFetcher();
         } else if (updatedInstall) {
 
         } else {
-            mStoredContent = new PersistentDatabase(AnchoredContext.getInstance().getApplicationContext());
-            mStoredContent.getReadableDatabase();
+        //    mStoredContent = new PersistentDatabase(AnchoredContext.getInstance().getApplicationContext());
+        //    mStoredContent.getReadableDatabase();
             initializeContinuousFetcher();
         }
     }
 
     @Override
     public int getTotalNumberOfCards() {
-        return mStoredContent.getNumItems();
+        return 0;
     }
 
     private void initializeContinuousFetcher() {
@@ -239,6 +237,7 @@ public class VueContentModelImpl implements VueContentModel {
             }
             aisles.clear();
             aisles = null;
+
             mDataContainerListener.addMoreData(CuratedAisles);
 
         } catch (MalformedURLException e) {
