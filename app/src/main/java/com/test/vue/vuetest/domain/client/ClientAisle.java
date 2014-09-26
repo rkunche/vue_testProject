@@ -11,9 +11,8 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public class ClientAisle extends AisleBase {
-    
     List<ClientProduct> productList;
-
+    Long modifiedTime;
     /**
      * Ignore serialization of this field
      * @return
@@ -23,7 +22,6 @@ public class ClientAisle extends AisleBase {
     {
         return productList;
     }
-
     /**
      * Mark as property for de-serialization
      * @return
@@ -32,5 +30,23 @@ public class ClientAisle extends AisleBase {
     public void setProductList(List<ClientProduct> productList)
     {
         this.productList = productList;
+    }
+    /**
+     * Ignore serialization of this field
+     * @return
+     */
+    @JsonIgnore
+    public Long getModifiedTime()
+    {
+        return modifiedTime;
+    }
+    /**
+     * Mark as property for de-serialization
+     * @return
+     */
+    @JsonProperty
+    public void setModifiedTime(Long modifiedTime)
+    {
+        this.modifiedTime = modifiedTime;
     }
 }

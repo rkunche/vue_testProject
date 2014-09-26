@@ -8,4 +8,5 @@ public class ProductHelper{
     public Long id;
     public Class type;
     public Object object;
+
 }

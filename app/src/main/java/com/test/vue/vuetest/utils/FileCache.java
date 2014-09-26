@@ -1,6 +1,7 @@
 package com.test.vue.vuetest.utils;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.io.File;
 
@@ -10,6 +11,7 @@ public class FileCache {
     private long twoDaysOldTime = 2 * 24 * 60 * 60 * 1000;
     private File mVueAppCameraPicsDir;
     private File mVueUserProfileImageDir;
+
 
     public FileCache(Context context) {
         // Find the dir to save cached images

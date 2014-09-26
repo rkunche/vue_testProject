@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/overflow_listlayout_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentRight="true"
+         android:background="@android:color/white"
+        android:id="@+id/list_lay_id"
+        android:layout_height="wrap_content" >
+
+        <com.test.vue.vuetest.swipeoption.swipelistview.SwipeListView
+            xmlns:swipe="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/list_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="#cccccc"
+            android:dividerHeight="0.5dp"
+
+            swipe:swipeFrontView="@+id/overflow_listlayout_layout"
+            swipe:swipeBackView="@+id/back"
+
+            />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

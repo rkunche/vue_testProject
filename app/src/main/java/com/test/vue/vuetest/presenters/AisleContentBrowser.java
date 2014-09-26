@@ -3,19 +3,24 @@ package com.test.vue.vuetest.presenters;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.test.vue.vuetest.R;
+import com.test.vue.vuetest.domain.client.ClientAisle;
+
+import java.lang.ref.WeakReference;
 
 
 public class AisleContentBrowser extends ViewFlipper {
-    private String mAisleUniqueId;
+    private Long mAisleUniqueId;
     int mCurrentIndex;
 
 
@@ -30,6 +35,7 @@ public class AisleContentBrowser extends ViewFlipper {
     private final int MAX_ELAPSED_DURATION_FOR_TAP = 200;
     public static final int SWIPE_MIN_DISTANCE = 30;
     private IAisleContentAdapter mSpecialNeedsAdapter;
+    public static final Long EMPTY_AISLE_CONTENT_ID = 0000000L;
     
     public int mFirstX;
     public int mLastX;
@@ -41,17 +47,32 @@ public class AisleContentBrowser extends ViewFlipper {
     public boolean isLeft;
     public boolean isRight;
     private GestureDetector mDetector;
+    ClientAisle clientAisle;
+    WeakReference<ClientAisle> clientAisleWeakReference;
+
     
     public AisleContentBrowser(Context context) {
         super(context);
         mContext = context;
-       // mAisleUniqueId = AisleWindowContent.EMPTY_AISLE_CONTENT_ID;
+        mAisleUniqueId =  EMPTY_AISLE_CONTENT_ID;
         mScrollIndex = 0;
     }
-    
+    public void setClientAisle(ClientAisle clientAisle){
+        this.clientAisle = clientAisle;
+         clientAisleWeakReference = new WeakReference<ClientAisle>(this.clientAisle);
+    }
+    public ClientAisle getClientAisle(){
+        return  clientAisle;
+    }
+    public void setAisleUniqueId(Long aisleId){
+        mAisleUniqueId = aisleId;
+    }
+    public Long getAisleUniqueId(){
+        return  mAisleUniqueId;
+    }
     public AisleContentBrowser(Context context, AttributeSet attribs) {
         super(context, attribs);
-       // mAisleUniqueId = AisleWindowContent.EMPTY_AISLE_CONTENT_ID;
+       mAisleUniqueId =  EMPTY_AISLE_CONTENT_ID;
         mScrollIndex = 0;
         mAnimationInProgress = false;
         mContext = context;
@@ -62,18 +83,14 @@ public class AisleContentBrowser extends ViewFlipper {
             }
         });
         mTapTimeout = ViewConfiguration.getTapTimeout();
-        this.setBackgroundColor(Color.WHITE);
+        this.setBackgroundColor(Color.TRANSPARENT);
         mDetector = new GestureDetector(AisleContentBrowser.this.getContext(),
                 new mListener());
     }
     
-    public void setUniqueId(String id) {
-        mAisleUniqueId = id;
-    }
+
     
-    public String getUniqueId() {
-        return mAisleUniqueId;
-    }
+
     
     public void setScrollIndex(int scrollIndex) {
         mScrollIndex = scrollIndex;
@@ -143,15 +160,16 @@ public class AisleContentBrowser extends ViewFlipper {
                             .indexOfChild(aisleContentBrowser.getCurrentView());
                     nextView = (View) aisleContentBrowser
                             .getChildAt(currentIndex + 1);
-                    
+
                     mLoadImage = false;
                     if (/* null != mSpecialNeedsAdapter && */null == nextView
                             || getImageListCount() == 1) {
                         mLoadImage = true;
-                       
+
                         if (!mSpecialNeedsAdapter.setAisleContent(
                                 AisleContentBrowser.this, currentIndex,
-                                currentIndex + 1, true, getImageListCount())) {
+                                currentIndex + 1, true, getImageListCount(),mContext)) {
+
                             mAnimationInProgress = true;
                             Animation cantWrapRight = AnimationUtils
                                     .loadAnimation(mContext,
@@ -185,7 +203,7 @@ public class AisleContentBrowser extends ViewFlipper {
                             return super.onTouchEvent(event);
                         }
                     }
-                    
+
                     Animation currentGoLeft = AnimationUtils.loadAnimation(
                             mContext,  R.anim.right_out);
                     final Animation nextFadeIn = AnimationUtils.loadAnimation(
@@ -209,7 +227,7 @@ public class AisleContentBrowser extends ViewFlipper {
                                 }
                             });
                     
-                    aisleContentBrowser.setDisplayedChild(currentIndex + 1);
+                   aisleContentBrowser.setDisplayedChild(currentIndex + 1);
                     // aisleContentBrowser.invalidate();
                     return super.onTouchEvent(event);
                 }
@@ -229,8 +247,7 @@ public class AisleContentBrowser extends ViewFlipper {
                         mLoadImage = true;
                         if (!mSpecialNeedsAdapter.setAisleContent(
                                 AisleContentBrowser.this, currentIndex,
-                                currentIndex - 1, true, getImageListCount())) {
-                            
+                                currentIndex - 1, true, getImageListCount(),mContext)) {
                             Animation cantWrapLeft = AnimationUtils
                                     .loadAnimation(mContext,
                                             R.anim.cant_wrap_left);
@@ -315,7 +332,7 @@ public class AisleContentBrowser extends ViewFlipper {
         @Override
         public boolean onDoubleTap(MotionEvent e) {
             if (mClickListener != null && null != mSpecialNeedsAdapter) {
-                mClickListener.onDoubleTap(mAisleUniqueId);
+                //mClickListener.onDoubleTap(mAisleUniqueId);
             }
             return super.onDoubleTap(e);
         }
@@ -346,7 +363,10 @@ public class AisleContentBrowser extends ViewFlipper {
     }
     
     public int getImageListCount() {
-        return mCount;
+        if(clientAisle != null&& clientAisle.getProductList() != null) {
+            return clientAisle.getProductList().size();
+        }
+        return  1;
     }
 
 }

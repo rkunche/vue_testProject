@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/invite_card"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Invite friends to shop with you!"
+        android:gravity="center"
+        android:layout_marginTop="12dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp"
+            android:weightSum="4"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="21dp"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+           android:layout_weight="1"
+            android:layout_marginLeft="4dp"
+          >
+            <com.test.vue.vuetest.uihelper.CircularImageView
+                style="@style/profile_pic_size"
+
+                android:id="@+id/friend_1"
+                android:layout_alignParentTop="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Taylor Swift"
+                android:textColor="@color/black"
+                android:layout_below="@+id/friend_1"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+             />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_marginLeft="4dp">
+            <com.test.vue.vuetest.uihelper.CircularImageView
+                style="@style/profile_pic_size"
+
+                android:id="@+id/friend_2"
+                android:layout_alignParentTop="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jennifer Lopes"
+                android:textColor="@color/black"
+                android:layout_below="@+id/friend_2"
+
+                android:gravity="center"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_marginLeft="4dp">
+            <com.test.vue.vuetest.uihelper.CircularImageView
+                style="@style/profile_pic_size"
+
+                android:id="@+id/friend_3"
+                android:layout_alignParentTop="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Katy Perry"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:layout_below="@+id/friend_3"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+   <!--     <RelativeLayout
+            android:layout_width="64dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="4dp">
+            <com.test.vue.vuetest.uihelper.CircularImageView
+                android:layout_width="58dp"
+                android:layout_height="58dp"
+
+                android:id="@+id/friend_4"
+                android:layout_alignParentTop="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="first item"
+                android:textColor="@color/black"
+                android:layout_below="@+id/friend_4"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </RelativeLayout>-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_marginLeft="4dp">
+            <TextView
+                android:layout_width="58dp"
+                android:layout_height="58dp"
+                 android:background="@drawable/round_corners_blue"
+                android:id="@+id/friend_5"
+                android:layout_alignParentTop="true"
+                android:text="+"
+                android:gravity="center"
+                android:textSize="28sp"
+                android:textColor="@color/white"
+
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="more friends"
+                android:textColor="@color/black"
+                android:layout_below="@+id/friend_5"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+            />
+        </RelativeLayout>
+    </LinearLayout>
+    <TextView
+android:layout_marginTop="8dp"
+        android:id="@+id/dismiss_bottom_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dismiss"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_marginBottom="12dp"/>
+</LinearLayout>

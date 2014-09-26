@@ -67,7 +67,6 @@ public class VueFacebookLoginActivity extends Activity{
             @Override
             public void call(final Session session, SessionState state, Exception exception) {
                 if (session.isOpened()) {
-
                     // make request to the /me API
                     Request.newMeRequest(session, new Request.GraphUserCallback() {
 

@@ -8,4 +8,5 @@ public class AisleHelper {
     public OnResult callback;
     public ClientAisle clientAisle;
     public Long aisleId;
+
 }

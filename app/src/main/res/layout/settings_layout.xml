@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/greenbg"
+    android:scrollbars="none">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/greenbg">
+
+            <RelativeLayout
+                android:id="@+id/notification_lay"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginBottom="24dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/notification_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="56dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/setting_text_left_margin"
+                    android:gravity="center"
+                    android:text="@string/setting_notifications"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_large" />
+
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/setting_text_left_margin" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignTop="@+id/notification_lay"
+                android:background="#c8c7cc"></View>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignBottom="@+id/notification_lay"
+                android:background="#c8c7cc"></View>
+
+            <RelativeLayout
+                android:id="@+id/tracking_lay_id"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_below="@+id/notification_lay"
+                android:layout_marginTop="24dp"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/location_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="56dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/setting_text_left_margin"
+                    android:gravity="center"
+                    android:text="@string/setting_location_tracking"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_large" />
+
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/setting_text_left_margin" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignTop="@+id/tracking_lay_id"
+                android:background="#c8c7cc"></View>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignBottom="@+id/tracking_lay_id"
+                android:background="#c8c7cc"></View>
+
+            <TextView
+                android:id="@+id/tracking_text_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tracking_lay_id"
+                android:layout_marginLeft="@dimen/setting_text_left_margin"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="@dimen/margin_4dp"
+                android:text="Location tracking helps Vue find the best offers for you in your area."
+                android:textColor="@color/setting_small_text_color"
+                android:textSize="@dimen/text_size_small" />
+
+            <TextView
+                android:id="@+id/about_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tracking_text_id"
+                android:layout_marginBottom="@dimen/margin_4dp"
+                android:layout_marginLeft="@dimen/setting_text_left_margin"
+                android:layout_marginTop="32dp"
+                android:text="ABOUT:"
+                android:textColor="@color/setting_small_text_color"
+                android:textSize="@dimen/text_size_small" />
+
+            <RelativeLayout
+                android:id="@+id/version_lay_id"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_below="@+id/about_id"
+                android:layout_marginTop="2dp"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/version_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="56dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/setting_text_left_margin"
+                    android:gravity="center"
+                    android:text="@string/setting_versions"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_large" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/setting_text_left_margin"
+                    android:text="2.0"
+                    android:textColor="#909095"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_size_small" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/version_lay_id"
+                android:layout_marginLeft="@dimen/setting_text_left_margin"
+                android:background="#c8c7cc"></View>
+
+            <RelativeLayout
+                android:id="@+id/privacy_lay_id"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_below="@+id/version_lay_id"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/privacy_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="56dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/setting_text_left_margin"
+                    android:gravity="center"
+                    android:text="@string/setting_privacy"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_large" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/setting_text_left_margin"
+                    android:src="@drawable/ic_action_setting_arrow" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignTop="@+id/version_lay_id"
+                android:background="#c8c7cc"></View>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignBottom="@+id/privacy_lay_id"
+                android:background="#c8c7cc"></View>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/privacy_lay_id"
+                android:layout_marginBottom="24dp"
+                android:layout_marginLeft="@dimen/setting_text_left_margin"
+                android:layout_marginTop="24dp"
+                android:paddingBottom="24dp"
+                android:id="@+id/rights_text_id"
+                android:text="Vue All Rights reserved 2014."
+                android:textColor="@color/setting_small_text_color"
+                android:textSize="@dimen/text_size_small" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

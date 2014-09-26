@@ -1,102 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/first_card"
+    android:id="@+id/product_card"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/search_bg_shadow">
+    android:background="@drawable/card_no_border">
 
-    <ImageView
-        android:id="@+id/pager_image_one"
+    <com.test.vue.vuetest.presenters.ProductCustomImageVeiw
+        android:id="@+id/product_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottomLayout_one"
-        android:layout_marginBottom="@dimen/product_card_image_margin_bottom" />
+        android:layout_above="@+id/bottomLayout" />
+
+    <ImageView
+        android:id="@+id/product_next_id"
+        style="@style/prev_next"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_action_right_white" />
+
+    <ImageView
+        android:id="@+id/product_prev_id"
+        style="@style/prev_next"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/ic_action_left_white" />
+
 
     <RelativeLayout
-        android:id="@+id/pager_bottom_content_one"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/vue_icon_touch_area_dimensions"
-        android:layout_alignBottom="@+id/pager_image_one"
-        android:layout_marginBottom="@dimen/product_card_info_layout_margin_bottom">
+        android:layout_height="@dimen/card_source_name_area_height">
 
-        <ImageView
-            android:id="@+id/pager_suggester_image_id_one"
-            android:layout_width="@dimen/vue_icon_touch_area_dimensions"
-            android:layout_height="@dimen/vue_icon_touch_area_dimensions"
-            android:layout_alignParentLeft="true"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/margin_8dp"
-            android:src="@drawable/vue_launcher_icon" />
-
-        <TextView
-            android:id="@+id/suggest_text_id"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/product_card_info_text_views_height"
-            android:layout_marginLeft="@dimen/margin_8dp"
-            android:layout_toRightOf="@+id/pager_suggester_image_id_one"
-            android:gravity="bottom"
-            android:shadowColor="@android:color/black"
-            android:shadowRadius="@integer/product_card_info_text_shadow"
-            android:text="@string/suggested_by"
-            android:textColor="@android:color/white" />
-
-        <TextView
-            android:id="@+id/img_card_suggester_name_one"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/product_card_info_text_views_height"
-            android:layout_below="@+id/suggest_text_id"
-            android:layout_marginLeft="@dimen/margin_8dp"
-            android:layout_toRightOf="@+id/pager_suggester_image_id_one"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="@dimen/card_source_name_area_height"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="@string/sample_corol_white" />
+            android:text="$199 @ Nordstrom's"
+            android:textColor="@color/white" />
 
-        <TextView
-            android:id="@+id/find_at__id"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/product_card_info_text_views_height"
-            android:layout_marginRight="@dimen/margin_8dp"
-            android:layout_toLeftOf="@+id/pager_find_price_id_one"
-            android:gravity="bottom"
-            android:shadowColor="@android:color/black"
-            android:shadowRadius="@integer/product_card_info_text_shadow"
-            android:text="@string/find_at"
-            android:textColor="@android:color/white" />
-
-        <TextView
-            android:id="@+id/pager_card_find_id_one"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/product_card_info_text_views_height"
-            android:layout_below="@+id/find_at__id"
-            android:layout_marginRight="@dimen/margin_8dp"
-            android:layout_toLeftOf="@+id/pager_find_price_id_one"
-            android:layout_weight="2"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:text="@string/sample_corol_white" />
-
-
-        <TextView
-            android:id="@+id/pager_find_price_id_one"
-            android:layout_width="@dimen/vue_icon_touch_area_dimensions"
-            android:layout_height="@dimen/vue_icon_touch_area_dimensions"
+        <RelativeLayout
+            android:id="@+id/product_menu_id"
+            style="@style/vue_icon_touch_area"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/margin_8dp"
-            android:background="@drawable/round_corners"
-            android:gravity="center"
-            android:text="@string/sample_price"
-            android:textColor="@android:color/white" />
+            android:layout_marginRight="8dp">
+
+            <ImageView
+                style="@style/vue_icon_area"
+                android:src="@drawable/ic_action_more_white" />
+        </RelativeLayout>
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/bottomLayout_one"
+        android:id="@+id/product_bottom_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/product_suggester_content_layout_height"
+        android:layout_alignBottom="@+id/product_image">
+
+
+        <RelativeLayout
+            android:id="@+id/product_suggester_lay_id"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/product_suggester_content_layout_height"
+            android:layout_alignParentBottom="true"
+            android:background="@color/light_blue">
+
+            <TextView
+                android:id="@+id/product_suggest_text_id"
+                style="@style/product_card_bottom_text"
+                android:gravity="bottom"
+                android:text="@string/suggested_by"
+                android:textColor="@android:color/black" />
+            <!--66 = 64+2, 64 is profile pic width-->
+            <TextView
+                android:id="@+id/product_card_suggester_name"
+                style="@style/product_card_bottom_text"
+                android:layout_below="@+id/product_suggest_text_id"
+                android:layout_marginTop="@dimen/margin_2dp"
+                android:gravity="top"
+                android:text="@string/sample_corol_white"
+                android:textColor="@color/white" />
+            <!--66 = 64+2, 64 is profile pic width-->
+            <RelativeLayout
+                android:id="@+id/card_create_aisle_id"
+                style="@style/vue_icon_touch_area"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/margin_8dp">
+
+                <ImageView
+                    style="@style/vue_icon_area"
+                    android:src="@drawable/ic_action_folder_white" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/product_comments_show_id"
+                style="@style/vue_icon_touch_area"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/margin_8dp"
+                android:layout_toLeftOf="@+id/card_create_aisle_id">
+
+                <ImageView
+                    style="@style/vue_icon_area"
+                    android:src="@drawable/ic_action_comments_white" />
+
+                <TextView
+                    android:layout_width="@dimen/message_notification_text_size"
+                    android:layout_height="@dimen/message_notification_text_size"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/round_corners"
+                    android:gravity="center"
+                    android:text="2"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <com.test.vue.vuetest.uihelper.CircularImageView
+        android:id="@+id/product_suggester_image_id"
+        style="@style/profile_pic_size"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/product_bottom_content"
+        android:layout_marginLeft="@dimen/margin_2dp"
+        android:layout_marginTop="-12dp"
+        android:src="@drawable/vuetest" />
+
+    <RelativeLayout
+        android:id="@+id/product_add_photo_lay_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/product_image">
+        <!--<include layout="@layout/add_new_product_helper" />-->
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottomLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
-
-        <include layout="@layout/card_bottom" />
+        <!-- <include layout="@layout/comments_expand"></include>-->
+        <!-- <include layout="@layout/card_bottom" />-->
     </RelativeLayout>
     <!--  <include
           android:id="@+id/info_card_lay"

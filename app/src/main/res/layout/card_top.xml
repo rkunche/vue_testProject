@@ -1,62 +1,50 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/product_card_top_layout_height"
-    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-    android:layout_marginRight="@dimen/activity_horizontal_margin">
+    style="@style/aisle_top_user_pic_card">
 
-    <ImageView
-        android:id="@+id/card_user_id"
-        android:layout_width="@dimen/product_card_top_layout_profile_pic_dimensions"
-        android:layout_height="@dimen/product_card_top_layout_profile_pic_dimensions"
+    <com.test.vue.vuetest.uihelper.CircularImageView
+        android:id="@+id/aisle_card_user_pic_id"
+        style="@style/profile_pic_size"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/margin_2dp"
-        android:src="@drawable/vue_launcher_icon" />
+        android:src="@drawable/vuetest" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginRight="@dimen/vue_icon_touch_area_dimensions"
-        android:layout_toRightOf="@+id/card_user_id"
+        android:layout_toLeftOf="@+id/aisle_card_user_window_id"
+        android:layout_toRightOf="@+id/aisle_card_user_pic_id"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/card_user_heading_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_4dp"
-            android:layout_weight="2"
-            android:ellipsize="end"
+            style="@style/aisle_card_top_text"
             android:gravity="bottom"
-            android:maxLines="1"
-            android:text="@string/sample_Dress_for_pool_party" />
+            android:text="@string/sample_Dress_for_pool_party"
+            android:textColor="@color/aisle_title_color"
+            android:textSize="18dp" />
 
         <TextView
-            android:id="@+id/card_user_name_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_4dp"
-            android:layout_weight="2"
-            android:ellipsize="end"
+            android:id="@+id/aisle_card_user_name_id"
+            style="@style/aisle_card_top_text"
+            android:layout_marginTop="2dp"
             android:gravity="top"
-            android:maxLines="1"
-            android:text="@string/sample_Marry_Long_bottom" />
+            android:text="@string/sample_Mary_Long_bottom"
+            android:textColor="@color/aisle_owner_name"
+            android:textSize="16dp" />
     </LinearLayout>
 
     <RelativeLayout
-        android:id="@+id/card_user_window_id"
-        android:layout_width="@dimen/vue_icon_touch_area_dimensions"
-        android:layout_height="@dimen/vue_icon_touch_area_dimensions"
+        android:id="@+id/aisle_card_user_window_id"
+        style="@style/vue_icon_touch_area"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/margin_2dp">
 
         <ImageView
-            android:layout_width="@dimen/vue_icon_dimensions"
-            android:layout_height="@dimen/vue_icon_dimensions"
-            android:layout_centerInParent="true"
-
-            />
+            style="@style/vue_icon_area"
+            android:src="@drawable/ic_action_add_gray" />
     </RelativeLayout>
 
 </RelativeLayout>

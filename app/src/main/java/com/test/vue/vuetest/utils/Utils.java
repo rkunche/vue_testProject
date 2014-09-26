@@ -16,6 +16,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 
+import com.facebook.android.Util;
 import com.test.vue.vuetest.R;
 import com.test.vue.vuetest.models.ScreenDimensions;
 import com.test.vue.vuetest.presenters.LandingPageActivity;
@@ -33,7 +34,8 @@ import java.util.Random;
 
 public class Utils {
 	
-    static int sCardHeight = 0;
+   public static int sCardHeight = 0;
+   public static int sCardWidth = 0;
 
     /**
      * returns the random number in the given range.
@@ -83,9 +85,8 @@ public class Utils {
 		// 24 notification bar
 		// 48 action bar
 		// 64 card heading info
-		// 72 card bottom info
 		// 48 card bottom text card_bottom_text_height
-		// 8 shading space.
+
 		if (sCardHeight == 0) {
 			int cardHeadingInfo =   context.getResources().getInteger(
                     R.integer.top_card_height);
@@ -93,11 +94,16 @@ public class Utils {
 				R.integer.image_card_bottom_layout_height);
 			int cardBottomText =   context.getResources().getInteger(
 					 R.integer.card_bottom_text_height);
-			ScreenDimensions dimensions = getScreenDimensions(context);
+            int notificationBarHeight = 24;
+            int actionBarHeight = 48;
 
-			int deductValue = Utils.getPixel(context, (24 + 48
-					+ cardHeadingInfo + cardBottomInfo + cardBottomText + 8));
+			ScreenDimensions dimensions = getScreenDimensions(context);
+            //top shadow height = 10
+            //show divider = 10
+			int deductValue = Utils.getPixel(context, (notificationBarHeight+actionBarHeight+10+cardHeadingInfo+cardBottomText+10));
 			sCardHeight = dimensions.mScreenHeight - deductValue;
+            int deductMarginValue = 16 + 16;
+            sCardWidth =  dimensions.mScreenWidth - Utils.getPixel(context,deductMarginValue);
 		}
 		return sCardHeight;
 
@@ -140,7 +146,7 @@ public class Utils {
         
         return output;
     }
-    
+
     public static void CopyStream(InputStream is, OutputStream os) {
         final int buffer_size = 1024;
         try {
@@ -154,69 +160,8 @@ public class Utils {
         } catch (Exception ex) {
         }
     }
-    
-    public static final int IO_BUFFER_SIZE = 8 * 1024;
-    public static boolean isExternalStorageRemovable() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
-            return Environment.isExternalStorageRemovable();
-        }
-        return true;
-    }
-    
-    public static File getExternalCacheDir(Context context) {
-        if (hasExternalCacheDir()) {
-            return context.getExternalCacheDir();
-        }
-        
-        // Before Froyo we need to construct the external cache dir ourselves
-        final String cacheDir = "/Android/data/" + context.getPackageName()
-                + "/cache/";
-        return new File(Environment.getExternalStorageDirectory().getPath()
-                + cacheDir);
-    }
-    
-    public static boolean hasExternalCacheDir() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO;
-    }
-    
-    /** A method to download json data from url */
-    public static String downloadUrl(String strUrl) throws IOException {
-        String data = "";
-        InputStream iStream = null;
-        HttpURLConnection urlConnection = null;
-        try {
-            URL url = new URL(strUrl);
-            
-            // Creating an http connection to communicate with url
-            urlConnection = (HttpURLConnection) url.openConnection();
-            
-            // Connecting to url
-            urlConnection.connect();
-            
-            // Reading data from url
-            iStream = urlConnection.getInputStream();
-            
-            BufferedReader br = new BufferedReader(new InputStreamReader(
-                    iStream));
-            
-            StringBuffer sb = new StringBuffer();
-            
-            String line = "";
-            while ((line = br.readLine()) != null) {
-                sb.append(line);
-            }
-            
-            data = sb.toString();
-            
-            br.close();
-            
-        } catch (Exception e) {
-            Log.d("Exception while downloading url", e.toString());
-        } finally {
-            iStream.close();
-            urlConnection.disconnect();
-        }
-        return data;
-    }
+
+
+
 
 }

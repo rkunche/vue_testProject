@@ -63,6 +63,7 @@ public class GenericNetWorker<T> {
                       e.printStackTrace();
                   }
               }
+
           }
       }catch (MalformedURLException e) {
            e.printStackTrace();

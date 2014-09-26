@@ -15,7 +15,7 @@
         <LinearLayout
             android:id="@+id/shadow_id"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/login_button__height"
+            android:layout_height="@dimen/login_button_height"
             android:layout_margin="1dp"
             android:background="@drawable/drop_shadow">
 
@@ -32,7 +32,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/g_plus__layout_id"
+        android:id="@+id/g_plus_layout_id"
         android:layout_width="@dimen/login_button_layout_width"
         android:layout_height="@dimen/login_button_layout_height"
         android:layout_below="@+id/facebook_id"
@@ -42,7 +42,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/login_button__height"
+            android:layout_height="@dimen/login_button_height"
             android:layout_margin="1dp"
             android:layout_marginBottom="@dimen/login_button_layout_bottom_margin"
             android:background="@drawable/drop_shadow">
@@ -62,6 +62,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/login_button_layout_margin"
-        android:layout_below="@+id/g_plus__layout_id" />
+        android:layout_below="@+id/g_plus_layout_id" />
 
 </RelativeLayout>

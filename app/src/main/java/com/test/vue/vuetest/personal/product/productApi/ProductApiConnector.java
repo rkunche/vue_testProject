@@ -5,6 +5,7 @@ import com.test.vue.vuetest.domain.client.ClientProductComment;
 import com.test.vue.vuetest.domain.client.ClientProductImage;
 import com.test.vue.vuetest.domain.client.ClientProductProvider;
 import com.test.vue.vuetest.domain.client.ClientProductRating;
+import com.test.vue.vuetest.domain.client.ClientProductTag;
 
 public class ProductApiConnector {
    public static ProductApiInterface getUrlInterface(Class type){
@@ -18,7 +19,10 @@ public class ProductApiConnector {
            return  new ProductProviderApi();
        }else if(type.equals(ClientProductRating.class)){
            return  new ProductRatingApi();
+       }else if(type.equals(ClientProductTag.class)){
+           return new ProductTagApi();
        }
+
        return null;
    }
 }

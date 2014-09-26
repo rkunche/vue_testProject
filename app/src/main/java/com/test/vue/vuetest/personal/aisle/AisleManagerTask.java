@@ -31,6 +31,7 @@ public class AisleManagerTask extends AsyncTask<Void,Void,ArrayList<ClientAisle>
     public static final int GET_AISLES_BY_USER = 3;
     public static final int DELETE_AISLE = 4;
     public static final int DELETE_AISLES = 5;
+    public static final int GET_AISLES_BY_ID = 6;
 
     GenericNetWorker<ClientAisle> clientAisleHelper;
     //ClientAisle clientAisle;
@@ -61,11 +62,15 @@ public class AisleManagerTask extends AsyncTask<Void,Void,ArrayList<ClientAisle>
                 case UPDATE_AISLES:
                     aislesList = (ArrayList<ClientAisle>)getAisles(aisleHelper.clientAisle.getOwnerUserId());
                     return aislesList;
+                case GET_AISLES_BY_ID:
+                    url = UrlConstants.GET_AISLE_RESTURL;
+                    aisleHelper.clientAisle = clientAisleHelper.getObject(url,5732910535540736L);
+                    break;
 
                 case GET_AISLES_BY_USER:
-                     ClientUser user = SaveUser.getUserFromFile();
-                     Assert.assertNotNull(user);
-                     aislesList = (ArrayList<ClientAisle>)getAisles(user.getId());
+                     //ClientUser user = SaveUser.getUserFromFile();
+                     //Assert.assertNotNull(user);
+                     aislesList = (ArrayList<ClientAisle>)getAisles(6419807607980032L);
                      if(aislesList != null && aislesList.size() >0){
 
                      } else {
@@ -97,7 +102,6 @@ public class AisleManagerTask extends AsyncTask<Void,Void,ArrayList<ClientAisle>
             aisleHelper.callback.onResultComplete(true,clientAisles);
         } else {
             aisleHelper.callback.onResultComplete(false,clientAisles);
-            Log.i(TAG,TAG+" NULL" );
         }
     }
 
@@ -105,6 +109,7 @@ public class AisleManagerTask extends AsyncTask<Void,Void,ArrayList<ClientAisle>
      * Get all the aisles matched with user Id.
      */
     public  List<ClientAisle> getAisles(Long userId) {
+        Log.i("getAisle","getAisles started");
         List<ClientAisle> aisles = null;
         HttpURLConnection urlConnection = null;
         try{
@@ -122,6 +127,7 @@ public class AisleManagerTask extends AsyncTask<Void,Void,ArrayList<ClientAisle>
                 if (responseMessage.length() > 0) {
                     try {
                         aisles = (new ObjectMapper()).readValue(responseMessage,new TypeReference<List<ClientAisle>>(){});
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

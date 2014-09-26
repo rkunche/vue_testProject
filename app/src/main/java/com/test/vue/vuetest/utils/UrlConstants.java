@@ -118,6 +118,8 @@ public class UrlConstants {
             SERVER_PREFIX + "api/productrating";
     public static final String UPDATE_PRODUCTTAG_RESTURL =
             SERVER_PREFIX + "api/producttag";
+    public static final String UPDATE_PRODUCTPROVIDER_RESTURL =
+            SERVER_PREFIX + "api/productprovider";
 
 
 
@@ -159,7 +161,6 @@ public class UrlConstants {
      */
     public static final String IMAGE_UPLOAD_RESTURL =
             SERVER_PREFIX + "upload";
- ;
 
 }
 

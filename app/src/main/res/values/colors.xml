@@ -20,7 +20,7 @@
     <color name="homecolor">#A0CFEC</color>
     <color name="red">#b91c20</color>
     <color name="redtwo">#ea7171</color>
-    <color name="orange">#CD3700</color>
+    <color name="orange">#ff9601</color>
     <color name="lemon">#FFFBD0</color>
     <color name="orange1">#B232B2</color>
     <color name="barred">#ff0000</color>
@@ -45,4 +45,15 @@
     <color name="share_dailog_bg_color">#f5f5f1</color>
     <color name="share_dailog_text_color">#666666</color>
     <color name="share_dailog_divider_color">#e5e5e5</color>
+    <color name="card_suggester_background">#cc66ff</color>
+    <color name="light_blue">#8020a6d2</color>
+    <color name="light_blue_button">#69a1c1</color>ebf1e7
+    <color name="birthday_card_color">#ebf1e7</color>
+    <color name="aisle_owner_name">#666666</color>
+    <color name="aisle_title_color">#1f1f1f</color>
+    <color name="start_in_two_days">#666666</color>
+    <color name="text_color_black">#1f1f1f</color>
+    <color name="dismiss_text_color">#666666</color>
+    <color name="setting_small_text_color">#6d6d72</color>
+    <color name="rate_now">#141313</color>
 </resources>

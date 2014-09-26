@@ -8,20 +8,17 @@
     <string name="title_activity_google_play_services">GooglePlayServicesActivity</string>
 
     <!--sample text that will be replace once the server is ready in UI-->
-    <string name="sample_Dress_for_pool_party">Dress for pool party</string>
-    <string name="sample_Marry_Long_bottom">Marry Long bottom</string>
+    <string name="sample_Dress_for_pool_party">Dress for Pool Party</string>
+    <string name="sample_Mary_Long_bottom">Mary Long bottom</string>
     <string name="sample_Trending_in_San_Fransisco">Trending in San Fransisco.</string>
-    <string name="sample_starts_in_two_days">starts in 2 days...</string>
-    <string name="sample_rate_now">Please rate now!</string>
-    <string name="sample_corol_white">Corol White</string>
+    <string name="sample_starts_in_two_days">Starts in 2 days...Please  </string>
+    <string name="sample_rate_now">  Rate Now!</string>
+    <string name="sample_corol_white">Alex Chung</string>
     <string name="sample_price">$42</string>
-
     <string name="personalize_your_shopping_experience">Personalize your shopping experience</string>
-
     <string name="find_at">Find At</string>
     <string name="suggested_by">Suggested by</string>
     <string name="facebook_id">270148406527212</string>
-
     <string name="trending">Trending</string>
     <string name="trending_aisles_tag">aisle/trending</string>
     <string name="dataentry_edit_permission">Do you want to change the existing data?</string>
@@ -34,7 +31,7 @@
     <string name="profile_owner">Profile Owner</string>
     <string name="uploading_mesg">Uploading...</string>
     <string name="aisle_owner_profile_desc">Profile of the aisle owner</string>
-    <string name="progress_message">Signing in to Google&#8230;</string>
+    <string name="progress_message">Signing in to Google…</string>
     <string name="app_installation_mesg">Enable Share via</string>
     <string name="no_thanks_click_alert_mesg">To be friendly, please provide initials</string>
     <string name="plus_example_deep_link_id">/+/mobile/android/</string>
@@ -52,7 +49,7 @@
     <string name="com_facebook_loginview_log_out_action">Log Out</string>
     <string name="com_facebook_loginview_cancel_action">Cancel</string>
     <string name="com_facebook_logo_content_description">Facebook Logo</string>
-    <string name="com_facebook_usersettingsfragment_log_in_button">Log In&#8230;</string>
+    <string name="com_facebook_usersettingsfragment_log_in_button">Log In…</string>
     <string name="com_facebook_usersettingsfragment_logged_in">Logged In</string>
     <string name="com_facebook_usersettingsfragment_not_logged_in">Not Logged In</string>
     <string name="com_facebook_placepicker_subtitle_format">%1$s • %2$,d were here</string>
@@ -71,8 +68,29 @@
     <string name="com_facebook_requesterror_relogin">The app is not connected with Facebook, please log in and reconnect this app.</string>
     <string name="com_facebook_requesterror_password_changed">Your password on Facebook has changed, please reconnect the app with Facebook.</string>
     <string name="com_facebook_requesterror_reconnect">An error occurred when connecting with Facebook, please reconnect the app with Facebook.</string>
-    <string name="com_facebook_requesterror_permissions">An app connection with Facebook failed due to insufficient permissions, please grant the app permissions to perform the operation.
-    </string>
+    <string name="com_facebook_requesterror_permissions">An app connection with Facebook failed due to insufficient permissions, please grant the app permissions to perform the operation.</string>
     <string name="no_network">No network, check network settings</string>
     <string name="alert_Dialog_Network">No Network Connection: Check Network Settings</string>
+    <string name="like_surprises">Like Surprises?</string>
+    <string name="we_send_only_good_ones">We send you only good ones!</string>
+    <string name="add_your_birth_day">Add your birthday and \n let us surprise you!</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="undo">Undo</string>
+    <string name="undoall">Undo All</string>
+    <string name="setting_notifications">Notifications</string>
+    <string name="setting_location_tracking">Location Tracking</string>
+    <string name="setting_versions">Version</string>
+    <string name="setting_privacy">Privacy policy</string>
+
+
+    <string name="basic_action_1">Action_1</string>
+    <string name="basic_action_2">Action_2</string>
+    <string name="basic_del">Delete</string>
+    <string name="str_orange">#fe7b27</string>
+    <string name="str_green">#3cac69</string>
+    <string name="str_red">#FF4444</string>
+    <string name="str_yellow">#FFBB33</string>
+    <string name="str_sky_blue">#33B5E5</string>
+
 </resources>

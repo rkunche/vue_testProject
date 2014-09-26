@@ -9,6 +9,25 @@ public class CardViewHolder {
     AisleContentBrowser aisleContentBrowser;
 
     ImageView aisleOwnerProfilePic;
+    ImageView productSuggesterPic;
+    ImageView productImage;
+    RelativeLayout productMenuId;
+    RelativeLayout productCreateAisle;
+    RelativeLayout suggesterLayout;
+    RelativeLayout commentsShowId;
+    RelativeLayout productAddPhotoLayId;
+    RelativeLayout aisleCard;
+    RelativeLayout specialCard;
+    RelativeLayout aisleSettings;
+
+    TextView aisleCardUserNameId;
+    TextView cardUserHeadingId;
+    TextView productSuggesterText;
+    TextView productSuggesterName;
+
+
+
+
     TextView aisleOwnerNameTView;
     ImageView ImgCardPhotoPicOne;
     ImageView imgCardProfilePicOne;

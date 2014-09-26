@@ -22,6 +22,22 @@ public class ProductProviderBase
         this.id = id;
     }
 
+    public Long getOwnerProductId() {
+        return ownerProductId;
+    }
+
+    public void setOwnerProductId(Long ownerProductId) {
+        this.ownerProductId = ownerProductId;
+    }
+
+    public String getExternalURL() {
+        return externalURL;
+    }
+
+    public void setExternalURL(String externalURL) {
+        this.externalURL = externalURL;
+    }
+
     public int getQuantity() {
         return quantity;
     }
@@ -44,6 +60,14 @@ public class ProductProviderBase
 
     public void setStore(String store) {
         this.store = store;
+    }
+
+    public ProductAvailabilityEnum getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(ProductAvailabilityEnum availability) {
+        this.availability = availability;
     }
 
     public double getPrice() {
@@ -103,36 +127,9 @@ public class ProductProviderBase
     }
 
     /** Primary key */
-    @Getter @Setter @Id
-    Long id;
-
-    public String getExternalURL() {
-        return externalURL;
-    }
-
-    public void setExternalURL(String externalURL) {
-        this.externalURL = externalURL;
-    }
-
-    public ProductAvailabilityEnum getAvailability() {
-        return availability;
-    }
-
-    public void setAvailability(ProductAvailabilityEnum availability) {
-        this.availability = availability;
-    }
-
-    public Long getOwnerProductId() {
-        return ownerProductId;
-    }
-
-    public void setOwnerProductId(Long ownerProductId) {
-        this.ownerProductId = ownerProductId;
-    }
-
+    @Getter @Setter @Id Long id;
     /** Parent information */
     @Getter @Setter Long ownerProductId;
-
     public enum ProductAvailabilityEnum {
         EXCESS_INVENTORY,
         IN_STOCK,
@@ -141,10 +138,8 @@ public class ProductProviderBase
         PERMANENTLY_UNAVAILABLE,
         OUT_OF_STOCK
     };
-
     @Getter @Setter String externalURL;
     @Getter @Setter int quantity;
-
     /**
      * Indexed search-able fields
      */
@@ -155,7 +150,6 @@ public class ProductProviderBase
     @Getter @Setter @Index boolean onSale;
     @Getter @Setter @Index float salePrice;
     @Getter @Setter @Index long saleExpirtyDate;
-
     /** TODO: Still thinking if these should be modelled as sizes or searchable constant strings */
     @Getter @Setter List<String> availableColors;
     @Getter @Setter List<String> availableSizes;
